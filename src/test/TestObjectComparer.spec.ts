@@ -3,12 +3,30 @@ import {ObjectComparer} from "../main/ts/ObjectComparer";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
+const carMakes: ReadonlyArray<string> = Object.freeze(
+    ["Koenigsegg", "Lamborghini", "Ferrari", "Pagani", "Audi",
+    "Porsche","Nissan", "Honda", "Toyota", "Ford", "Chevrolet"]);
+
+const motorcycleMakes: ReadonlyArray<string> =
+    Object.freeze(["MV Agusta", "Triumph", "Honda", "Yamaha", "Kawasaki"]);
+
+const simbaFriends: ReadonlyArray<string> =
+    Object.freeze(["Timon", "Pumbaa", "Rafiki"]);
+
+const simbaFamily: Readonly<any> = Object.freeze(
+    {dad: "Mufasa", mom: "Sarabi", sister: null, brother: undefined});
+
+const kionFamily: Readonly<any> = Object.freeze(
+    {dad: "Mufasa", mom: "Nala", sister: "Kiara", brother: "Nguruma"});
+
+const kionFriends: ReadonlyArray<string> =
+    Object.freeze(["Jasiri", "Bunga", "Kovu"]);
+
 const objA1: Readonly<any> = Object.freeze({
     type: "car",
     fuel: "petrol",
     numOfWheels: 4,
-    makes: ["Koenigsegg", "Lamborghini", "Ferrari", "Pagani", "Audi",
-            "Porsche", "Nissan", "Honda", "Toyota", "Ford", "Chevrolet"],
+    makes: carMakes,
     obj: {
         prop1: "foo",
         prop2: 2,
@@ -21,7 +39,7 @@ const objA2: Readonly<any> = Object.freeze({
     type: "motorcycle",
     fuel: "petrol",
     numOfWheels: 2,
-    makes: ["MV Agusta", "Triumph", "Honda", "Yamaha", "Kawasaki"],
+    makes: motorcycleMakes,
     obj: {
         prop1: "foo",
         prop2: 2,
@@ -34,12 +52,8 @@ const objB1: Readonly<any> = Object.freeze({
     name: "Simba",
     gender: "male",
     age: 7,
-    friends: ["Timon", "Pumbaa", "Rafiki"],
-    family: {
-        dad: "Mufasa",
-        mom: "Sarabi",
-        sister: null
-    },
+    friends: simbaFriends,
+    family: simbaFamily,
     isKing: true
 });
 
@@ -47,18 +61,14 @@ const objB2: Readonly<any> = Object.freeze({
     name: "Kion",
     gender: "male",
     age: 3,
-    friends: ["Jasiri", "Bunga", "Kovu"],
-    family: {
-        dad: "Mufasa",
-        mom: "Nala",
-        sister: "Kiara"
-    },
+    friends: kionFriends,
+    family: kionFamily,
     isKing: false
 });
 
-suite("TestMutant", function testMutant()
+suite("TestObjectComparer", function testObjectComparer()
 {
-    suite("Valid ObjectComparer construction does not throw", function testValidMutantCtor()
+    suite("Valid ObjectComparer construction does not throw", function testValidObjectComparerCtor()
     {
         test("new ObjectComparer(objA1, objA1) does not throw", function testValidCtorDoesNotThrow1()
         {
