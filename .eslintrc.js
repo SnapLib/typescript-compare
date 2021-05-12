@@ -34,6 +34,7 @@ module.exports = {
         "quotes": ["error", "double", {"avoidEscape": true, "allowTemplateLiterals": true}],
         "no-tabs": "error",
         "no-trailing-spaces": "error",
-        "semi": ["error", "always"]
+        "semi": "off",
+        "@typescript-eslint/semi": ["error", "always"]
     }
 };
