@@ -69,7 +69,13 @@ const objB2: Readonly<any> = Object.freeze({
     toString: () => "objB2"});
 
 const mockObjects: ReadonlyArray<{[key: string]: unknown}> =
-    Object.freeze([objA1, objA2, objB1, objB2]);
+Object.freeze([objA1, objA2, objB1, objB2]);
+
+const mockAObjects: ReadonlyArray<{[key: string]: unknown}> =
+    Object.freeze([objA1, objA2]);
+
+const mockBObjects: ReadonlyArray<{[key: string]: unknown}> =
+    Object.freeze([objB1, objB2]);
 
 suite("TestObjectComparer", function testObjectComparer()
 {
@@ -82,5 +88,49 @@ suite("TestObjectComparer", function testObjectComparer()
                     assert.doesNotThrow(() => new ObjectComparer(mockObj1, mockObj2));
                 })
         ));
+    });
+
+    suite("Test getters", function testGetters()
+    {
+        suite("get sourceObject()", function testGetSourceObject()
+        {
+            mockObjects.forEach(mockObj1 =>
+                mockObjects.forEach(mockObj2 =>
+                    test(`new ObjectComparer(${mockObj1}, ${mockObj2}).get.sourceObject() === ${mockObj1}`, function()
+                    {
+                        assert.strictEqual(new ObjectComparer(mockObj1, mockObj2).get.sourceObject(), mockObj1);
+                    })
+            ));
+        });
+
+        suite("get targetObject()", function testGetTargetObject()
+        {
+            mockObjects.forEach(mockObj1 =>
+                mockObjects.forEach(mockObj2 =>
+                    test(`new ObjectComparer(${mockObj1}, ${mockObj2}).get.targetObject() === ${mockObj2}`, function()
+                    {
+                        assert.strictEqual(new ObjectComparer(mockObj1, mockObj2).get.targetObject(), mockObj2);
+                    })
+            ));
+        });
+
+        suite("get omittedKeys()", function testGetOmittedKeys()
+        {
+            mockAObjects.forEach(mockAObj1 =>
+                mockAObjects.forEach(mockAObj2 =>
+                    test(`new ObjectComparer(${mockAObj1}, ${mockAObj2}).get.omittedKeys() is empty`, function()
+                    {
+                        assert.isEmpty(new ObjectComparer(mockAObj1, mockAObj2).get.omittedKeys());
+                    })
+            ));
+
+            mockBObjects.forEach(mockBObj1 =>
+                mockBObjects.forEach(mockBObj2 =>
+                    test(`new ObjectComparer(${mockBObj1}, ${mockBObj2}).get.omittedKeys() is empty`, function()
+                    {
+                        assert.isEmpty(new ObjectComparer(mockBObj1, mockBObj2).get.omittedKeys());
+                    })
+            ));
+        });
     });
 });
