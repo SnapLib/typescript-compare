@@ -92,7 +92,7 @@ export class ObjectComparer
         {
             return this._alteredKeyValues;
         }
-    })
+    });
 
     public readonly has = Object.freeze({
         omittedKeys: (): boolean =>
@@ -109,7 +109,7 @@ export class ObjectComparer
         {
             return this._alteredKeyValues.length !== 0;
         }
-    })
+    });
 
     public readonly count = Object.freeze({
         omittedKeys: (): number =>
@@ -126,7 +126,7 @@ export class ObjectComparer
         {
             return this._alteredKeyValues.length;
         }
-    })
+    });
 }
 
 export {ObjectComparer as default};
