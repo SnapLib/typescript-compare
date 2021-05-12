@@ -33,7 +33,8 @@ const objA1: Readonly<any> = Object.freeze({
         prop3: false,
         prop4: ["bar", "baz"]
     },
-    isSafe: true});
+    isSafe: true,
+    toString: () => "objA1"});
 
 const objA2: Readonly<any> = Object.freeze({
     type: "motorcycle",
@@ -46,7 +47,8 @@ const objA2: Readonly<any> = Object.freeze({
         prop3: false,
         prop4: ["bar", "baz"]
     },
-    isSafe: false});
+    isSafe: false,
+    toString: () => "objA2"});
 
 const objB1: Readonly<any> = Object.freeze({
     name: "Simba",
@@ -54,8 +56,8 @@ const objB1: Readonly<any> = Object.freeze({
     age: 7,
     friends: simbaFriends,
     family: simbaFamily,
-    isKing: true
-});
+    isKing: true,
+    toString: () => "objB1"});
 
 const objB2: Readonly<any> = Object.freeze({
     name: "Kion",
@@ -63,41 +65,24 @@ const objB2: Readonly<any> = Object.freeze({
     age: 3,
     friends: kionFriends,
     family: kionFamily,
-    isKing: false
-});
+    isKing: false,
+    toString: () => "objB2"});
+
+const mockObjects: ReadonlyArray<{[key: string]: unknown}> = Object.freeze([objA1, objA2, objB1, objB2]);
 
 suite("TestObjectComparer", function testObjectComparer()
 {
     suite("Valid ObjectComparer construction does not throw", function testValidObjectComparerCtor()
     {
-        test("new ObjectComparer(objA1, objA1) does not throw", function testValidCtorDoesNotThrow1()
+        for (const index in mockObjects)
         {
-            assert.doesNotThrow(() => new ObjectComparer(objA1, objA1));
-        });
-
-        test("new ObjectComparer(objA1, objA2) does not throw", function testValidCtorDoesNotThrow2()
-        {
-            assert.doesNotThrow(() => new ObjectComparer(objA1, objA2));
-        });
-
-        test("new ObjectComparer(objA1, objB1) does not throw", function testValidCtorDoesNotThrow3()
-        {
-            assert.doesNotThrow(() => new ObjectComparer(objA1, objB1));
-        });
-
-        test("new ObjectComparer(objB1, objA1) does not throw", function testValidCtorDoesNotThrow4()
-        {
-            assert.doesNotThrow(() => new ObjectComparer(objB1, objA1));
-        });
-
-        test("new ObjectComparer(objB1, objB2) does not throw", function testValidCtorDoesNotThrow5()
-        {
-            assert.doesNotThrow(() => new ObjectComparer(objB1, objB2));
-        });
-
-        test("new ObjectComparer(objB1, objA2) does not throw", function testValidCtorDoesNotThrow6()
-        {
-            assert.doesNotThrow(() => new ObjectComparer(objB1, objA2));
-        });
+            mockObjects.forEach(mockObj =>
+            {
+                test(`new ObjectComparer(${mockObjects[index]}, ${mockObj}) does not throw`, function()
+                {
+                    assert.doesNotThrow(() => new ObjectComparer(mockObjects[index], mockObj));
+                });
+            });
+        }
     });
 });
