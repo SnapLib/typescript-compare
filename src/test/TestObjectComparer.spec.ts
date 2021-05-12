@@ -68,21 +68,19 @@ const objB2: Readonly<any> = Object.freeze({
     isKing: false,
     toString: () => "objB2"});
 
-const mockObjects: ReadonlyArray<{[key: string]: unknown}> = Object.freeze([objA1, objA2, objB1, objB2]);
+const mockObjects: ReadonlyArray<{[key: string]: unknown}> =
+    Object.freeze([objA1, objA2, objB1, objB2]);
 
 suite("TestObjectComparer", function testObjectComparer()
 {
     suite("Valid ObjectComparer construction does not throw", function testValidObjectComparerCtor()
     {
-        for (const index in mockObjects)
-        {
-            mockObjects.forEach(mockObj =>
-            {
-                test(`new ObjectComparer(${mockObjects[index]}, ${mockObj}) does not throw`, function()
+        mockObjects.forEach(mockObj1 =>
+            mockObjects.forEach(mockObj2 =>
+                test(`new ObjectComparer(${mockObj1}, ${mockObj2}) does not throw`, function()
                 {
-                    assert.doesNotThrow(() => new ObjectComparer(mockObjects[index], mockObj));
-                });
-            });
-        }
+                    assert.doesNotThrow(() => new ObjectComparer(mockObj1, mockObj2));
+                })
+        ));
     });
 });
