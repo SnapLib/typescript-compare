@@ -1,0 +1,7 @@
+{
+  "entryPoints": ["./src/main/ts"],
+  "gitRemote": "upstream",
+  "out": "./build/tsdoc",
+  "readme": "./docs/README.md",
+  "tsconfig": "./tsconfig.json"
+}

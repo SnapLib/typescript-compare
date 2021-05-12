@@ -1,0 +1,27 @@
+{
+  "name": "object-comparer",
+  "version": "0.0.1",
+  "description": "Compare 2 different JavaScript objects.",
+  "main": "ObjectComparer.js",
+  "author": {
+    "name": "Snap",
+    "email": "snap@snaplib.org"
+  },
+  "license": "MIT",
+  "private": true,
+  "type": "commonjs",
+  "keywords": [
+    "snaplib",
+    "javascript",
+    "object",
+    "compare",
+    "utility"
+  ],
+  "scripts": {
+    "build-tsdoc": "typedoc --options ./typedoc.json",
+    "lint": "eslint --quiet --ext ts ./src",
+    "lint-strict": "eslint --ext ts ./src",
+    "test": "mocha --config ./.mocharc.js",
+    "tsnode": "ts-node"
+  }
+}
