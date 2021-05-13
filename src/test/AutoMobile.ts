@@ -1,4 +1,4 @@
-interface AutoMobile
+interface Automobile
 {
     type: string;
     fuel: string;
@@ -12,7 +12,7 @@ export const carMakes: Array<string> =
     ["Koenigsegg", "Lamborghini", "Ferrari", "Pagani", "Audi",
     "Porsche", "Nissan", "Honda", "Toyota", "Ford", "Chevrolet"];
 
-export class Car implements AutoMobile
+export class Car implements Automobile
 {
     type = "car";
 
@@ -37,7 +37,7 @@ export class Car implements AutoMobile
 export const motorcycleMakes: Array<string> =
     ["MV Agusta", "Triumph", "BMW", "Honda", "Yamaha", "Kawasaki"];
 
-export class Motorcycle implements AutoMobile
+export class Motorcycle implements Automobile
 {
     type = "motorcycle";
 
