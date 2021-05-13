@@ -1,15 +1,10 @@
 export interface AutoMobile
 {
     type: string;
-
     fuel: string;
-
     numOfWheels: number;
-
     makes: Array<string>;
-
     models: {[make: string]: Array<string>};
-
     isSafe: boolean;
 }
 
