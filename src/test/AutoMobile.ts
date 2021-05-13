@@ -13,6 +13,10 @@ export interface AutoMobile
     isSafe: boolean;
 }
 
+export const carMakes: Array<string> =
+    ["Koenigsegg", "Lamborghini", "Ferrari", "Pagani", "Audi",
+    "Porsche", "Nissan", "Honda", "Toyota", "Ford", "Chevrolet"];
+
 export class Car implements AutoMobile
 {
     type = "car";
@@ -21,8 +25,7 @@ export class Car implements AutoMobile
 
     numOfWheels = 4;
 
-    makes = ["Koenigsegg", "Lamborghini", "Ferrari", "Pagani", "Audi",
-             "Porsche", "Nissan", "Honda", "Toyota", "Ford", "Chevrolet"];
+    makes = carMakes;
 
     models = {
         "Koenigsegg": ["One", "Agera", "CCX", "Jesko"],
@@ -36,6 +39,9 @@ export class Car implements AutoMobile
     toString = (): string => "Car";
 }
 
+export const motorcycleMakes: Array<string> =
+    ["MV Agusta", "Triumph", "BMW", "Honda", "Yamaha", "Kawasaki"];
+
 export class Motorcycle implements AutoMobile
 {
     type = "motorcycle";
@@ -44,7 +50,7 @@ export class Motorcycle implements AutoMobile
 
     numOfWheels = 2;
 
-    makes = ["MV Agusta", "Triumph", "BMW", "Honda", "Yamaha", "Kawasaki"];
+    makes = motorcycleMakes;
 
     models = {
         "MV Agusta": ["F3", "Superveloce", "Brutale", "Turismo Veloce"],
