@@ -103,6 +103,57 @@ suite("TestObjectComparer", function testObjectComparer()
             ));
         });
 
+        suite("get addedKeys()", function testGetAddedKeys()
+        {
+            mockAutomobileObjsWithToStr.forEach(mockAutomobileObj1 =>
+                mockAutomobileObjsWithToStr.forEach(mockAutomobileObj2 =>
+                    test(`new ObjectComparer(${mockAutomobileObj1}, ${mockAutomobileObj2}).get.addedKeys() is empty`, function()
+                    {
+                        assert.isEmpty(new ObjectComparer(mockAutomobileObj1, mockAutomobileObj2).get.addedKeys());
+                    })
+            ));
+
+            mockLionObjsWithToStr.forEach(mockLionObj1 =>
+                mockLionObjsWithToStr.forEach(mockLionObj2 =>
+                    test(`new ObjectComparer(${mockLionObj1}, ${mockLionObj2}).get.addedKeys() is empty`, function()
+                    {
+                        assert.isEmpty(new ObjectComparer(mockLionObj1, mockLionObj2).get.addedKeys());
+                    })
+            ));
+
+            mockAutomobileObjects.forEach(mockAutomobileObj1 =>
+                mockAutomobileObjsWithToStr.forEach(mockAutomobileObj2 =>
+                    test(`new ObjectComparer(${mockAutomobileObj1}, ${mockAutomobileObj2}).get.addedKeys() === ["toString"]`, function()
+                    {
+                        assert.deepStrictEqual(new ObjectComparer(mockAutomobileObj1, mockAutomobileObj2).get.addedKeys(), ["toString"]);
+                    })
+            ));
+
+            mockLionObjects.forEach(mockLionObj1 =>
+                mockLionObjsWithToStr.forEach(mockLionObj2 =>
+                    test(`new ObjectComparer(${mockLionObj1}, ${mockLionObj2}).get.addedKeys() === ["toString"]`, function()
+                    {
+                        assert.deepStrictEqual(new ObjectComparer(mockLionObj1, mockLionObj2).get.addedKeys(), ["toString"]);
+                    })
+            ));
+
+            mockAutomobileObjsWithToStr.forEach(mockAutomobileObj =>
+                    mockLionObjsWithToStr.forEach(mockLionObj =>
+                        test(`new ObjectComparer(${mockAutomobileObj}, ${mockAutomobileObj} & ${mockLionObj}).get.addedKeys() === ["${lionKeys.join('", "')}"]`, function()
+                        {
+                            assert.deepStrictEqual(new ObjectComparer(mockAutomobileObj, Object.assign({}, mockAutomobileObj, mockLionObj)).get.addedKeys(), lionKeys);
+                        })
+            ));
+
+            mockLionObjsWithToStr.forEach(mockLionObj =>
+                mockAutomobileObjsWithToStr.forEach(mockAutomobileObj =>
+                    test(`new ObjectComparer(${mockLionObj}, ${mockAutomobileObj}).get.omittedKeys() === ["${automobileKeys.join('", "')}"]`, function()
+                    {
+                        assert.deepStrictEqual(new ObjectComparer(mockLionObj, Object.assign({}, mockLionObj, mockAutomobileObj)).get.addedKeys(), automobileKeys);
+                    })
+            ));
+        });
+
         suite("get includedKeys()", function testGetIncludedKeys()
         {
             mockAutomobileObjects.forEach(mockAutomobileObj =>
