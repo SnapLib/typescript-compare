@@ -10,50 +10,46 @@ interface Automobile
 
 export const carMakes: Array<string> =
     ["Koenigsegg", "Lamborghini", "Ferrari", "Pagani", "Audi",
-    "Porsche", "Nissan", "Honda", "Toyota", "Ford", "Chevrolet"];
+     "Porsche", "Nissan", "Honda", "Toyota", "Ford", "Chevrolet"];
 
-export class Car implements Automobile
+export const Car: Automobile =
 {
-    type = "car";
+    type: "car",
 
-    fuel = "petrol";
+    fuel: "petrol",
 
-    numOfWheels = 4;
+    numOfWheels: 4,
 
-    makes = carMakes;
+    makes: carMakes,
 
-    models = {
+    models: {
         "Koenigsegg": ["One", "Agera", "CCX", "Jesko"],
         "Lamborghini": ["Aventador", "Huracan", "Reventon", "Murcielago", "Gallardo"],
         "Ferrari": ["Enzo Ferrari", "FXX", "458 Italia"],
         "Audi": ["RS4", "R8", "RS5", "RS6"]
-    };
+    },
 
-    isSafe = true;
-
-    toString = (): string => "Car";
-}
+    isSafe: true,
+};
 
 export const motorcycleMakes: Array<string> =
     ["MV Agusta", "Triumph", "BMW", "Honda", "Yamaha", "Kawasaki"];
 
-export class Motorcycle implements Automobile
+export const Motorcycle: Automobile =
 {
-    type = "motorcycle";
+    type: "motorcycle",
 
-    fuel = "petrol";
+    fuel: "petrol",
 
-    numOfWheels = 2;
+    numOfWheels: 2,
 
-    makes = motorcycleMakes;
+    makes: motorcycleMakes,
 
-    models = {
+    models: {
         "MV Agusta": ["F3", "Superveloce", "Brutale", "Turismo Veloce"],
         "Triumph": ["Daytona", "Speed Triple", "Bonneville", "Scrambler"],
         "Yamaha": ["R1", "R6", "FZ"]
-    };
+    },
 
-    isSafe = false;
-
-    toString = (): string => "Motorcycle";
-}
+    isSafe: false,
+};
