@@ -36,7 +36,7 @@ export class Car implements AutoMobile
     toString = (): string => "Car";
 }
 
-export class MotorCycle implements AutoMobile
+export class Motorcycle implements AutoMobile
 {
     type = "motorcycle";
 
