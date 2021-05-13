@@ -1,4 +1,4 @@
-export interface AutoMobile
+interface AutoMobile
 {
     type: string;
     fuel: string;
