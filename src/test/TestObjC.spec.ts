@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {Car, Motorcycle} from "./AutoMobile";
 import {Simba, Kion} from "./Lion";
-import {ObjectComparer} from "../main/ts/ObjC";
+import {ObjectComparer} from "../main/ts/ObjectComparer";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
