@@ -188,5 +188,13 @@ suite("TestObjectComparer", function testObjectComparer()
                     })
             ));
         });
+
+        suite("get alteredKeyValues()", function testGetAlteredKeyValues()
+        {
+            test(`new ObjectComparer(${Car}, ${Motorcycle}).get.alteredKeyValues()`, function()
+            {
+                assert.deepStrictEqual(new ObjectComparer(Car, Motorcycle).get.alteredKeyValues().map(e => e.key), automobileKeys);
+            });
+        });
     });
 });
