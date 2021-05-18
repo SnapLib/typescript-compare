@@ -5,10 +5,10 @@ import {ObjectComparer} from "../main/ts/objectComparer";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
-const carWithToStr: unknown = Object.assign({}, Car, {toString: () => "Car"});
-const motorcycleWithToStr: unknown = Object.assign({}, Motorcycle, {toString: () => "Motorcycle"});
-const simbaWithToStr: unknown = Object.assign({}, Simba, {toString: () => "Simba"});
-const kionWithToStr: unknown = Object.assign({}, Kion, {toString: () => "Kion"});
+const carWithToStr: unknown = Object.assign({toString: () => "Car"}, Car);
+const motorcycleWithToStr: unknown = Object.assign({toString: () => "Motorcycle"}, Motorcycle);
+const simbaWithToStr: unknown = Object.assign({toString: () => "Simba"}, Simba);
+const kionWithToStr: unknown = Object.assign({toString: () => "Kion"}, Kion);
 
 const automobileKeys: ReadonlyArray<string> = Object.freeze(Object.keys(Car));
 const lionKeys: ReadonlyArray<string> = Object.freeze(Object.keys(Simba));
