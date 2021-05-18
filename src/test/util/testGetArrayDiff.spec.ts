@@ -10,11 +10,17 @@ const mockIntArrayA: unknown[] = [111, 222, 333];
 
 const mockIntArrayB: unknown[] = [111, 222, 999];
 
+const mockArrays: ReadonlyArray<unknown[]> =
+    [mockStrArrayA, mockStrArrayB, mockIntArrayA, mockIntArrayB];
+
 suite("TestGetArrayDiff", function testGetArrayDiff()
 {
-    test(`["${mockStrArrayA.join('", "')}"] -> ["${mockStrArrayA.join('", "')}"] returns empty`, function testEqualArrayReturnsEmpty()
+    mockArrays.forEach(mockArray =>
     {
-        assert.isEmpty(getArrayDiff(mockStrArrayA, mockStrArrayA));
+       test(`getArrayDiff([${mockArray.join(", ")}], [${mockArray.join(", ")}]) returns empty`, function()
+       {
+           assert.isEmpty(getArrayDiff(mockArray, mockArray));
+       });
     });
 
     suite(`["${mockStrArrayA.join('", "')}"] -> ["${mockStrArrayB.join('", "')}"]`, function testSecondIndexStrDiff()
