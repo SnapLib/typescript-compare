@@ -39,7 +39,7 @@ export class ObjectComparer<SourceType, TargetType>
                 .map(srcObjEntry => (Object.freeze({
                     key: srcObjEntry[0],
                     originalValue: Object.freeze(srcObjEntry[1]),
-                    newValue: Object.freeze(targetObjEntries.filter(e => e[0] === srcObjEntry[0])[0][1])}))));
+                    newValue: Object.freeze(targetObjEntries.find(e => e[0] === srcObjEntry[0])?.[1])}))));
     }
 
     public readonly get = Object.freeze({
