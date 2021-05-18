@@ -1,4 +1,4 @@
-export interface Lion
+type Lion =
 {
     name: string;
     gender: string;
@@ -6,7 +6,8 @@ export interface Lion
     friends: Array<string>;
     family: {[relation: string]: string | null | undefined};
     isKing: boolean;
-}
+    toString: () => string;
+};
 
 export const simbaFriends: Array<string> = ["Timon", "Pumbaa", "Rafiki"];
 
@@ -21,6 +22,7 @@ export const Simba: Lion =
     friends: simbaFriends,
     family: simbaFamily,
     isKing: true,
+    toString: () => "Simba"
 };
 
 const kionFriends: Array<string> = ["Jasiri", "Bunga", "Kovu"];
@@ -36,4 +38,5 @@ export const Kion: Lion =
     friends: kionFriends,
     family: kionFamily,
     isKing: false,
+    toString: () => "Kion"
 };

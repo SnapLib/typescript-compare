@@ -1,4 +1,4 @@
-interface Automobile
+type Automobile =
 {
     type: string;
     fuel: string;
@@ -6,7 +6,8 @@ interface Automobile
     makes: Array<string>;
     models: {[make: string]: Array<string>};
     isSafe: boolean;
-}
+    toString: () => string;
+};
 
 export const carMakes: Array<string> =
     ["Koenigsegg", "Lamborghini", "Ferrari", "Pagani", "Audi",
@@ -30,6 +31,8 @@ export const Car: Automobile =
     },
 
     isSafe: true,
+
+    toString: () => "Car"
 };
 
 export const motorcycleMakes: Array<string> =
@@ -52,4 +55,6 @@ export const Motorcycle: Automobile =
     },
 
     isSafe: false,
+
+    toString: () => "Motorcycle"
 };
