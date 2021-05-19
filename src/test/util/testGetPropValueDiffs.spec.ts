@@ -16,10 +16,15 @@ const mocks: ReadonlyArray<unknown> =
     [Car, Motorcycle, Kion, Simba,
      mockStrArrayA, mockStrArrayB, mockIntArrayA, mockIntArrayB];
 
+const toStr = (o: unknown): string =>
+{
+    return typeof o === "string" ? `"${o}"` : Array.isArray(o) ? `[${o.map(e => toStr(e)).join(", ")}]` : `${o}`;
+};
+
 suite("TestGetPropValueDiffs", function testGetPropValueDiffs()
 {
     mocks.forEach(mockObj =>
-        test(`getPropValueDiffs(${mockObj}, ${mockObj}) returns empty`, function(){
+        test(`getPropValueDiffs(${toStr(mockObj)}, ${toStr(mockObj)}) returns empty`, function(){
             assert.isEmpty(getPropValueDiffs(mockObj, mockObj));
         })
     );
@@ -70,7 +75,7 @@ suite("TestGetPropValueDiffs", function testGetPropValueDiffs()
         });
     });
 
-    suite(`["${mockStrArrayA.join('", "')}"] -> ["${mockStrArrayB.join('", "')}"]`, function testSecondIndexStrDiff()
+    suite(`${toStr(mockStrArrayA)} -> ${toStr(mockStrArrayB)}`, function testSecondIndexStrDiff()
     {
         test('Diff keys are "0" and "2"', function()
         {
@@ -88,7 +93,7 @@ suite("TestGetPropValueDiffs", function testGetPropValueDiffs()
         });
     });
 
-    suite(`[${mockIntArrayA.join(", ")}] -> [${mockIntArrayB.join(", ")}]`, function testThirdIndexIntDiff()
+    suite(`${toStr(mockIntArrayA)} -> ${toStr(mockIntArrayB)}`, function testThirdIndexIntDiff()
     {
         test('Diff key is "2"', function()
         {
@@ -106,7 +111,7 @@ suite("TestGetPropValueDiffs", function testGetPropValueDiffs()
         });
     });
 
-    suite(`["${mockStrArrayA.join('", "')}"] -> [${mockIntArrayA.join(", ")}]`, function testSecondIndexStrDiff()
+    suite(`${toStr(mockStrArrayA)} -> ${toStr(mockIntArrayA)}`, function testSecondIndexStrDiff()
     {
         test('Diff keys are "0", "1", and "2"', function()
         {
