@@ -16,10 +16,10 @@ const mocks: ReadonlyArray<unknown> =
     [Car, Motorcycle, Kion, Simba,
      mockStrArrayA, mockStrArrayB, mockIntArrayA, mockIntArrayB];
 
-suite("TestGetObjPropValueDiffs", function testGetObjPropValueDiffs()
+suite("TestGetPropValueDiffs", function testGetPropValueDiffs()
 {
     mocks.forEach(mockObj =>
-        test(`getObjPropValueDiffs(${mockObj}, ${mockObj}) returns empty`, function(){
+        test(`getPropValueDiffs(${mockObj}, ${mockObj}) returns empty`, function(){
             assert.isEmpty(getPropValueDiffs(mockObj, mockObj));
         })
     );
