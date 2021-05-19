@@ -1,3 +1,6 @@
+import {ObjPropValueDiff} from "./util/objPropValueDiff";
+import {getPropValueDiffs} from "./util/getPropValueDiffs";
+
 export class ObjectComparer<SourceType, TargetType>
 {
     private readonly _srcObj: Readonly<SourceType>;
@@ -5,24 +8,13 @@ export class ObjectComparer<SourceType, TargetType>
     private readonly _omittedKeys: ReadonlyArray<string>;
     private readonly _addedKeys: ReadonlyArray<string>;
     private readonly _includedKeys: ReadonlyArray<string>;
-    private readonly _alteredKeyValues: readonly Readonly<{key: string, originalValue: Readonly<unknown>, newValue: Readonly<unknown>}>[];
+    private readonly _alteredKeyValues: readonly Readonly<ObjPropValueDiff>[];
+    private readonly _alteredKeyValueKeys: ReadonlyArray<string>;
 
-    public constructor(sourceObject: SourceType, targetObject: TargetType)
+    public constructor(sourceObject: NonNullable<SourceType>, targetObject: NonNullable<TargetType>)
     {
         this._srcObj = Object.freeze(sourceObject);
         this._targetObj = Object.freeze(targetObject);
-
-        const srcObjEntries: readonly Readonly<[string, unknown]>[] =
-            Object.freeze(Object.entries(sourceObject));
-
-        const targetObjEntries: readonly Readonly<[string, unknown]>[] =
-            Object.freeze(Object.entries(targetObject));
-
-        const srcObjKeys: ReadonlyArray<string> =
-            Object.freeze(Object.keys(sourceObject));
-
-        const targetObjKeys: ReadonlyArray<string> =
-            Object.freeze(Object.keys(targetObject));
 
         this._omittedKeys = Object.freeze(
             Object.keys(sourceObject).filter(srcObjKey => ! (srcObjKey in targetObject)));
@@ -33,28 +25,20 @@ export class ObjectComparer<SourceType, TargetType>
         this._includedKeys = Object.freeze(
             Object.keys(sourceObject).filter(srcObjKey => srcObjKey in targetObject));
 
-        this._alteredKeyValues = Object.freeze(
-            srcObjEntries.filter(srcObjEntry =>
-                targetObjEntries.some(targetObjEntry => srcObjEntry[0] === targetObjEntry[0] && srcObjEntry[1] !== targetObjEntry[1]))
-                .map(srcObjEntry => (Object.freeze({
-                    key: srcObjEntry[0],
-                    originalValue: Object.freeze(srcObjEntry[1]),
-                    newValue: Object.freeze(targetObjEntries.find(e => e[0] === srcObjEntry[0])?.[1])}))));
+        this._alteredKeyValues =
+            Object.freeze(getPropValueDiffs(sourceObject, targetObject));
+
+        this._alteredKeyValueKeys =
+            Object.freeze(this._alteredKeyValues.map(diff => diff.key));
     }
 
-    public readonly get = Object.freeze({
-        sourceObject: (): Readonly<SourceType> => this._srcObj,
-
-        targetObject: (): Readonly<TargetType> => this._targetObj,
-
-        omittedKeys: (): ReadonlyArray<string> => this._omittedKeys,
-
-        addedKeys: (): ReadonlyArray<string> => this._addedKeys,
-
-        includedKeys: (): ReadonlyArray<string> => this._includedKeys,
-
-        alteredKeyValues: (): readonly Readonly<{key: string, originalValue: Readonly<unknown>, newValue: Readonly<unknown>}>[] => this._alteredKeyValues
-    });
+    public get sourceObject(): Readonly<SourceType> { return this._srcObj; }
+    public get targetObject(): Readonly<TargetType> { return this._targetObj; }
+    public get omittedKeys(): ReadonlyArray<string> { return this._omittedKeys; }
+    public get addedKeys(): ReadonlyArray<string> { return this._addedKeys; }
+    public get includedKeys(): ReadonlyArray<string> { return this._includedKeys; }
+    public get alteredKeyValues(): readonly Readonly<ObjPropValueDiff>[] { return this._alteredKeyValues; }
+    public get alteredKeyValueKeys(): ReadonlyArray<string> { return this._alteredKeyValueKeys; }
 
     public readonly has = Object.freeze({
         omittedKeys: (): boolean => this._omittedKeys.length !== 0,
