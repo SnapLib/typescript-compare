@@ -21,13 +21,16 @@ const toStr = (o: unknown): string =>
     return typeof o === "string" ? `"${o}"` : Array.isArray(o) ? `[${o.map(e => toStr(e)).join(", ")}]` : `${o}`;
 };
 
-suite("TestGetPropValueDiffs", function testGetPropValueDiffs()
+suite("TestEvalPropValueDiffs", function testGetPropValueDiffs()
 {
-    mocks.forEach(mockObj =>
-        test(`getPropValueDiffs(${toStr(mockObj)}, ${toStr(mockObj)}) returns empty`, function(){
-            assert.isEmpty(evalPropValueDiffs(mockObj, mockObj));
-        })
-    );
+    suite("Same objects return empty diff", function testSameObjsReturnEmpty()
+    {
+        mocks.forEach(mockObj =>
+            test(`getPropValueDiffs(${toStr(mockObj)}, ${toStr(mockObj)}) returns empty`, function(){
+                assert.isEmpty(evalPropValueDiffs(mockObj, mockObj));
+            })
+        );
+    });
 
     suite(`${Car} -> ${Motorcycle}`, function testCarMotorcycleObjPropValueDiffs()
     {
@@ -75,7 +78,7 @@ suite("TestGetPropValueDiffs", function testGetPropValueDiffs()
         });
     });
 
-    suite(`${toStr(mockStrArrayA)} -> ${toStr(mockStrArrayB)}`, function testSecondIndexStrDiff()
+    suite(`${toStr(mockStrArrayA)} -> ${toStr(mockStrArrayB)}`, function testFirstAndThirdIndexStrDiff()
     {
         test('Diff keys are "0" and "2"', function()
         {
@@ -111,7 +114,7 @@ suite("TestGetPropValueDiffs", function testGetPropValueDiffs()
         });
     });
 
-    suite(`${toStr(mockStrArrayA)} -> ${toStr(mockIntArrayA)}`, function testSecondIndexStrDiff()
+    suite(`${toStr(mockStrArrayA)} -> ${toStr(mockIntArrayA)}`, function testStrIntArrayDiff()
     {
         test('Diff keys are "0", "1", and "2"', function()
         {
