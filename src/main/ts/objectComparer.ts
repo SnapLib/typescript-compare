@@ -1,5 +1,5 @@
 import {ObjPropValueDiff} from "./util/objPropValueDiff";
-import {getPropValueDiffs} from "./util/getPropValueDiffs";
+import {evalPropValueDiffs} from "./util/evalPropValueDiffs";
 
 export class ObjectComparer<SourceType, TargetType>
 {
@@ -26,7 +26,7 @@ export class ObjectComparer<SourceType, TargetType>
             Object.keys(sourceObject).filter(srcObjKey => srcObjKey in targetObject));
 
         this._alteredKeyValueDiffs =
-            Object.freeze(getPropValueDiffs(sourceObject, targetObject));
+            Object.freeze(evalPropValueDiffs(sourceObject, targetObject));
 
         this._alteredKeyValueKeys =
             Object.freeze(this._alteredKeyValueDiffs.map(diff => diff.key));

@@ -1,6 +1,6 @@
 import {ObjPropValueDiff} from "./objPropValueDiff";
 
-export const getPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): ObjPropValueDiff[] =>
+export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): ObjPropValueDiff[] =>
 {
     if (typeof source !== "object" || source === null)
     {
@@ -26,4 +26,4 @@ export const getPropValueDiffs = (source: NonNullable<unknown>, target: NonNulla
                                  targetObjEntries.find(targetObjEntry => srcObjEntry[0] === targetObjEntry[0])?.[1])));
 };
 
-export {getPropValueDiffs as default};
+export {evalPropValueDiffs as default};
