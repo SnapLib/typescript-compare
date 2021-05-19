@@ -1,11 +1,6 @@
-export interface ObjPropValDiff
-{
-    key: string;
-    sourceValue: unknown;
-    targetValue: unknown;
-}
+import {ObjPropValueDiff} from "./objPropValueDiff";
 
-export const getPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): ObjPropValDiff[] =>
+export const getPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): ObjPropValueDiff[] =>
 {
     if (typeof source !== "object" || source === null)
     {
@@ -25,9 +20,10 @@ export const getPropValueDiffs = (source: NonNullable<unknown>, target: NonNulla
             targetObjEntries.some(targetObjEntry =>
                 srcObjEntry[0] === targetObjEntry[0]
                 && srcObjEntry[1] !== targetObjEntry[1]))
-        .map(srcObjEntry => ({key: srcObjEntry[0],
-                              sourceValue: srcObjEntry[1],
-                              targetValue: Object.freeze(targetObjEntries.find(targetObjEntry => srcObjEntry[0] === targetObjEntry[0])?.[1])}));
+        .map(srcObjEntry => (
+            new ObjPropValueDiff(srcObjEntry[0],
+                                 srcObjEntry[1],
+                                 targetObjEntries.find(targetObjEntry => srcObjEntry[0] === targetObjEntry[0])?.[1])));
 };
 
 export {getPropValueDiffs as default};
