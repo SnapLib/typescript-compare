@@ -16,6 +16,12 @@ const mocks: ReadonlyArray<unknown> =
     [Car, Motorcycle, Kion, Simba,
      mockStrArrayA, mockStrArrayB, mockIntArrayA, mockIntArrayB];
 
+const mockObjs: readonly Readonly<unknown>[] =
+    Object.freeze([Car, Motorcycle, Kion, Simba]);
+
+const mockArrays: readonly Readonly<unknown[]>[] =
+    Object.freeze([mockStrArrayA, mockStrArrayB, mockIntArrayA, mockIntArrayB]);
+
 const toStr = (o: unknown): string =>
 {
     return typeof o === "string" ? `"${o}"` : Array.isArray(o) ? `[${o.map(e => toStr(e)).join(", ")}]` : `${o}`;
@@ -129,6 +135,78 @@ suite("TestEvalPropValueDiffs", function testGetPropValueDiffs()
         test("Diff target values are 111, 222, and 333", function()
         {
             assert.deepStrictEqual(evalPropValueDiffs(mockStrArrayA, mockIntArrayA).map(diff => diff.targetValue), [111, 222, 333]);
+        });
+    });
+
+    suite("Test object to array comparison returns empty", function testObjArrayDiff()
+    {
+        suite("returns empty diff keys", function testObjArrayDiffKey()
+        {
+            mockObjs.forEach(mockObj =>
+                mockArrays.forEach(mockArray =>
+                    test(`${mockObj} -> ${toStr(mockArray)} keys are empty`, function()
+                    {
+                        assert.isEmpty(evalPropValueDiffs(mockObj, mockArray).map(diff => diff.key));
+                    })
+            ));
+        });
+
+        suite("returns empty diff source values", function testObjArrayDiffSourceValue()
+        {
+            mockObjs.forEach(mockObj =>
+                mockArrays.forEach(mockArray =>
+                    test(`${mockObj} -> ${toStr(mockArray)} returns no source values`, function()
+                    {
+                        assert.isEmpty(evalPropValueDiffs(mockObj, mockArray).map(diff => diff.sourceValue));
+                    })
+            ));
+        });
+
+        suite("returns empty diff target values", function testObjArrayDiffTargetValue()
+        {
+            mockObjs.forEach(mockObj =>
+                mockArrays.forEach(mockArray =>
+                    test(`${mockObj} -> ${toStr(mockArray)} returns no target values`, function()
+                    {
+                        assert.isEmpty(evalPropValueDiffs(mockObj, mockArray).map(diff => diff.targetValue));
+                    })
+            ));
+        });
+    });
+
+    suite("Test array to object comparison returns empty", function testArrayObjDiff()
+    {
+        suite("returns empty diff keys", function testArrayObjDiffKey()
+        {
+            mockArrays.forEach(mockArr =>
+                mockObjs.forEach(mockObj =>
+                    test(`${toStr(mockArr)} -> ${mockObj} returns no keys`, function()
+                    {
+                        assert.isEmpty(evalPropValueDiffs(mockArr, mockObj).map(diff => diff.key));
+                    })
+            ));
+        });
+
+        suite("returns empty diff source value", function testArrayObjDiffSourceValue()
+        {
+            mockArrays.forEach(mockArr =>
+                mockObjs.forEach(mockObj =>
+                    test(`${toStr(mockArr)} -> ${mockObj} returns no source values`, function()
+                    {
+                        assert.isEmpty(evalPropValueDiffs(mockArr, mockObj).map(diff => diff.sourceValue));
+                    })
+            ));
+        });
+
+        suite("returns empty diff target value", function testArrayObjDiffTargetValue()
+        {
+            mockArrays.forEach(mockArr =>
+                mockObjs.forEach(mockObj =>
+                    test(`${toStr(mockArr)} -> ${mockObj} returns no target values`, function()
+                    {
+                        assert.isEmpty(evalPropValueDiffs(mockArr, mockObj).map(diff => diff.targetValue));
+                    })
+            ));
         });
     });
 });
