@@ -6,4 +6,4 @@ export interface ObjectComparerHasQuery
     readonly alteredKeyValues: () => boolean;
 }
 
-export {ObjectComparerHasQuery as default};
+export type {ObjectComparerHasQuery as default};

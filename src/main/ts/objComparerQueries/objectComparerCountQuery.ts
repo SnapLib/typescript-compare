@@ -6,4 +6,4 @@ export interface ObjectComparerCountQuery
     readonly alteredKeyValues: () => number;
 }
 
-export {ObjectComparerCountQuery as default};
+export type {ObjectComparerCountQuery as default};
