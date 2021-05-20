@@ -1,7 +1,7 @@
 import {ObjPropValueDiff} from "./util/objPropValueDiff";
 import {evalPropValueDiffs} from "./util/evalPropValueDiffs";
-import {ObjectComparerHasQuery} from "./objComparerQueries/objectComparerHasQuery";
-import {ObjectComparerCountQuery} from "./objComparerQueries/objectComparerCountQuery";
+import type {ObjectComparerHasQuery} from "./objComparerQueries/objectComparerHasQuery";
+import type {ObjectComparerCountQuery} from "./objComparerQueries/objectComparerCountQuery";
 
 export class ObjectComparer<SourceType, TargetType>
 {
