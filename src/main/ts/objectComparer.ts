@@ -10,7 +10,7 @@ export class ObjectComparer<SourceType, TargetType>
     private readonly _omittedKeys: ReadonlyArray<string>;
     private readonly _addedKeys: ReadonlyArray<string>;
     private readonly _includedKeys: ReadonlyArray<string>;
-    private readonly _alteredKeyValueDiffs: readonly Readonly<ObjPropValueDiff>[];
+    private readonly _alteredPropValueDiffs: readonly Readonly<ObjPropValueDiff>[];
     private readonly _alteredKeyValueKeys: ReadonlyArray<string>;
 
     public constructor(sourceObject: NonNullable<SourceType>, targetObject: NonNullable<TargetType>)
@@ -27,11 +27,11 @@ export class ObjectComparer<SourceType, TargetType>
         this._includedKeys = Object.freeze(
             Object.keys(sourceObject).filter(srcObjKey => srcObjKey in targetObject));
 
-        this._alteredKeyValueDiffs =
+        this._alteredPropValueDiffs =
             Object.freeze(evalPropValueDiffs(sourceObject, targetObject));
 
         this._alteredKeyValueKeys =
-            Object.freeze(this._alteredKeyValueDiffs.map(diff => diff.key));
+            Object.freeze(this._alteredPropValueDiffs.map(diff => diff.key));
     }
 
     public get sourceObject(): Readonly<SourceType> { return this._srcObj; }
@@ -39,7 +39,7 @@ export class ObjectComparer<SourceType, TargetType>
     public get omittedKeys(): ReadonlyArray<string> { return this._omittedKeys; }
     public get addedKeys(): ReadonlyArray<string> { return this._addedKeys; }
     public get includedKeys(): ReadonlyArray<string> { return this._includedKeys; }
-    public get alteredKeyValueDiffs(): readonly Readonly<ObjPropValueDiff>[] { return this._alteredKeyValueDiffs; }
+    public get alteredPropValueDiffs(): readonly Readonly<ObjPropValueDiff>[] { return this._alteredPropValueDiffs; }
     public get alteredKeyValueKeys(): ReadonlyArray<string> { return this._alteredKeyValueKeys; }
 
     public readonly has: ObjectComparerHasQuery = Object.freeze({
@@ -49,7 +49,7 @@ export class ObjectComparer<SourceType, TargetType>
 
         includedKeys: (): boolean => this._includedKeys.length !== 0,
 
-        alteredKeyValues: (): boolean => this._alteredKeyValueDiffs.length !== 0
+        alteredKeyValues: (): boolean => this._alteredPropValueDiffs.length !== 0
     });
 
     public readonly count: ObjectComparerCountQuery = Object.freeze({
@@ -59,6 +59,6 @@ export class ObjectComparer<SourceType, TargetType>
 
         includedKeys: (): number => this._includedKeys.length,
 
-        alteredKeyValues: (): number => this._alteredKeyValueDiffs.length
+        alteredKeyValues: (): number => this._alteredPropValueDiffs.length
     });
 }
