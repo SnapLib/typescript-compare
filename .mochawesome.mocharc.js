@@ -1,10 +1,8 @@
 "use strict";
 
-const mocharc = require("./.mocharc");
-
 module.exports =
 {
-    ...mocharc,
+    ...require("./.mocharc"),
     reporter: "mochawesome",
     reporterOptions: [
         "autoOpen=true",
