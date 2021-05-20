@@ -49,7 +49,7 @@ export class ObjectComparer<SourceType, TargetType>
 
         includedKeys: (): boolean => this._includedKeys.length !== 0,
 
-        alteredKeyValues: (): boolean => this._alteredPropValueDiffs.length !== 0
+        alteredPropValues: (): boolean => this._alteredPropValueDiffs.length !== 0
     });
 
     public readonly count: ObjectComparerCountQuery = Object.freeze({
@@ -59,6 +59,6 @@ export class ObjectComparer<SourceType, TargetType>
 
         includedKeys: (): number => this._includedKeys.length,
 
-        alteredKeyValues: (): number => this._alteredPropValueDiffs.length
+        alteredPropValues: (): number => this._alteredPropValueDiffs.length
     });
 }
