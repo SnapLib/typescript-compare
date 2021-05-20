@@ -22,7 +22,7 @@
     "lint": "eslint --quiet --ext ts ./src",
     "lint-strict": "eslint --ext ts ./src",
     "test": "mocha --config ./.mocharc.js",
-    "test-report": "mocha --config report.mocharc.js",
+    "test-report": "mocha --config ./report.mocharc.js",
     "tsnode": "ts-node"
   },
   "devDependencies": {
