@@ -2,39 +2,79 @@ import {ObjPropValueDiff} from "../../main/ts/util/objPropValueDiff";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
-const toStr = (o: unknown): string => {return `${typeof o === "string" ? `"${o}"`: o}`;};
-
 const mocks: readonly Readonly<[string, unknown, unknown]>[] =
     [ ["dash", "mash", "vinyl"],
       ["zed", 29, "marklar"],
+      ["epona", ["navi", "deku"], {triForce: true}],
+      ["zulu", {foo: "bar"}, false],
       ["octi", true, 20] ];
 
-suite("TestObjPropValueDiff", function testObjPropValueDiff()
+const toStr = (o: unknown): string =>
 {
-    suite("Test key", function testGetKey()
+    return typeof o === "string" ? `"${o}"`
+           : Array.isArray(o) ? `[${o.map(e => toStr(e)).join(", ")}]`
+           : `${o}`;
+};
+
+suite("ObjPropValueDiff", function testObjPropValueDiff()
+{
+    suite("get", function testGet()
     {
-        mocks.forEach(mock =>
-            test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).key === "${mock[0]}"`, function()
-            {
-                assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2]).key, mock[0]);
-            }));
+        suite("key", function testKey()
+        {
+            mocks.forEach(mock =>
+                test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).key === "${mock[0]}"`, function()
+                {
+                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2]).key, mock[0]);
+                }));
+        });
+
+        suite("sourceValue", function testSourceValue()
+        {
+            mocks.forEach(mock =>
+                test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).sourceValue === ${toStr(mock[1])}`, function()
+                {
+                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2]).sourceValue, mock[1]);
+                }));
+        });
+
+        suite("targetValue", function testTargetValue()
+        {
+            mocks.forEach(mock =>
+                test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).sourceValue === ${toStr(mock[2])}`, function()
+                {
+                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2]).targetValue, mock[2]);
+                }));
+        });
     });
 
-    suite("Test sourceValue", function testGetSourceValue()
+    suite("index", function testGet()
     {
-        mocks.forEach(mock =>
-            test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).sourceValue === ${toStr(mock[1])}`, function()
-            {
-                assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2]).sourceValue, mock[1]);
-            }));
-    });
+        suite("0", function testKey()
+        {
+            mocks.forEach(mock =>
+                test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[0] === "${mock[0]}"`, function()
+                {
+                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2])[0], mock[0]);
+                }));
+        });
 
-    suite("Test targetValue", function testGetTargetValue()
-    {
-        mocks.forEach(mock =>
-            test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).sourceValue === ${toStr(mock[2])}`, function()
-            {
-                assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2]).targetValue, mock[2]);
-            }));
+        suite("1", function testSourceValue()
+        {
+            mocks.forEach(mock =>
+                test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[1] === ${toStr(mock[1])}`, function()
+                {
+                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2])[1], mock[1]);
+                }));
+        });
+
+        suite("2", function testTargetValue()
+        {
+            mocks.forEach(mock =>
+                test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[2] === ${toStr(mock[2])}`, function()
+                {
+                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2])[2], mock[2]);
+                }));
+        });
     });
 });
