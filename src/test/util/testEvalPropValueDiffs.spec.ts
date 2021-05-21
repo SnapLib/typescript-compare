@@ -24,15 +24,17 @@ const mockArrays: readonly Readonly<unknown[]>[] =
 
 const toStr = (o: unknown): string =>
 {
-    return typeof o === "string" ? `"${o}"` : Array.isArray(o) ? `[${o.map(e => toStr(e)).join(", ")}]` : `${o}`;
+    return typeof o === "string" ? `"${o}"`
+                  : Array.isArray(o) ? `[${o.map(e => toStr(e)).join(", ")}]`
+                  : `${o}`;
 };
 
-suite("TestEvalPropValueDiffs", function testGetPropValueDiffs()
+suite("evalPropValueDiffs", function testEvalPropValueDiffs()
 {
     suite("Same objects return empty diff", function testSameObjsReturnEmpty()
     {
         mocks.forEach(mockObj =>
-            test(`getPropValueDiffs(${toStr(mockObj)}, ${toStr(mockObj)}) returns empty`, function(){
+            test(`evalPropValueDiffs(${toStr(mockObj)}, ${toStr(mockObj)}) returns empty`, function(){
                 assert.isEmpty(evalPropValueDiffs(mockObj, mockObj));
             })
         );
