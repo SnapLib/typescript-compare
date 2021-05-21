@@ -242,17 +242,17 @@ suite("ObjectComparer", function testObjectComparer()
 
                 suite(`${toStr(mockStrArrayA)} -> ${toStr(mockIntArrayA)}`, function testStrIntArrayDiff()
                 {
-                    test('Diff keys are "0", "1", and "2"', function()
+                    test('diff keys are "0", "1", and "2"', function()
                     {
                         assert.deepStrictEqual(new ObjectComparer(mockStrArrayA, mockIntArrayA).alteredPropValueDiffs.map(diff => diff.key), ["0", "1", "2"]);
                     });
 
-                    test('Diff source values are "first", "second", and "third"', function()
+                    test('diff source values are "first", "second", and "third"', function()
                     {
                         assert.deepStrictEqual(new ObjectComparer(mockStrArrayA, mockIntArrayA).alteredPropValueDiffs.map(diff => diff.sourceValue), ["first", "second", "third"]);
                     });
 
-                    test("Diff target values are 111, 222, and 333", function()
+                    test("diff target values are 111, 222, and 333", function()
                     {
                         assert.deepStrictEqual(new ObjectComparer(mockStrArrayA, mockIntArrayA).alteredPropValueDiffs.map(diff => diff.targetValue), [111, 222, 333]);
                     });
@@ -263,7 +263,7 @@ suite("ObjectComparer", function testObjectComparer()
             {
                 mockObjs.forEach(mockObj =>
                     mockArrays.forEach(mockArray =>
-                        test(`{${mockObj}} -> ${toStr(mockArray)} diffs are empty`, function()
+                        test(`{${mockObj}} -> ${toStr(mockArray)} property value diffs are empty`, function()
                         {
                             assert.isEmpty(new ObjectComparer(mockObj, mockArray).alteredPropValueDiffs);
                         })
@@ -274,7 +274,7 @@ suite("ObjectComparer", function testObjectComparer()
             {
                 mockArrays.forEach(mockArr =>
                     mockObjs.forEach(mockObj =>
-                        test(`${toStr(mockArr)} -> {${mockObj}} diffs are empty`, function()
+                        test(`${toStr(mockArr)} -> {${mockObj}} property value diffs are empty`, function()
                         {
                             assert.isEmpty(new ObjectComparer(mockArr, mockObj).alteredPropValueDiffs);
                         })
