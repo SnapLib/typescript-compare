@@ -5,8 +5,8 @@ import {suite, test} from "mocha";
 const mocks: readonly Readonly<[string, unknown, unknown]>[] =
     [ ["dash", "mash", "vinyl"],
       ["zed", 29, "marklar"],
-      ["epona", ["navi", "deku"], {triForce: true}],
-      ["zulu", {foo: "bar"}, false],
+      ["epona", ["navi", "deku"], {triForce: true, toString: () => "{mockObjA}"}],
+      ["zulu", {foo: "bar", toString: () => "{mockObjB}"}, false],
       ["octi", true, 20] ];
 
 const toStr = (o: unknown): string =>
