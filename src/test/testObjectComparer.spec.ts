@@ -51,7 +51,7 @@ suite("ObjectComparer", function testObjectComparer()
 
     suite("get", function testGetters()
     {
-        suite("sourceObject", function testSourceObject()
+        suite("sourceObject", function testGetSourceObject()
         {
             mockObjs.forEach(mockObj1 =>
                 mockObjs.forEach(mockObj2 =>
@@ -62,7 +62,7 @@ suite("ObjectComparer", function testObjectComparer()
             ));
         });
 
-        suite("targetObject", function testTargetObject()
+        suite("targetObject", function testGetTargetObject()
         {
             mockObjs.forEach(mockObj1 =>
                 mockObjs.forEach(mockObj2 =>
@@ -73,7 +73,7 @@ suite("ObjectComparer", function testObjectComparer()
             ));
         });
 
-        suite("omittedKeys", function testOmittedKeys()
+        suite("omittedKeys", function testGetOmittedKeys()
         {
             mockAutomobileObjs.forEach(mockAutomobileObj1 =>
                 mockAutomobileObjs.forEach(mockAutomobileObj2 =>
@@ -106,7 +106,7 @@ suite("ObjectComparer", function testObjectComparer()
             ));
         });
 
-        suite("addedKeys", function testAddedKeys()
+        suite("addedKeys", function testGetAddedKeys()
         {
             mockAutomobileObjs.forEach(mockAutomobileObj1 =>
                 mockAutomobileObjs.forEach(mockAutomobileObj2 =>
@@ -139,7 +139,7 @@ suite("ObjectComparer", function testObjectComparer()
             ));
         });
 
-        suite("includedKeys", function testIncludedKeys()
+        suite("includedKeys", function testGetIncludedKeys()
         {
             mockAutomobileObjs.forEach(mockAutomobileObj =>
                 mockLionObjs.forEach(mockLionObj =>{
@@ -171,7 +171,7 @@ suite("ObjectComparer", function testObjectComparer()
             ));
         });
 
-        suite("alteredPropValueDiffs", function testAlteredPropValueDiffs()
+        suite("alteredPropValueDiffs", function testGetAlteredPropValueDiffs()
         {
             suite("of objects", function testAlteredPropValueDiffsOfObjs()
             {
@@ -281,5 +281,77 @@ suite("ObjectComparer", function testObjectComparer()
                 ));
             });
         });
+    });
+
+    suite("has", function testHas()
+    {
+       suite("omittedKeys", function testHasOmittedKeys()
+       {
+           mockAutomobileObjs.forEach(mockAutomobileObj1 =>
+               mockAutomobileObjs.forEach(mockAutomobileObj2 =>
+                   test(`new ObjectComparer(${mockAutomobileObj1}, ${mockAutomobileObj2}).has.omittedKeys() === false`, function()
+                   {
+                       assert.isFalse(new ObjectComparer(mockAutomobileObj1, mockAutomobileObj2).has.omittedKeys());
+                   })
+           ));
+
+           mockLionObjs.forEach(mockLionObj1 => {
+               mockLionObjs.forEach(mockLionObj2 =>
+                   test(`new ObjectComparer(${mockLionObj1}, ${mockLionObj2}).has.omittedKeys() === false`, function()
+                   {
+                       assert.isFalse(new ObjectComparer(mockLionObj1, mockLionObj2).has.omittedKeys());
+                   })
+               );
+           });
+
+           mockArrays.forEach(mockArray1 => {
+               mockArrays.forEach(mockArray2 =>
+                   test(`new ObjectComparer(${toStr(mockArray1)}, ${toStr(mockArray2)}).has.omittedKeys() === false`, function()
+                   {
+                       assert.isFalse(new ObjectComparer(mockArray1, mockArray2).has.omittedKeys());
+                   })
+               );
+           });
+
+           mockAutomobileObjs.forEach(mockAutomobileObj => {
+               mockLionObjs.forEach(mockLionObj => {
+                   test(`new ObjectComparer(${mockAutomobileObj}, ${mockLionObj}).has.omittedKeys() === true`, function()
+                   {
+                       assert.isTrue(new ObjectComparer(mockAutomobileObj, mockLionObj).has.omittedKeys());
+                   });
+
+                   test(`new ObjectComparer(${mockLionObj}, ${mockAutomobileObj}).has.omittedKeys() === true`, function()
+                   {
+                       assert.isTrue(new ObjectComparer(mockLionObj, mockAutomobileObj).has.omittedKeys());
+                   });
+               });
+
+               mockArrays.forEach(mockArray => {
+                   test(`new ObjectComparer(${mockAutomobileObj}, ${toStr(mockArray)}).has.omittedKeys() === true`, function()
+                   {
+                       assert.isTrue(new ObjectComparer(mockAutomobileObj, mockArray).has.omittedKeys());
+                   });
+
+                   test(`new ObjectComparer(${toStr(mockArray)}, ${mockAutomobileObj}).has.omittedKeys() === true`, function()
+                   {
+                       assert.isTrue(new ObjectComparer(mockArray, mockAutomobileObj).has.omittedKeys());
+                   });
+               });
+           });
+
+           mockLionObjs.forEach(mockLionObj =>
+               mockArrays.forEach(mockArray => {
+                   test(`new ObjectComparer(${mockLionObj}, ${toStr(mockArray)}).has.omittedKeys() === true`, function()
+                   {
+                       assert.isTrue(new ObjectComparer(mockLionObj, mockArray).has.omittedKeys());
+                   });
+
+                   test(`new ObjectComparer(${toStr(mockArray)}, ${mockLionObj}).has.omittedKeys() === true`, function()
+                   {
+                       assert.isTrue(new ObjectComparer(mockArray, mockLionObj).has.omittedKeys());
+                   });
+               })
+           );
+       });
     });
 });
