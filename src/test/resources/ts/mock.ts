@@ -16,6 +16,7 @@ export class Mock
     public static readonly lions: readonly Readonly<unknown>[] = Object.freeze([Simba, Kion]);
     public static readonly objects: readonly Readonly<unknown>[] = Object.freeze(Mock.lions.concat(Mock.automobiles));
     public static readonly arrays: readonly Readonly<unknown>[] = Object.freeze([strArrayA, strArrayB, intArrayA, intArrayB]);
+    public static readonly allMocks: readonly Readonly<unknown>[] = Object.freeze(Mock.objects.concat(Mock.arrays));
 }
 
 export {Simba, Kion} from "./lion";
