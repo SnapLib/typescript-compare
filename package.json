@@ -22,7 +22,7 @@
   },
   "types": "./types",
   "scripts": {
-    "build": "tsc -p ./tsconfig.json",
+    "build-dist": "tsc -p ./tsconfig.json",
     "build-tsdoc": "typedoc --options ./typedoc.json",
     "lint": "eslint --quiet --ext ts ./src/**/*.ts",
     "lint-strict": "eslint --ext ts ./src/**/*.ts",
