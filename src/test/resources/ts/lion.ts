@@ -3,15 +3,15 @@ type Lion =
     name: string;
     gender: string;
     age: number;
-    friends: Array<string>;
-    family: {[relation: string]: string | null | undefined};
+    friends: Array<unknown>;
+    family: unknown | null | undefined;
     isKing: boolean;
     toString: () => string;
 };
 
-export const simbaFriends: Array<string> = ["Timon", "Pumbaa", "Rafiki"];
+export const simbaFriends: Array<unknown> = ["Timon", "Pumbaa", "Rafiki"];
 
-export const simbaFamily: {[relation: string]: string | null | undefined} =
+export const simbaFamily: unknown | null | undefined =
     {dad: "Mufasa", mom: "Sarabi", sister: null, brother: undefined};
 
 export const Simba: Lion =
@@ -25,9 +25,9 @@ export const Simba: Lion =
     toString: () => "Simba"
 };
 
-const kionFriends: Array<string> = ["Jasiri", "Bunga", "Kovu"];
+const kionFriends: Array<unknown> = ["Jasiri", "Bunga", "Kovu"];
 
-const kionFamily: {[relation: string]: string | null | undefined} =
+const kionFamily: unknown | null | undefined =
     {dad: "Mufasa", mom: "Nala", sister: "Kiara", brother: "Nguruma"};
 
 export const Kion: Lion =
