@@ -2,6 +2,7 @@
 
 module.exports = {
     root: true,
+    ignorePatterns: ["!**/*.ts"],
     env:
     {
         es2020: true,
