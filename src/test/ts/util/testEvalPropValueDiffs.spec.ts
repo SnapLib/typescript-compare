@@ -100,6 +100,24 @@ suite("evalPropValueDiffs", function testEvalPropValueDiffs()
                 assert.deepStrictEqual(evalPropValueDiffs(strArrayA, intArrayA).map(diff => diff.targetValue), [111, 222, 333]);
             });
         });
+
+        suite(`${toStr(intArrayA)} -> ${toStr(intArrayB)}`, function testEvalStrIntArrayDiff()
+        {
+            test('diff keys is "2"', function()
+            {
+                assert.deepStrictEqual(evalPropValueDiffs(intArrayA, intArrayB).map(diff => diff.key), ["2"]);
+            });
+
+            test("diff source value is 333", function()
+            {
+                assert.deepStrictEqual(evalPropValueDiffs(intArrayA, intArrayB).map(diff => diff.sourceValue), [333]);
+            });
+
+            test("diff target value is 999", function()
+            {
+                assert.deepStrictEqual(evalPropValueDiffs(intArrayA, intArrayB).map(diff => diff.targetValue), [999]);
+            });
+        });
     });
 
     suite("object and array", function testEvalObjArrayDiff()
