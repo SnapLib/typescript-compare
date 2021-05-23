@@ -1,4 +1,4 @@
-import {Simba, Kion, Car, Motorcycle} from "./mock";
+import {Simba, Kion, Car, Motorcycle} from "../resources/ts/mock";
 import {ObjectCompare} from "../../main/ts/objectCompare";
 import {assert} from "chai";
 import {suite, test} from "mocha";

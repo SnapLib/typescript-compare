@@ -1,5 +1,5 @@
 import {evalPropValueDiffs} from "../../../main/ts/util/evalPropValueDiffs";
-import {Simba, Kion, Car, Motorcycle} from "./mock";
+import {Simba, Kion, Car, Motorcycle} from "../../resources/ts/mock";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
