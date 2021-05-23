@@ -17,6 +17,9 @@
     "compare",
     "utility"
   ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "scripts": {
     "build-tsdoc": "typedoc --options ./typedoc.json",
     "lint": "eslint --quiet --ext ts ./src",
