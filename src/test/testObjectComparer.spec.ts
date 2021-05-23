@@ -1,6 +1,6 @@
 import {Car, Motorcycle} from "./AutoMobile";
 import {Simba, Kion} from "./Lion";
-import {ObjectCompare} from "../main/ts/objectCompare";
+import {ObjectCompare} from "../main/ts/lib/objectCompare";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
