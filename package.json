@@ -2,7 +2,7 @@
   "name": "object-compare",
   "version": "0.0.1",
   "description": "Compare 2 JavaScript objects.",
-  "main": "index.js",
+  "main": "objectCompare.js",
   "author": {
     "name": "Snap",
     "email": "snap@snaplib.org"
@@ -21,9 +21,6 @@
     "node": ">=14.0.0"
   },
   "types": "./types",
-  "directories": {
-    "lib": "./lib"
-  },
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
     "build-tsdoc": "typedoc --options ./typedoc.json",

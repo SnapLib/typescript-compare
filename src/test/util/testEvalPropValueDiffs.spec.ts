@@ -1,4 +1,4 @@
-import {evalPropValueDiffs} from "../../main/ts/lib/util/evalPropValueDiffs";
+import {evalPropValueDiffs} from "../../main/ts/util/evalPropValueDiffs";
 import {Car, Motorcycle} from "../AutoMobile";
 import {Simba, Kion} from "../Lion";
 import {assert} from "chai";
