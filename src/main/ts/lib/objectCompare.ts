@@ -1,7 +1,7 @@
 import {ObjPropValueDiff} from "./util/objPropValueDiff";
 import {evalPropValueDiffs} from "./util/evalPropValueDiffs";
-import type {ObjectComparerHasQuery} from "./objComparerQueries/objectComparerHasQuery";
-import type {ObjectComparerCountQuery} from "./objComparerQueries/objectComparerCountQuery";
+import type {ObjectCompareHasQuery} from "./objComparerQueries/objectCompareHasQuery";
+import type {ObjectCompareCountQuery} from "./objComparerQueries/objectCompareCountQuery";
 
 export class ObjectCompare<SourceType, TargetType>
 {
@@ -42,7 +42,7 @@ export class ObjectCompare<SourceType, TargetType>
     public get alteredPropValueDiffs(): readonly Readonly<ObjPropValueDiff>[] { return this._alteredPropValueDiffs; }
     public get alteredKeyValueKeys(): ReadonlyArray<string> { return this._alteredKeyValueKeys; }
 
-    public readonly has: ObjectComparerHasQuery = Object.freeze({
+    public readonly has: ObjectCompareHasQuery = Object.freeze({
         omittedKeys: (): boolean => this._omittedKeys.length !== 0,
 
         addedKeys: (): boolean => this._addedKeys.length !== 0,
@@ -52,7 +52,7 @@ export class ObjectCompare<SourceType, TargetType>
         alteredPropValues: (): boolean => this._alteredPropValueDiffs.length !== 0
     });
 
-    public readonly count: ObjectComparerCountQuery = Object.freeze({
+    public readonly count: ObjectCompareCountQuery = Object.freeze({
         omittedKeys: (): number => this._omittedKeys.length,
 
         addedKeys: (): number => this._addedKeys.length,

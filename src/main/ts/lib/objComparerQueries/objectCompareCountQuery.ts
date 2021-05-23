@@ -1,4 +1,4 @@
-export interface ObjectComparerCountQuery
+export interface ObjectCompareCountQuery
 {
     readonly omittedKeys: () => number;
     readonly addedKeys: () => number;
@@ -6,4 +6,4 @@ export interface ObjectComparerCountQuery
     readonly alteredPropValues: () => number;
 }
 
-export type {ObjectComparerCountQuery as default};
+export type {ObjectCompareCountQuery as default};

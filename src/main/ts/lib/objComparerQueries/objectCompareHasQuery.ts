@@ -1,4 +1,4 @@
-export interface ObjectComparerHasQuery
+export interface ObjectCompareHasQuery
 {
     readonly omittedKeys: () => boolean;
     readonly addedKeys: () => boolean;
@@ -6,4 +6,4 @@ export interface ObjectComparerHasQuery
     readonly alteredPropValues: () => boolean;
 }
 
-export type {ObjectComparerHasQuery as default};
+export type {ObjectCompareHasQuery as default};
