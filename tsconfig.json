@@ -1,3 +1,26 @@
-{
-  "extends": "./src/main/ts/tsconfig.json"
+/*
+ * This tsconfig file is used to define the default build behavior
+ * for the distributable of the object-compare package.
+ */
+ {
+  "include": ["./src/main/ts/**/*.ts"],
+  "compilerOptions":
+  {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src/main/ts",
+    "declaration": true,
+    "declarationDir": "./build/dist/object-compare/types",
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "lib": ["es2020"],
+    "module": "es2020",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "outDir": "./build/dist/object-compare",
+    "preserveConstEnums": false,
+    "removeComments": true,
+    "sourceMap": false,
+    "strict": true,
+    "target": "es2020"
+  }
 }
