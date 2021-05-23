@@ -1,0 +1,21 @@
+{
+  "compilerOptions":
+  {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./.",
+    "declaration": true,
+    "declarationDir": "../../../build/dist/object-compare/types",
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "lib": ["es2020"],
+    "module": "es2020",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "outDir": "../../../build/dist/object-compare",
+    "preserveConstEnums": false,
+    "removeComments": true,
+    "sourceMap": false,
+    "strict": true,
+    "target": "es2020",
+  }
+}
