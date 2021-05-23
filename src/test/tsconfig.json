@@ -22,7 +22,6 @@
     "noEmitOnError": false,
     "preserveConstEnums": true,
     "removeComments": true,
-    "rootDirs": ["./resources/ts", "./ts", "./ts/util"],
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
