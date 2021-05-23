@@ -1,4 +1,4 @@
-import {ObjPropValueDiff} from "../../main/ts/util/objPropValueDiff";
+import {ObjPropValueDiff} from "../../../main/ts/util/objPropValueDiff";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
