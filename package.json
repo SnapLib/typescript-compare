@@ -2,7 +2,7 @@
   "name": "object-compare",
   "version": "0.0.1",
   "description": "Compare 2 JavaScript objects.",
-  "main": "ObjectComparer.js",
+  "main": "index.js",
   "author": {
     "name": "Snap",
     "email": "snap@snaplib.org"
@@ -20,12 +20,17 @@
   "engines": {
     "node": ">=14.0.0"
   },
+  "types": "./types",
+  "directories": {
+    "lib": "./lib"
+  },
   "scripts": {
+    "build": "tsc -p ./tsconfig.json",
     "build-tsdoc": "typedoc --options ./typedoc.json",
     "lint": "eslint --quiet --ext ts ./src",
     "lint-strict": "eslint --ext ts ./src",
-    "test": "mocha --config ./.mocharc.js",
-    "test-report": "mocha --config ./report.mocharc.js"
+    "test": "env TS_NODE_PROJECT='./src/test/tsconfig.json' mocha --config ./.mocharc.js",
+    "test-report": "env TS_NODE_PROJECT='./src/test/tsconfig.json' mocha --config ./report.mocharc.js"
   },
   "devDependencies": {
     "@types/chai": "^4.2.18",
