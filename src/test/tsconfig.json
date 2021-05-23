@@ -2,10 +2,10 @@
  * This tsconfig file is for executing unit tests. Unit tests are run with Mocha
  * and ts-node registered as a hook.
  *
- * Due to strange behavior resulting in Mocha attempting to locate the tsconfig
- * file outside of the root directory of this npm package, this tsconfig file
- * can't extend the tsconfig file located at the root of this directory. Hence,
- * having to copy/repeat properties that are also set in the root tsconfig file.
+ * Due to Mocha attempting to locate the tsconfig file outside of the root
+ * directory of this npm package if this tsconfig file extends the root tsconfig
+ * file; this tsconfig file must copy/repeat properties that are also set in the
+ * root tsconfig file and must be updated separately.
  */
 {
   "include": ["./ts/**/*.ts"],
