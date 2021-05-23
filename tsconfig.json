@@ -1,6 +1,9 @@
 /*
  * This tsconfig file is used to define the default build behavior
  * for the distributable of the object-compare package.
+ *
+ * The only other tsconfig file is used for testing and is located in the
+ * ./src/test/ts/tsconfig.json file.
  */
  {
   "include": ["./src/main/ts/**/*.ts"],
