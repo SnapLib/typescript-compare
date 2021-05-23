@@ -1,17 +1,8 @@
-import {evalPropValueDiffs} from "../../../main/ts/util/evalPropValueDiffs";
 import {Simba, Kion, Car, Motorcycle, strArrayA, strArrayB, intArrayA, intArrayB} from "../../resources/ts/mock";
+import mock from "../../resources/ts/mock";
+import {evalPropValueDiffs} from "../../../main/ts/util/evalPropValueDiffs";
 import {assert} from "chai";
 import {suite, test} from "mocha";
-
-const mocks: ReadonlyArray<unknown> =
-    [Car, Motorcycle, Kion, Simba,
-     strArrayA, strArrayB, intArrayA, intArrayB];
-
-const mockObjs: readonly Readonly<unknown>[] =
-    Object.freeze([Car, Motorcycle, Kion, Simba]);
-
-const mockArrays: readonly Readonly<unknown[]>[] =
-    Object.freeze([strArrayA, strArrayB, intArrayA, intArrayB]);
 
 const automobileKeys = Object.keys(Car);
 const lionKeys = Object.keys(Simba);
@@ -41,7 +32,7 @@ suite("evalPropValueDiffs", function testEvalPropValueDiffs()
 {
     suite("of objects", function testEvalPropValueDiffsOfObjs()
     {
-        mocks.forEach(mock =>
+        mock.allMocks.forEach(mock =>
             test(`evalPropValueDiffs(${mock}, ${mock}) is empty`, function()
             {
                 assert.isEmpty(evalPropValueDiffs(mock, mock));
@@ -113,8 +104,8 @@ suite("evalPropValueDiffs", function testEvalPropValueDiffs()
 
     suite("object and array", function testEvalObjArrayDiff()
     {
-        mockObjs.forEach(mockObj =>
-            mockArrays.forEach(mockArray =>
+        mock.objects.forEach(mockObj =>
+            mock.arrays.forEach(mockArray =>
                 test(`{${mockObj}} -> ${toStr(mockArray)} property value diffs are empty`, function()
                 {
                     assert.isEmpty(evalPropValueDiffs(mockObj, mockArray));
@@ -124,8 +115,8 @@ suite("evalPropValueDiffs", function testEvalPropValueDiffs()
 
     suite("array and object", function testEvalArrayObjDiff()
     {
-        mockArrays.forEach(mockArr =>
-            mockObjs.forEach(mockObj =>
+        mock.arrays.forEach(mockArr =>
+            mock.objects.forEach(mockObj =>
                 test(`${toStr(mockArr)} -> {${mockObj}} property value diffs are empty`, function()
                 {
                     assert.isEmpty(evalPropValueDiffs(mockArr, mockObj));
