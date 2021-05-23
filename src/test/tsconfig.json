@@ -8,6 +8,7 @@
  * having to copy/repeat properties that are also set in the root tsconfig file.
  */
 {
+  "include": ["./ts/**/*.ts"],
   "compilerOptions":
   {
     "allowSyntheticDefaultImports": true,
