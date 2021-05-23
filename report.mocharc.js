@@ -10,7 +10,7 @@ module.exports =
         "json=false",
         "reportDir=./build/test-report",
         "reportFilename=index",
-        "reportPageTitle=ObjectComparer test report",
+        "reportPageTitle=ObjectCompare test report",
         "reportTitle=SnapLib Object Comparer Test Report",
         "showSkipped=false"
     ]
