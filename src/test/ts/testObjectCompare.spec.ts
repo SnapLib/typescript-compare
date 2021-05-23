@@ -237,6 +237,24 @@ suite("ObjectComparer", function testObjectComparer()
                         assert.deepStrictEqual(new ObjectCompare(strArrayA, intArrayA).alteredPropValueDiffs.map(diff => diff.targetValue), [111, 222, 333]);
                     });
                 });
+
+                suite(`${toStr(intArrayA)} -> ${toStr(intArrayB)}`, function testStrIntArrayDiff()
+                {
+                    test('diff key is "2"', function()
+                    {
+                        assert.deepStrictEqual(new ObjectCompare(intArrayA, intArrayB).alteredPropValueDiffs.map(diff => diff.key), ["2"]);
+                    });
+
+                    test("diff source values is 333", function()
+                    {
+                        assert.deepStrictEqual(new ObjectCompare(intArrayA, intArrayB).alteredPropValueDiffs.map(diff => diff.sourceValue), [333]);
+                    });
+
+                    test("diff target value is 999", function()
+                    {
+                        assert.deepStrictEqual(new ObjectCompare(intArrayA, intArrayB).alteredPropValueDiffs.map(diff => diff.targetValue), [999]);
+                    });
+                });
             });
 
             suite("object and array", function testObjArrayDiff()
