@@ -1,7 +1,7 @@
 {
   "name": "object-compare",
   "version": "0.0.1",
-  "description": "Compare 2 JavaScript objects.",
+  "description": "Compare 2 JavaScript objects to each other.",
   "main": "objectCompare.js",
   "author": {
     "name": "Snap",
