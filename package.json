@@ -1,5 +1,5 @@
 {
-  "name": "object-comparer",
+  "name": "object-compare",
   "version": "0.0.1",
   "description": "Compare 2 JavaScript objects.",
   "main": "ObjectComparer.js",
