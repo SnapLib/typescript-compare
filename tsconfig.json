@@ -1,14 +1,18 @@
 {
+  "include": ["./src/main/ts/**/*.ts"],
   "compilerOptions":
   {
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./src/main/ts",
+    "declaration": true,
+    "declarationDir": "./build/dist/object-compare/types",
     "esModuleInterop": true,
     "importHelpers": true,
     "lib": ["es2020"],
-    "module": "commonjs",
+    "module": "es2020",
     "moduleResolution": "node",
     "noEmitOnError": true,
+    "outDir": "./build/dist/object-compare",
     "preserveConstEnums": false,
     "removeComments": true,
     "sourceMap": false,
