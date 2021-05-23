@@ -26,8 +26,8 @@
     "build-tsdoc": "typedoc --options ./typedoc.json",
     "lint": "eslint --quiet --ext ts ./src",
     "lint-strict": "eslint --ext ts ./src",
-    "test": "env TS_NODE_PROJECT='./src/test/ts/tsconfig.json' mocha --config ./.mocharc.js",
-    "test-report": "env TS_NODE_PROJECT='./src/test/ts/tsconfig.json' mocha --config ./report.mocharc.js"
+    "test": "env TS_NODE_PROJECT='./src/test/ts/tsconfig.json' mocha --config ./src/test/.mocharc.js",
+    "test-report": "env TS_NODE_PROJECT='./src/test/ts/tsconfig.json' mocha --config ./src/test/report.mocharc.cjs"
   },
   "devDependencies": {
     "@types/chai": "^4.2.18",
