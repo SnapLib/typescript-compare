@@ -1,4 +1,4 @@
-type Automobile =
+type AutoMobile =
 {
     type: string;
     fuel: string;
@@ -13,7 +13,7 @@ export const carMakes: Array<string> =
     ["Koenigsegg", "Lamborghini", "Ferrari", "Pagani", "Audi",
      "Porsche", "Nissan", "Honda", "Toyota", "Ford", "Chevrolet"];
 
-export const Car: Automobile =
+export const Car: AutoMobile =
 {
     type: "car",
 
@@ -38,7 +38,7 @@ export const Car: Automobile =
 export const motorcycleMakes: Array<string> =
     ["MV Agusta", "Triumph", "BMW", "Honda", "Yamaha", "Kawasaki"];
 
-export const Motorcycle: Automobile =
+export const Motorcycle: AutoMobile =
 {
     type: "motorcycle",
 
