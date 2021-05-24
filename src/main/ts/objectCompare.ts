@@ -62,3 +62,5 @@ export class ObjectCompare<SourceType, TargetType>
         alteredPropValues: (): number => this._alteredPropValueDiffs.length
     });
 }
+
+export {ObjectCompare as default};
