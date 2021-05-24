@@ -1,5 +1,5 @@
-import {Simba, Kion} from "./lion";
-import {Car, Motorcycle} from "./autoMobile";
+import {Simba, Kion, lionKeys} from "./lion";
+import {Car, Motorcycle, automobileKeys} from "./autoMobile";
 import {strArrayA, strArrayB, intArrayA, intArrayB} from "./array";
 
 export class Mock
@@ -13,14 +13,16 @@ export class Mock
     public static readonly intArrayA: readonly Readonly<unknown>[] = Object.freeze(Array.from(intArrayA, Object.freeze));
     public static readonly intArrayB: readonly Readonly<unknown>[] = Object.freeze(Array.from(intArrayB, Object.freeze));
     public static readonly automobiles: readonly Readonly<unknown>[] = Object.freeze([Car, Motorcycle]);
+    public static readonly automobileKeys: ReadonlyArray<string> = Object.freeze(automobileKeys);
     public static readonly lions: readonly Readonly<unknown>[] = Object.freeze([Simba, Kion]);
     public static readonly objects: readonly Readonly<unknown>[] = Object.freeze(Mock.lions.concat(Mock.automobiles));
+    public static readonly lionKeys: ReadonlyArray<string> = Object.freeze(lionKeys);
     public static readonly arrays: readonly Readonly<unknown>[] = Object.freeze([strArrayA, strArrayB, intArrayA, intArrayB]);
     public static readonly allMocks: readonly Readonly<unknown>[] = Object.freeze(Mock.objects.concat(Mock.arrays));
 }
 
-export {Simba, Kion} from "./lion";
-export {Car, Motorcycle} from "./autoMobile";
+export {Simba, Kion, lionKeys} from "./lion";
+export {Car, Motorcycle, automobileKeys} from "./autoMobile";
 export {strArrayA, strArrayB, intArrayA, intArrayB} from "./array";
 
 export {Mock as default};
