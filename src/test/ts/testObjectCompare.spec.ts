@@ -1,12 +1,11 @@
-import {Simba, Kion, Car, Motorcycle, strArrayA, strArrayB, intArrayA, intArrayB} from "../resources/ts/mock";
 import mock from "../resources/ts/mock";
 import {ObjectCompare} from "../../main/ts/objectCompare";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
-const automobileKeys: ReadonlyArray<string> = Object.freeze(Object.keys(Car));
+const automobileKeys: ReadonlyArray<string> = Object.freeze(Object.keys(mock.Car));
 const automobileKeysNoToStr: ReadonlyArray<string> = Object.freeze(automobileKeys.filter(key => key !== "toString"));
-const lionKeys: ReadonlyArray<string> = Object.freeze(Object.keys(Simba));
+const lionKeys: ReadonlyArray<string> = Object.freeze(Object.keys(mock.Simba));
 const lionKeysNoToStr: ReadonlyArray<string> = Object.freeze(lionKeys.filter(key => key !== "toString"));
 
 const toStr = (o: unknown): string =>
@@ -156,16 +155,16 @@ suite("ObjectComparer", function testObjectComparer()
             suite("of objects", function testAlteredPropValueDiffsOfObjs()
             {
                 const diffCarValues =
-                    [Car.type, Car.numOfWheels, Car.makes, Car.models, Car.isSafe, Car.toString];
+                    Object.entries(mock.Car).filter(entry => entry[0] !== "fuel").map(entry => entry[1]);
                 const diffMotoValues =
-                    [Motorcycle.type, Motorcycle.numOfWheels, Motorcycle.makes, Motorcycle.models, Motorcycle.isSafe, Motorcycle.toString];
+                    Object.entries(mock.Motorcycle).filter(entry => entry[0] !== "fuel").map(entry => entry[1]);
                 const autoMobileKeysNoFuel =
                     automobileKeys.filter(key => key !== "fuel");
 
                 const diffSimbaValues =
-                        [Simba.name, Simba.age, Simba.friends, Simba.family, Simba.isKing, Simba.toString];
+                    Object.entries(mock.Simba).filter(entry => entry[0] !== "gender").map(entry => entry[1]);
                 const diffKionValues =
-                    [Kion.name, Kion.age, Kion.friends, Kion.family, Kion.isKing, Kion.toString];
+                    Object.entries(mock.Kion).filter(entry => entry[0] !== "gender").map(entry => entry[1]);
                 const lionKeysNoGender =
                     lionKeys.filter(key => key !== "gender");
 
@@ -177,82 +176,82 @@ suite("ObjectComparer", function testObjectComparer()
 
                 test("diff keys", function()
                 {
-                  assert.deepStrictEqual(new ObjectCompare(Car, Motorcycle).alteredPropValueDiffs.map(diff => diff.key), autoMobileKeysNoFuel);
-                  assert.deepStrictEqual(new ObjectCompare(Motorcycle, Car).alteredPropValueDiffs.map(diff => diff.key), autoMobileKeysNoFuel);
-                  assert.deepStrictEqual(new ObjectCompare(Simba, Kion).alteredPropValueDiffs.map(diff => diff.key), lionKeysNoGender);
-                  assert.deepStrictEqual(new ObjectCompare(Kion, Simba).alteredPropValueDiffs.map(diff => diff.key), lionKeysNoGender);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Car, mock.Motorcycle).alteredPropValueDiffs.map(diff => diff.key), autoMobileKeysNoFuel);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Motorcycle, mock.Car).alteredPropValueDiffs.map(diff => diff.key), autoMobileKeysNoFuel);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Simba, mock.Kion).alteredPropValueDiffs.map(diff => diff.key), lionKeysNoGender);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Kion, mock.Simba).alteredPropValueDiffs.map(diff => diff.key), lionKeysNoGender);
                 });
 
                 test("diff sourceValues", function()
                 {
-                  assert.deepStrictEqual(new ObjectCompare(Car, Motorcycle).alteredPropValueDiffs.map(diff => diff.sourceValue), diffCarValues);
-                  assert.deepStrictEqual(new ObjectCompare(Motorcycle, Car).alteredPropValueDiffs.map(diff => diff.sourceValue), diffMotoValues);
-                  assert.deepStrictEqual(new ObjectCompare(Simba, Kion).alteredPropValueDiffs.map(diff => diff.sourceValue), diffSimbaValues);
-                  assert.deepStrictEqual(new ObjectCompare(Kion, Simba).alteredPropValueDiffs.map(diff => diff.sourceValue), diffKionValues);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Car, mock.Motorcycle).alteredPropValueDiffs.map(diff => diff.sourceValue), diffCarValues);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Motorcycle, mock.Car).alteredPropValueDiffs.map(diff => diff.sourceValue), diffMotoValues);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Simba, mock.Kion).alteredPropValueDiffs.map(diff => diff.sourceValue), diffSimbaValues);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Kion, mock.Simba).alteredPropValueDiffs.map(diff => diff.sourceValue), diffKionValues);
                 });
 
                 test("diff targetValues", function()
                 {
-                  assert.deepStrictEqual(new ObjectCompare(Car, Motorcycle).alteredPropValueDiffs.map(diff => diff.targetValue), diffMotoValues);
-                  assert.deepStrictEqual(new ObjectCompare(Motorcycle, Car).alteredPropValueDiffs.map(diff => diff.targetValue), diffCarValues);
-                  assert.deepStrictEqual(new ObjectCompare(Simba, Kion).alteredPropValueDiffs.map(diff => diff.targetValue), diffKionValues);
-                  assert.deepStrictEqual(new ObjectCompare(Kion, Simba).alteredPropValueDiffs.map(diff => diff.targetValue), diffSimbaValues);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Car, mock.Motorcycle).alteredPropValueDiffs.map(diff => diff.targetValue), diffMotoValues);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Motorcycle, mock.Car).alteredPropValueDiffs.map(diff => diff.targetValue), diffCarValues);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Simba, mock.Kion).alteredPropValueDiffs.map(diff => diff.targetValue), diffKionValues);
+                  assert.deepStrictEqual(new ObjectCompare(mock.Kion, mock.Simba).alteredPropValueDiffs.map(diff => diff.targetValue), diffSimbaValues);
                 });
             });
 
             suite("of arrays", function testAlteredPropValueDiffsOfArrays()
             {
-               suite(`${toStr(strArrayA)} -> ${toStr(strArrayB)}`, function testStrArrayDiff()
+               suite(`${toStr(mock.strArrayA)} -> ${toStr(mock.strArrayB)}`, function testStrArrayDiff()
                 {
                     test('diff keys are "0" and "2"', function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(strArrayA, strArrayB).alteredPropValueDiffs.map(diff => diff.key), ["0", "2"]);
+                        assert.deepStrictEqual(new ObjectCompare(mock.strArrayA, mock.strArrayB).alteredPropValueDiffs.map(diff => diff.key), ["0", "2"]);
                     });
 
                     test('diff source values are "first" and "third"', function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(strArrayA, strArrayB).alteredPropValueDiffs.map(diff => diff.sourceValue), ["first", "third"]);
+                        assert.deepStrictEqual(new ObjectCompare(mock.strArrayA, mock.strArrayB).alteredPropValueDiffs.map(diff => diff.sourceValue), ["first", "third"]);
                     });
 
                     test('diff target values are "foo" and "baz"', function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(strArrayA, strArrayB).alteredPropValueDiffs.map(diff => diff.targetValue), ["foo", "baz"]);
+                        assert.deepStrictEqual(new ObjectCompare(mock.strArrayA, mock.strArrayB).alteredPropValueDiffs.map(diff => diff.targetValue), ["foo", "baz"]);
                     });
                 });
 
-                suite(`${toStr(strArrayA)} -> ${toStr(intArrayA)}`, function testStrIntArrayDiff()
+                suite(`${toStr(mock.strArrayA)} -> ${toStr(mock.intArrayA)}`, function testStrIntArrayDiff()
                 {
                     test('diff keys are "0", "1", and "2"', function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(strArrayA, intArrayA).alteredPropValueDiffs.map(diff => diff.key), ["0", "1", "2"]);
+                        assert.deepStrictEqual(new ObjectCompare(mock.strArrayA, mock.intArrayA).alteredPropValueDiffs.map(diff => diff.key), ["0", "1", "2"]);
                     });
 
                     test('diff source values are "first", "second", and "third"', function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(strArrayA, intArrayA).alteredPropValueDiffs.map(diff => diff.sourceValue), ["first", "second", "third"]);
+                        assert.deepStrictEqual(new ObjectCompare(mock.strArrayA, mock.intArrayA).alteredPropValueDiffs.map(diff => diff.sourceValue), ["first", "second", "third"]);
                     });
 
                     test("diff target values are 111, 222, and 333", function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(strArrayA, intArrayA).alteredPropValueDiffs.map(diff => diff.targetValue), [111, 222, 333]);
+                        assert.deepStrictEqual(new ObjectCompare(mock.strArrayA, mock.intArrayA).alteredPropValueDiffs.map(diff => diff.targetValue), [111, 222, 333]);
                     });
                 });
 
-                suite(`${toStr(intArrayA)} -> ${toStr(intArrayB)}`, function testStrIntArrayDiff()
+                suite(`${toStr(mock.intArrayA)} -> ${toStr(mock.intArrayB)}`, function testStrIntArrayDiff()
                 {
                     test('diff key is "2"', function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(intArrayA, intArrayB).alteredPropValueDiffs.map(diff => diff.key), ["2"]);
+                        assert.deepStrictEqual(new ObjectCompare(mock.intArrayA, mock.intArrayB).alteredPropValueDiffs.map(diff => diff.key), ["2"]);
                     });
 
                     test("diff source values is 333", function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(intArrayA, intArrayB).alteredPropValueDiffs.map(diff => diff.sourceValue), [333]);
+                        assert.deepStrictEqual(new ObjectCompare(mock.intArrayA, mock.intArrayB).alteredPropValueDiffs.map(diff => diff.sourceValue), [333]);
                     });
 
                     test("diff target value is 999", function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(intArrayA, intArrayB).alteredPropValueDiffs.map(diff => diff.targetValue), [999]);
+                        assert.deepStrictEqual(new ObjectCompare(mock.intArrayA, mock.intArrayB).alteredPropValueDiffs.map(diff => diff.targetValue), [999]);
                     });
                 });
             });
