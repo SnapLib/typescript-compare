@@ -4,22 +4,19 @@ import {evalPropValueDiffs} from "../../../main/ts/util/evalPropValueDiffs";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
-const automobileKeys = Object.keys(Car);
-const lionKeys = Object.keys(Simba);
-
 const diffCarValues =
     [Car.type, Car.numOfWheels, Car.makes, Car.models, Car.isSafe, Car.toString];
 const diffMotoValues =
     [Motorcycle.type, Motorcycle.numOfWheels, Motorcycle.makes, Motorcycle.models, Motorcycle.isSafe, Motorcycle.toString];
 const autoMobileKeysNoFuel =
-    automobileKeys.filter(key => key !== "fuel");
+    mock.automobileKeys.filter(key => key !== "fuel");
 
 const diffSimbaValues =
         [Simba.name, Simba.age, Simba.friends, Simba.family, Simba.isKing, Simba.toString];
 const diffKionValues =
     [Kion.name, Kion.age, Kion.friends, Kion.family, Kion.isKing, Kion.toString];
 const lionKeysNoGender =
-    lionKeys.filter(key => key !== "gender");
+    mock.lionKeys.filter(key => key !== "gender");
 
 const toStr = (o: unknown): string =>
 {
