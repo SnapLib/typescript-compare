@@ -5,7 +5,7 @@
   "private": true,
   "main": "./lib/objectCompare.js",
   "types": "./types/objectCompare.d.ts",
-  "type": "module",
+  "type": "commonjs",
   "license": "MIT",
   "homepage": "https://www.github.com/SnapLib",
   "author": {

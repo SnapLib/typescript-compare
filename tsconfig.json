@@ -16,7 +16,7 @@
     "esModuleInterop": true,
     "importHelpers": true,
     "lib": ["es2020"],
-    "module": "es2020",
+    "module": "commonjs",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "outDir": "./build/dist/object-compare/lib",
