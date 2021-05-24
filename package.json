@@ -2,14 +2,18 @@
   "name": "@snaplib/object-compare",
   "version": "0.0.1",
   "description": "Compare 2 JavaScript objects to each other.",
-  "main": "objectCompare.js",
+  "private": true,
+  "main": "./lib/objectCompare.js",
+  "types": "./types/objectCompare.d.ts",
+  "type": "module",
+  "license": "MIT",
   "author": {
     "name": "Snap",
     "email": "snap@snaplib.org"
   },
-  "license": "MIT",
-  "private": true,
-  "type": "module",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "keywords": [
     "snaplib",
     "javascript",
@@ -17,10 +21,6 @@
     "compare",
     "utility"
   ],
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "types": "./types",
   "scripts": {
     "build-dist": "tsc -p ./tsconfig.json",
     "build-tsdoc": "typedoc --options ./typedoc.json",
