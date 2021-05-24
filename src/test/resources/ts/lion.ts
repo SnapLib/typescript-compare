@@ -40,3 +40,5 @@ export const Kion: Lion =
     isKing: false,
     toString: () => "Kion"
 };
+
+export const lionKeys: Array<string> = Object.keys(Simba);
