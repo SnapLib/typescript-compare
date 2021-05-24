@@ -58,3 +58,6 @@ export const Motorcycle: AutoMobile =
 
     toString: () => "Motorcycle"
 };
+
+export const automobileKeys: Array<string> =
+    Object.keys(Car);
