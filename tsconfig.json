@@ -19,7 +19,7 @@
     "module": "es2020",
     "moduleResolution": "node",
     "noEmitOnError": true,
-    "outDir": "./build/dist/object-compare",
+    "outDir": "./build/dist/object-compare/lib",
     "preserveConstEnums": false,
     "removeComments": true,
     "sourceMap": false,
