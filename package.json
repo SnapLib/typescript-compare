@@ -7,14 +7,15 @@
   "types": "./types/objectCompare.d.ts",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://github.com/SnapLib",
+  "homepage": "https://www.github.com/SnapLib",
   "author": {
     "name": "Snap",
-    "email": "snap@snaplib.org"
+    "email": "snap@snaplib.org",
+    "url": "https://www.snaplib.org"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SnapLib/typescript-object-compare.git"
+    "url": "https://www.github.com/SnapLib/typescript-object-compare.git"
   },
   "engines": {
     "node": ">=14.0.0"
