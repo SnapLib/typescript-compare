@@ -1,5 +1,8 @@
 export const isEqual = (source: unknown, target: unknown): boolean =>
 {
+    const primitiveTypes: ReadonlySet<string> =
+        new Set(["string", "number", "bigint", "boolean", "undefined"]);
+
     if (source === target)
     {
         return true;
@@ -8,16 +11,49 @@ export const isEqual = (source: unknown, target: unknown): boolean =>
     {
         return false;
     }
-    else if (source === null || target === null)
+    else if (primitiveTypes.has(typeof source))
     {
-        return source === null && target === null;
+        return source === target;
     }
-    else if (typeof source === "symbol" || typeof target === "symbol")
+    else if (typeof source === "symbol")
     {
-        return (source as symbol).description === (target as symbol).description;
+        if (typeof target !== "symbol")
+        {
+            return false;
+        }
+
+        return source.description === target.description;
     }
-    else if (Array.isArray(source) && Array.isArray(target))
+    else if (typeof source === "function")
     {
+        if (typeof target !== "function")
+        {
+            return false;
+        }
+        if (source.name !== target.name)
+        {
+            return false;
+        }
+
+        if (source.length !== target.length)
+        {
+            return false;
+        }
+
+        if (source.toString() !== target.toString())
+        {
+            return false;
+        }
+
+        return true;
+    }
+    else if (Array.isArray(source))
+    {
+        if ( ! Array.isArray(target))
+        {
+            return false;
+        }
+
         if (source.length !== target.length)
         {
             return false;
