@@ -33,6 +33,18 @@ suite.only("isEqual", function testIsEqual()
                     assert.isTrue(isEqual(primitive, primitive));
                 }));
         });
+
+        suite("not same primitives", function testNotSamePrimitives()
+        {
+            suite("different primitive type", function testDifferentPrimitiveType()
+            {
+                Array.from(primitives.keys()).forEach(index =>
+                    test(`isEqual(${toStr(primitives[index])}, ${toStr(primitives[primitives.length - 1 - index])}) returns false`, function testDifferentPrimitiveTypeReturnFalse()
+                    {
+                        assert.isFalse(isEqual(primitives[index], primitives[primitives.length - 1 - index]));
+                    }));
+            });
+        });
     });
 
     suite("non-primitives", function testIsEqualNonPrimitives()
