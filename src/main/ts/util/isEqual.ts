@@ -57,5 +57,4 @@ export const isEqual = (source: unknown, target: unknown): boolean =>
                 srcEntry[0] === targetEntry[0] && isEqual(srcEntry[1], targetEntry[1]))
             );
     }
-
 };
