@@ -3,20 +3,21 @@ import {isEqual} from "../../../main/ts/util/isEqual";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
-const primitives = [undefined, null, "salty", 42, true, false];
+const primitiveSingletons = [undefined, null, true, false];
 
-const arrays2 = mock.arrays.map(arr => [...(arr as Array<unknown>)]);
+const primitiveNonSingletonsA = ["salty", 42, Symbol("nock"), BigInt(9999999)];
 
-const nonPrimitivesA1 = [mock.Car, mock.Motorcycle, mock.Simba, mock.Kion, Symbol("nock")];
+const primitiveNonSingletonsB = ["towel", -321, Symbol("aito"), BigInt(11111111)];
 
-const nonPrimitivesA2 = [mock.Motorcycle, mock.Car, mock.Kion, mock.Simba, Symbol("aito")];
+const primitives = [...primitiveSingletons, ...primitiveNonSingletonsA];
 
-const nonPrimitivesB = [{...mock.Car}, {...mock.Motorcycle}, {...mock.Simba}, {...mock.Kion}, Symbol("nock")];
+const nonPrimitives = [mock.Car, mock.Motorcycle, mock.Simba, mock.Kion];
 
 const toStr = (o: unknown): string =>
 {
     return typeof o === "string" ? `"${o}"`
            :  typeof o === "symbol" ? `Symbol("${o.description}")`
+           :  typeof o === "bigint" ? `BigInt(${o})`
            : Array.isArray(o) ? `[${o.map(e => toStr(e)).join(", ")}]`
            : `${o}`;
 };
@@ -27,22 +28,53 @@ suite.only("isEqual", function testIsEqual()
     {
         suite("same primitives", function testSamePrimitives()
         {
-            primitives.forEach(primitive =>
-                test(`isEqual(${toStr(primitive)}, ${toStr(primitive)}) returns true`, function testSamePrimitivesReturnTrue()
+            primitives.forEach(primitive => {
+                const testDescStr = `isEqual(${toStr(primitive)}, ${toStr(primitive)}) return`;
+                test(testDescStr + "s true", function testSamePrimitivesReturnTrue()
                 {
-                    assert.isTrue(isEqual(primitive, primitive), `isEqual(${toStr(primitive)}, ${toStr(primitive)}) returned false`);
-                }));
+                    assert.isTrue(isEqual(primitive, primitive), testDescStr + "ed false");
+                });
+            });
         });
 
         suite("not same primitives", function testNotSamePrimitives()
         {
             suite("different primitive type", function testDifferentPrimitiveType()
             {
-                Array.from(primitives.keys()).forEach(index =>
-                    test(`isEqual(${toStr(primitives[index])}, ${toStr(primitives[primitives.length - 1 - index])}) returns false`, function testDifferentPrimitiveTypeReturnFalse()
+                Array.from(primitiveSingletons.keys()).forEach(index => {
+                    const testDescStr = `isEqual(${toStr(primitiveSingletons[index])}, ${toStr(primitiveSingletons[primitiveSingletons.length - 1 - index])}) return`;
+                    test(testDescStr + "s false", function testDifferentPrimitiveSingletonType()
                     {
-                        assert.isFalse(isEqual(primitives[index], primitives[primitives.length - 1 - index]));
-                    }));
+                        assert.isFalse(isEqual(primitiveSingletons[index], primitiveSingletons[primitiveSingletons.length - 1 - index]), testDescStr + "ed true");
+                    });
+                });
+
+                primitiveSingletons.forEach(primitiveSingleton =>
+                    primitiveNonSingletonsA.forEach(primNonSingleton => {
+                        const testDescStr1 = `isEqual(${toStr(primitiveSingleton)}, ${toStr(primNonSingleton)}) return`;
+                        test(testDescStr1 + "s false", function testDifferentPrimitiveNonSingletonTypeA()
+                        {
+                            assert.isFalse(isEqual(primitiveSingleton, primNonSingleton), testDescStr1 + "ed true");
+                        });
+
+                        const testDescStr2 = `isEqual(${toStr(primNonSingleton)}, ${toStr(primitiveSingleton)}) return`;
+                        test(testDescStr2 + "s false", function testDifferentPrimitiveNonSingletonTypeB()
+                        {
+                            assert.isFalse(isEqual(primNonSingleton, primitiveSingleton), testDescStr2 + "ed true");
+                        });
+                    })
+                );
+            });
+
+            suite("different primitive value", function testDifferentPrimitiveValue()
+            {
+                Array.from(primitiveNonSingletonsA.keys()).forEach(index => {
+                    const testDescStr = `isEqual(${toStr(primitiveNonSingletonsA[index])}, ${toStr(primitiveNonSingletonsB[index])}) return`;
+                    test(testDescStr + "s false", function differentPrimValuesReturnFalse()
+                    {
+                        assert.isFalse(isEqual(primitiveNonSingletonsA[index], primitiveNonSingletonsB[index]), testDescStr + "ed true");
+                    });
+                });
             });
         });
     });
@@ -51,48 +83,57 @@ suite.only("isEqual", function testIsEqual()
     {
         suite("same arrays", function testSameArrays()
         {
-            mock.arrays.forEach(mockArray =>
-                test(`isEqual(${toStr(mockArray)}, ${toStr(mockArray)}) returns true`, function testSameArraysReturnTrue()
+            mock.arrays.forEach(mockArray => {
+                const testDescStr = `isEqual(${toStr(mockArray)}, ${toStr(mockArray)}) return`;
+                test(testDescStr + "s true", function testSameArraysReturnTrue()
                 {
-                    assert.isTrue(isEqual(mockArray, mockArray), `isEqual(${toStr(mockArray)}, ${toStr(mockArray)}) returns false`,);
-            }));
+                    assert.isTrue(isEqual(mockArray, mockArray), testDescStr + "ed false");
+                });
+            });
         });
 
         suite("equal arrays", function testEqualArrays()
         {
-            Array.from(mock.arrays.keys()).forEach(index =>
-                test(`isEqual(${toStr(mock.arrays[index])}A, ${toStr(arrays2[index])}B) returns true`, function testEqualArraysReturnTrue()
+            mock.arrays.forEach(mockArray => {
+                const testDescStr = `isEqual(${toStr(mockArray)}A, ${toStr(mockArray)}B) return`;
+                test(testDescStr + "s true", function testEqualArraysReturnTrue()
                 {
-                    assert.isTrue(isEqual(mock.arrays[index], arrays2[index]), `isEqual(${toStr(mock.arrays[index])}A, ${toStr(arrays2[index])}B) returned false`);
-            }));
+                    assert.isTrue(isEqual(mockArray, [...mockArray as Array<unknown>]), testDescStr + "ed false");
+                });
+            });
         });
 
         suite("same non-primitives", function testSameNonPrimitives()
         {
-            nonPrimitivesA1.forEach(nonPrimitive =>
-                test(`isEqual(${toStr(nonPrimitive)}, ${toStr(nonPrimitive)}) returns true`, function testSameNonPrimitivesReturnTrue()
+            nonPrimitives.forEach(nonPrimitive => {
+                const testDescStr = `isEqual(${toStr(nonPrimitive)}, ${toStr(nonPrimitive)}) return`;
+                test(testDescStr + "s true", function testSameNonPrimitivesReturnTrue()
                 {
-                    assert.isTrue(isEqual(nonPrimitive, nonPrimitive), `isEqual(${toStr(nonPrimitive)}, ${toStr(nonPrimitive)}) returned false`);
-            }));
+                    assert.isTrue(isEqual(nonPrimitive, nonPrimitive), testDescStr + "ed false");
+                });
+            });
         });
 
         suite("equal non-primitives", function testEqualNonPrimitives()
         {
-            Array.from(nonPrimitivesB.keys()).forEach(index =>
-                test(`isEqual(${toStr(nonPrimitivesA1[index])}A, ${toStr(nonPrimitivesB[index])}B) returns true`, function testEqualNonPrimitivesReturnTrue()
+            nonPrimitives.forEach(nonPrimitive => {
+                const testDescStr = `isEqual(${toStr(nonPrimitive)}A, ${toStr(nonPrimitive)}B) return`;
+                test(testDescStr + "s true", function testEqualNonPrimitivesReturnTrue()
                 {
-                    assert.isTrue(isEqual(nonPrimitivesA1[index], nonPrimitivesB[index]), `isEqual(${toStr(nonPrimitivesA1[index])}A, ${toStr(nonPrimitivesB[index])}B) returned false`);
-            }));
+                    assert.isTrue(isEqual(nonPrimitive, {...nonPrimitive}), testDescStr + "ed false");
+                });
+            });
         });
 
         suite("not equal non-primitives", function testNotEqualNonPrimitives()
         {
-            Array.from(nonPrimitivesA2.keys()).forEach(index =>
-                test(`isEqual(${toStr(nonPrimitivesA1[index])}, ${toStr(nonPrimitivesA2[index])}) returns false`, function testNotEqualNonPrimitivesReturnFalse()
+            Array.from(nonPrimitives.keys()).forEach(index => {
+                const testDescStr = `isEqual(${toStr(nonPrimitives[index])}, ${toStr(nonPrimitives[nonPrimitives.length - 1 -index])}) return`;
+                test(testDescStr + "s false", function testNotEqualNonPrimitivesReturnFalse()
                 {
-                    assert.isFalse(isEqual(nonPrimitivesA1[index], nonPrimitivesA2[index]), `isEqual(${toStr(nonPrimitivesA1[index])}, ${toStr(nonPrimitivesA2[index])}) returned true`);
-            }));
+                    assert.isFalse(isEqual(nonPrimitives[index], nonPrimitives[nonPrimitives.length - 1 -index]), testDescStr + "ed true");
+                });
+            });
         });
     });
-
 });
