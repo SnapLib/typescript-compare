@@ -2,12 +2,12 @@ import {ObjPropValueDiff} from "./objPropValueDiff";
 
 export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): ObjPropValueDiff[] =>
 {
-    if (typeof source !== "symbol" && typeof source !== "object" || source === null)
+    if (typeof source !== "object" || source === null)
     {
         throw new Error(source === null ? "null source object argument" : "source object argument not parsable to object");
     }
 
-    if (typeof target !== "symbol" && typeof target !== "object" || target === null)
+    if (typeof target !== "object" || target === null)
     {
         throw new Error(target === null ? "null target object argument" : "target object argument not parsable to object");
     }
