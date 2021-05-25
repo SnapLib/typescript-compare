@@ -24,6 +24,7 @@ export class ObjectCompare<SourceType, TargetType>
         {
             throw new Error( ! targetObject ? `${targetObject} target object argument` : "target object argument not parsable to object");
         }
+
         this._srcObj = Object.freeze(sourceObject);
         this._targetObj = Object.freeze(targetObject);
 
