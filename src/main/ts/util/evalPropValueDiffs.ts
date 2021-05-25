@@ -1,4 +1,5 @@
 import {ObjPropValueDiff} from "./objPropValueDiff";
+import {isEqual} from "./isEqual";
 
 export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): ObjPropValueDiff[] =>
 {
@@ -19,7 +20,7 @@ export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNull
         .filter(srcObjEntry =>
             targetObjEntries.some(targetObjEntry =>
                 srcObjEntry[0] === targetObjEntry[0]
-                && srcObjEntry[1] !== targetObjEntry[1]))
+                && ! isEqual(srcObjEntry[1], targetObjEntry[1])))
         .map(srcObjEntry => (
             new ObjPropValueDiff(srcObjEntry[0],
                                  srcObjEntry[1],
