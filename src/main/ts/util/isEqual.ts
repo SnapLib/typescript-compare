@@ -80,7 +80,7 @@ export const isEqual = (source: unknown, target: unknown): boolean =>
         }
 
         const srcEntries: readonly Readonly<[string, Readonly<unknown>]>[] =
-            Object.freeze(Object.entries(target));
+            Object.freeze(Object.entries(source));
         const targetEntries: readonly Readonly<[string, Readonly<unknown>]>[] =
             Object.freeze(Object.entries(target));
 
@@ -89,9 +89,7 @@ export const isEqual = (source: unknown, target: unknown): boolean =>
             return false;
         }
 
-        return srcEntries.every(srcEntry => targetEntries.some(targetEntry =>
-                srcEntry[0] === targetEntry[0] && isEqual(srcEntry[1], targetEntry[1]))
-            );
+        return srcEntries.every(srcEntry => srcEntry[0] in target && isEqual(srcEntry[1], targetEntries.find(targetEntry => srcEntry[0] === targetEntry[0])?.[1]));
     }
 };
 
