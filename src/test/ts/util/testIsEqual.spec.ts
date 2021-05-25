@@ -22,7 +22,7 @@ const toStr = (o: unknown): string =>
            : `${o}`;
 };
 
-suite.only("isEqual", function testIsEqual()
+suite("isEqual", function testIsEqual()
 {
     suite("primitives", function testIsEqualPrimitives()
     {
