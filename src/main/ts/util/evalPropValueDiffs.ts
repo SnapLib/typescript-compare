@@ -3,14 +3,14 @@ import {isEqual} from "./isEqual";
 
 export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): ObjPropValueDiff[] =>
 {
-    if (typeof source !== "object" || source === null)
+    if (typeof source !== "object" || source === null || source === undefined)
     {
-        throw new Error(source === null ? "null source object argument" : "source object argument not parsable to object");
+        throw new Error( ! source ? `${source} source object argument` : "source object argument not parsable to object");
     }
 
-    if (typeof target !== "object" || target === null)
+    if (typeof target !== "object" || target === null || target === undefined)
     {
-        throw new Error(target === null ? "null target object argument" : "target object argument not parsable to object");
+        throw new Error( ! target ? `${target} target object argument` : "target object argument not parsable to object");
     }
 
     const targetObjEntries: readonly Readonly<[string, Readonly<unknown>]>[] =
