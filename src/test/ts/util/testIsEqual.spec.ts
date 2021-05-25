@@ -25,11 +25,14 @@ suite.only("isEqual", function testIsEqual()
 {
     suite("primitives", function testIsEqualPrimitives()
     {
-        primitives.forEach(primitive =>
-            test(`isEqual(${toStr(primitive)}, ${toStr(primitive)}) returns true`, function testSamePrimitivesReturnTrue()
-            {
-                assert.isTrue(isEqual(primitive, primitive));
-        }));
+        suite("same primitives", function testSamePrimitivesReturnTrue()
+        {
+            primitives.forEach(primitive =>
+                test(`isEqual(${toStr(primitive)}, ${toStr(primitive)}) returns true`, function testSamePrimitivesReturnTrue()
+                {
+                    assert.isTrue(isEqual(primitive, primitive));
+                }));
+        });
     });
 
     suite("non-primitives", function testIsEqualNonPrimitives()
