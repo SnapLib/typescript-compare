@@ -5,9 +5,9 @@ import {assert} from "chai";
 import {suite, test} from "mocha";
 
 const diffCarValues =
-    [Car.type, Car.numOfWheels, Car.makes, Car.models, Car.isSafe, Car.toString];
+    Object.entries(Car).filter(entry => entry[0] !== "fuel").map(entry => entry[1]);
 const diffMotoValues =
-    [Motorcycle.type, Motorcycle.numOfWheels, Motorcycle.makes, Motorcycle.models, Motorcycle.isSafe, Motorcycle.toString];
+    Object.entries(Motorcycle).filter(entry => entry[0] !== "fuel").map(entry => entry[1]);
 const autoMobileKeysNoFuel =
     mock.automobileKeys.filter(key => key !== "fuel");
 
