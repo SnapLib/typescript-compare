@@ -29,11 +29,22 @@ suite("evalPropValueDiffs", function testEvalPropValueDiffs()
 {
     suite("of objects", function testEvalPropValueDiffsOfObjs()
     {
-        mock.allMocks.forEach(mock =>
+        mock.allMocks.forEach(mock => {
             test(`evalPropValueDiffs(${mock}, ${mock}) is empty`, function()
             {
                 assert.isEmpty(evalPropValueDiffs(mock, mock));
-            }));
+            });
+
+            test(`evalPropValueDiffs(${mock}A, ${mock}B) is empty`, function()
+            {
+                assert.isEmpty(evalPropValueDiffs(mock, {...mock}));
+            });
+
+            test(`evalPropValueDiffs(${mock}B, ${mock}A) is empty`, function()
+            {
+                assert.isEmpty(evalPropValueDiffs({...mock}, mock));
+            });
+        });
 
         test("diff keys", function()
         {
