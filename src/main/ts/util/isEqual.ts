@@ -43,11 +43,17 @@ export const isEqual = (source: unknown, target: unknown): boolean =>
             throw new Error(`target argument ${target === null ? "is null" : "not interpretable object"}`);
         }
 
+        const srcEntries: readonly Readonly<[string, Readonly<unknown>]>[] =
+            Object.freeze(Object.entries(target));
         const targetEntries: readonly Readonly<[string, Readonly<unknown>]>[] =
             Object.freeze(Object.entries(target));
 
-        return Object.entries(source).every(srcEntry =>
-            targetEntries.some(targetEntry =>
+        if (srcEntries.length !== targetEntries.length)
+        {
+            return false;
+        }
+
+        return srcEntries.every(srcEntry => targetEntries.some(targetEntry =>
                 srcEntry[0] === targetEntry[0] && isEqual(srcEntry[1], targetEntry[1]))
             );
     }
