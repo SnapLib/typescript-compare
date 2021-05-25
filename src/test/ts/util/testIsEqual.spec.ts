@@ -34,15 +34,6 @@ suite.only("isEqual", function testIsEqual()
 
     suite("non-primitives", function testIsEqualNonPrimitives()
     {
-        suite("same non-primitives", function testSameNonPrimitives()
-        {
-            nonPrimitivesA1.forEach(nonPrimitive =>
-                test(`isEqual(${toStr(nonPrimitive)}, ${toStr(nonPrimitive)}) returns true`, function testSameNonPrimitivesReturnTrue()
-                {
-                    assert.isTrue(isEqual(nonPrimitive, nonPrimitive));
-            }));
-        });
-
         suite("same arrays", function testSameArrays()
         {
             mock.arrays.forEach(mockArray =>
@@ -58,6 +49,15 @@ suite.only("isEqual", function testIsEqual()
                 test(`isEqual(${toStr(mock.arrays[index])}A, ${toStr(arrays2[index])}B) returns true`, function testEqualArraysReturnTrue()
                 {
                     assert.isTrue(isEqual(mock.arrays[index], arrays2[index]));
+            }));
+        });
+
+        suite("same non-primitives", function testSameNonPrimitives()
+        {
+            nonPrimitivesA1.forEach(nonPrimitive =>
+                test(`isEqual(${toStr(nonPrimitive)}, ${toStr(nonPrimitive)}) returns true`, function testSameNonPrimitivesReturnTrue()
+                {
+                    assert.isTrue(isEqual(nonPrimitive, nonPrimitive));
             }));
         });
 
