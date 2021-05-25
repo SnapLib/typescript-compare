@@ -33,7 +33,8 @@
     "lint": "eslint --quiet --ext ts ./src/**/*.ts",
     "lint-strict": "eslint --ext ts ./src/**/*.ts",
     "test": "env TS_NODE_PROJECT='./src/test/tsconfig.json' mocha --config ./src/test/.mocharc.cjs",
-    "test-report": "env TS_NODE_PROJECT='./src/test/tsconfig.json' mocha --config ./src/test/report.mocharc.cjs"
+    "test-report": "env TS_NODE_PROJECT='./src/test/tsconfig.json' mocha --config ./src/test/report.mocharc.cjs",
+    "tsnode": "ts-node"
   },
   "devDependencies": {
     "@types/chai": "^4.2.18",
