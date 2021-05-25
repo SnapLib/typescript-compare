@@ -15,6 +15,15 @@ export class ObjectCompare<SourceType, TargetType>
 
     public constructor(sourceObject: NonNullable<SourceType>, targetObject: NonNullable<TargetType>)
     {
+        if (typeof sourceObject !== "object" || sourceObject === null || sourceObject === undefined)
+        {
+            throw new Error( ! sourceObject ? `${sourceObject} source object argument` : "source object argument not parsable to object");
+        }
+
+        if (typeof targetObject !== "object" || targetObject === null || targetObject === undefined)
+        {
+            throw new Error( ! targetObject ? `${targetObject} target object argument` : "target object argument not parsable to object");
+        }
         this._srcObj = Object.freeze(sourceObject);
         this._targetObj = Object.freeze(targetObject);
 
