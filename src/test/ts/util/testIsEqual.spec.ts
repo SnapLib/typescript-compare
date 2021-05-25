@@ -30,7 +30,7 @@ suite.only("isEqual", function testIsEqual()
             primitives.forEach(primitive =>
                 test(`isEqual(${toStr(primitive)}, ${toStr(primitive)}) returns true`, function testSamePrimitivesReturnTrue()
                 {
-                    assert.isTrue(isEqual(primitive, primitive));
+                    assert.isTrue(isEqual(primitive, primitive), `isEqual(${toStr(primitive)}, ${toStr(primitive)}) returned false`);
                 }));
         });
 
@@ -54,7 +54,7 @@ suite.only("isEqual", function testIsEqual()
             mock.arrays.forEach(mockArray =>
                 test(`isEqual(${toStr(mockArray)}, ${toStr(mockArray)}) returns true`, function testSameArraysReturnTrue()
                 {
-                    assert.isTrue(isEqual(mockArray, mockArray));
+                    assert.isTrue(isEqual(mockArray, mockArray), `isEqual(${toStr(mockArray)}, ${toStr(mockArray)}) returns false`,);
             }));
         });
 
@@ -63,7 +63,7 @@ suite.only("isEqual", function testIsEqual()
             Array.from(mock.arrays.keys()).forEach(index =>
                 test(`isEqual(${toStr(mock.arrays[index])}A, ${toStr(arrays2[index])}B) returns true`, function testEqualArraysReturnTrue()
                 {
-                    assert.isTrue(isEqual(mock.arrays[index], arrays2[index]));
+                    assert.isTrue(isEqual(mock.arrays[index], arrays2[index]), `isEqual(${toStr(mock.arrays[index])}A, ${toStr(arrays2[index])}B) returned false`);
             }));
         });
 
@@ -72,7 +72,7 @@ suite.only("isEqual", function testIsEqual()
             nonPrimitivesA1.forEach(nonPrimitive =>
                 test(`isEqual(${toStr(nonPrimitive)}, ${toStr(nonPrimitive)}) returns true`, function testSameNonPrimitivesReturnTrue()
                 {
-                    assert.isTrue(isEqual(nonPrimitive, nonPrimitive));
+                    assert.isTrue(isEqual(nonPrimitive, nonPrimitive), `isEqual(${toStr(nonPrimitive)}, ${toStr(nonPrimitive)}) returned false`);
             }));
         });
 
@@ -81,16 +81,16 @@ suite.only("isEqual", function testIsEqual()
             Array.from(nonPrimitivesB.keys()).forEach(index =>
                 test(`isEqual(${toStr(nonPrimitivesA1[index])}A, ${toStr(nonPrimitivesB[index])}B) returns true`, function testEqualNonPrimitivesReturnTrue()
                 {
-                    assert.isTrue(isEqual(nonPrimitivesA1[index], nonPrimitivesB[index]));
+                    assert.isTrue(isEqual(nonPrimitivesA1[index], nonPrimitivesB[index]), `isEqual(${toStr(nonPrimitivesA1[index])}A, ${toStr(nonPrimitivesB[index])}B) returned false`);
             }));
         });
 
-        suite.skip("not equal non-primitives", function testNotEqualNonPrimitives()
+        suite("not equal non-primitives", function testNotEqualNonPrimitives()
         {
             Array.from(nonPrimitivesA2.keys()).forEach(index =>
                 test(`isEqual(${toStr(nonPrimitivesA1[index])}, ${toStr(nonPrimitivesA2[index])}) returns false`, function testNotEqualNonPrimitivesReturnFalse()
                 {
-                    assert.isFalse(isEqual(nonPrimitivesA1[index], nonPrimitivesA2[index]));
+                    assert.isFalse(isEqual(nonPrimitivesA1[index], nonPrimitivesA2[index]), `isEqual(${toStr(nonPrimitivesA1[index])}, ${toStr(nonPrimitivesA2[index])}) returned true`);
             }));
         });
     });
