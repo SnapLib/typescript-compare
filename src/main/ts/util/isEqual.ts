@@ -58,3 +58,5 @@ export const isEqual = (source: unknown, target: unknown): boolean =>
             );
     }
 };
+
+export {isEqual as default};
