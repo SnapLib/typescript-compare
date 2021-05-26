@@ -97,7 +97,9 @@ in, ideally, an error to be thrown or undefined behavior.
 The `isEqual` function is a predicate function that consumes 2 arguments and
 tests them for ***equality***, <u>***not***</u> ***sameness***. If the passed
 arguments are of the same type and contain equal values or properties, they're
-considered equal and `true` is returned.
+considered equal and `true` is returned. Alternatively, if 2 arrays are passed
+as arguments, if they contain the same number of elements in the same order then
+`true` is returned.
 
 For example:
 ```typescript
