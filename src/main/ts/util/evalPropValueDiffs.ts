@@ -6,7 +6,7 @@ import {isEqual} from "./isEqual";
  * object, and returns the properties that are present in both, but "altered" in
  * the target object. By altered, that means the property key is the same in
  * both the source and target objects, but it's mapped to a different value in
- * the target object.
+ * the target object than the source object.
  *
  * @param {NonNullable<Object>} source The object being compared to the passed target object
  * @param {NonNullable<Object>} target The object being compared to the passed source object
