@@ -4,12 +4,46 @@ import type {ObjectCompareQuery} from "./objectCompareQuery";
 
 export class ObjectCompare<SourceType, TargetType>
 {
+    /**
+     * @private
+     * @readonly
+     */
     private readonly _srcObj: Readonly<SourceType>;
+
+    /**
+     * @private
+     * @readonly
+     */
     private readonly _targetObj: Readonly<TargetType>;
+
+    /**
+     * @private
+     * @readonly
+     */
     private readonly _omittedKeys: ReadonlyArray<string>;
+
+    /**
+     * @private
+     * @readonly
+     */
     private readonly _addedKeys: ReadonlyArray<string>;
+
+    /**
+     * @private
+     * @readonly
+     */
     private readonly _alteredProperties: readonly Readonly<PropertyDifference>[];
+
+    /**
+     * @private
+     * @readonly
+     */
     private readonly _alteredPropValueKeys: ReadonlyArray<string>;
+
+    /**
+     * @private
+     * @readonly
+     */
     private readonly _sharedProperties: ReadonlyArray<string>;
 
     public constructor(sourceObject: NonNullable<SourceType>, targetObject: NonNullable<TargetType>)
