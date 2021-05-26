@@ -87,17 +87,17 @@ are immutable and attempting to mutate them will result in an error.
 
 It should also be noted that the `ObjectCompare` class is intended to compare
 objects or values that can be interpreted as objects and contain iterable
-properties (string keys paired with values). Attempting to construct an
-`ObjectCompare` object with `null`, `undefined`, or primitive values as source
-and/or target arguments will result in either, ideally, an error to be thrown or
-undefined behavior.
+properties (string keys paired with values) or indexes (number keys paired with
+values). Attempting to construct an `ObjectCompare` object with `null`,
+`undefined`, or primitive values as source and/or target arguments will result
+in, ideally, an error to be thrown or undefined behavior.
 
 ## isEqual(unknown, unknown) function
 
 The `isEqual` function is a predicate function that consumes 2 arguments and
 tests them for ***equality***, <u>***not***</u> ***sameness***. If the passed
 arguments are of the same type and contain equal values or properties, they're
-considered equal and `true` would be returned.
+considered equal and `true` is returned.
 
 For example:
 ```typescript
