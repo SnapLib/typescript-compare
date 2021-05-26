@@ -16,8 +16,8 @@ const nonPrimitives = [mock.Car, mock.Motorcycle, mock.Simba, mock.Kion];
 const toStr = (o: unknown): string =>
 {
     return typeof o === "string" ? `"${o}"`
-           :  typeof o === "symbol" ? `Symbol("${o.description}")`
-           :  typeof o === "bigint" ? `BigInt(${o})`
+           : typeof o === "symbol" ? `Symbol("${o.description}")`
+           : typeof o === "bigint" ? `BigInt(${o})`
            : Array.isArray(o) ? `[${o.map(e => toStr(e)).join(", ")}]`
            : `${o}`;
 };
