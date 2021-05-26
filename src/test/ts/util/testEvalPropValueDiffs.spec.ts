@@ -25,7 +25,7 @@ const toStr = (o: unknown): string =>
                   : `${o}`;
 };
 
-suite("evalPropValueDiffs", function testEvalPropValueDiffs()
+suite("evalPropValueDiffs()", function testEvalPropValueDiffs()
 {
     suite("of objects", function testEvalPropValueDiffsOfObjs()
     {
