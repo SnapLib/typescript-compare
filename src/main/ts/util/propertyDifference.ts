@@ -1,4 +1,4 @@
-export class ObjPropValueDiff
+export class PropertyDifference
 {
     private readonly _key: string;
     private readonly _sourceValue: Readonly<unknown>;
@@ -21,6 +21,16 @@ export class ObjPropValueDiff
     public get key(): string { return this._key; }
     public get sourceValue(): Readonly<unknown> { return this._sourceValue; }
     public get targetValue(): Readonly<unknown> { return this._targetValue; }
+    public toString(): string { return `{key: "${this._key}", sourceValue: ${toStr(this._sourceValue)}, targetValue: ${toStr(this._targetValue)}`; }
 }
 
-export {ObjPropValueDiff as default};
+const toStr = (o: unknown): string =>
+{
+    return typeof o === "string" ? `"${o}"`
+           : typeof o === "symbol" ? `Symbol("${o.description}")`
+           : typeof o === "bigint" ? `BigInt(${o})`
+           : Array.isArray(o) ? `[${o.map(e => toStr(e)).join(", ")}]`
+           : `${o}`;
+};
+
+export {PropertyDifference as default};
