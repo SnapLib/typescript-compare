@@ -13,13 +13,13 @@ const toStr = (o: unknown): string =>
            : `${o}`;
 };
 
-suite("ObjectComparer", function testObjectComparer()
+suite("ObjectCompare", function testObjectCompare()
 {
-    suite("new ObjectCompare(NonNullable<unknown>, NonNullable<unknown>)", function testValidObjectComparerCtor()
+    suite("new ObjectCompare(NonNullable<unknown>, NonNullable<unknown>)", function testValidObjectCompareCtor()
     {
         mock.objects.forEach(mockObj1 =>
             mock.objects.forEach(mockObj2 =>
-                test(`new ObjectComparer(${mockObj1}, ${mockObj2}) does not throw`, function()
+                test(`new ObjectCompare(${mockObj1}, ${mockObj2}) does not throw`, function()
                 {
                     assert.doesNotThrow(() => new ObjectCompare(mockObj1, mockObj2));
                 })
@@ -32,7 +32,7 @@ suite("ObjectComparer", function testObjectComparer()
         {
             mock.objects.forEach(mockObj1 =>
                 mock.objects.forEach(mockObj2 =>
-                    test(`new ObjectComparer(${mockObj1}, ${mockObj2}).sourceObject === ${mockObj1}`, function()
+                    test(`new ObjectCompare(${mockObj1}, ${mockObj2}).sourceObject === ${mockObj1}`, function()
                     {
                         assert.strictEqual(new ObjectCompare(mockObj1, mockObj2).sourceObject, mockObj1);
                     })
@@ -43,7 +43,7 @@ suite("ObjectComparer", function testObjectComparer()
         {
             mock.objects.forEach(mockObj1 =>
                 mock.objects.forEach(mockObj2 =>
-                    test(`new ObjectComparer(${mockObj1}, ${mockObj2}).targetObject === ${mockObj2}`, function()
+                    test(`new ObjectCompare(${mockObj1}, ${mockObj2}).targetObject === ${mockObj2}`, function()
                     {
                         assert.strictEqual(new ObjectCompare(mockObj1, mockObj2).targetObject, mockObj2);
                     })
@@ -54,7 +54,7 @@ suite("ObjectComparer", function testObjectComparer()
         {
             mock.automobiles.forEach(mockAutomobileObj1 =>
                 mock.automobiles.forEach(mockAutomobileObj2 =>
-                    test(`new ObjectComparer(${mockAutomobileObj1}, ${mockAutomobileObj2}).omittedKeys is empty`, function()
+                    test(`new ObjectCompare(${mockAutomobileObj1}, ${mockAutomobileObj2}).omittedKeys is empty`, function()
                     {
                         assert.isEmpty(new ObjectCompare(mockAutomobileObj1, mockAutomobileObj2).omittedKeys);
                     })
@@ -62,7 +62,7 @@ suite("ObjectComparer", function testObjectComparer()
 
             mock.lions.forEach(mockLionObj1 =>
                 mock.lions.forEach(mockLionObj2 =>
-                    test(`new ObjectComparer(${mockLionObj1}, ${mockLionObj2}).omittedKeys is empty`, function()
+                    test(`new ObjectCompare(${mockLionObj1}, ${mockLionObj2}).omittedKeys is empty`, function()
                     {
                         assert.isEmpty(new ObjectCompare(mockLionObj1, mockLionObj2).omittedKeys);
                     })
@@ -70,12 +70,12 @@ suite("ObjectComparer", function testObjectComparer()
 
             mock.automobiles.forEach(mockAutomobileObj =>
                     mock.lions.forEach(mockLionObj => {
-                        test(`new ObjectComparer(${mockAutomobileObj}, ${mockLionObj}).omittedKeys === ${toStr(automobileKeysNoToStr)}`, function()
+                        test(`new ObjectCompare(${mockAutomobileObj}, ${mockLionObj}).omittedKeys === ${toStr(automobileKeysNoToStr)}`, function()
                         {
                             assert.deepStrictEqual(new ObjectCompare(mockAutomobileObj, mockLionObj).omittedKeys, automobileKeysNoToStr);
                         });
 
-                        test(`new ObjectComparer(${mockLionObj}, ${mockAutomobileObj}).omittedKeys === ${toStr(lionKeysNoToStr)}`, function()
+                        test(`new ObjectCompare(${mockLionObj}, ${mockAutomobileObj}).omittedKeys === ${toStr(lionKeysNoToStr)}`, function()
                         {
                             assert.deepStrictEqual(new ObjectCompare(mockLionObj, mockAutomobileObj).omittedKeys, lionKeysNoToStr);
                         });
@@ -87,7 +87,7 @@ suite("ObjectComparer", function testObjectComparer()
         {
             mock.automobiles.forEach(mockAutomobileObj1 =>
                 mock.automobiles.forEach(mockAutomobileObj2 =>
-                    test(`new ObjectComparer(${mockAutomobileObj1}, ${mockAutomobileObj2}).addedKeys is empty`, function()
+                    test(`new ObjectCompare(${mockAutomobileObj1}, ${mockAutomobileObj2}).addedKeys is empty`, function()
                     {
                         assert.isEmpty(new ObjectCompare(mockAutomobileObj1, mockAutomobileObj2).addedKeys);
                     })
@@ -95,7 +95,7 @@ suite("ObjectComparer", function testObjectComparer()
 
             mock.lions.forEach(mockLionObj1 =>
                 mock.lions.forEach(mockLionObj2 =>
-                    test(`new ObjectComparer(${mockLionObj1}, ${mockLionObj2}).addedKeys is empty`, function()
+                    test(`new ObjectCompare(${mockLionObj1}, ${mockLionObj2}).addedKeys is empty`, function()
                     {
                         assert.isEmpty(new ObjectCompare(mockLionObj1, mockLionObj2).addedKeys);
                     })
@@ -103,12 +103,12 @@ suite("ObjectComparer", function testObjectComparer()
 
             mock.automobiles.forEach(mockAutomobileObj =>
                     mock.lions.forEach(mockLionObj => {
-                        test(`new ObjectComparer(${mockAutomobileObj}, ${mockAutomobileObj} & ${mockLionObj}).addedKeys === ${toStr(lionKeysNoToStr)}`, function()
+                        test(`new ObjectCompare(${mockAutomobileObj}, ${mockAutomobileObj} & ${mockLionObj}).addedKeys === ${toStr(lionKeysNoToStr)}`, function()
                         {
                             assert.deepStrictEqual(new ObjectCompare(mockAutomobileObj, Object.assign({}, mockAutomobileObj, mockLionObj)).addedKeys, lionKeysNoToStr);
                         });
 
-                        test(`new ObjectComparer(${mockLionObj}, ${mockAutomobileObj}).addedKeys === ["${mock.automobileKeys.join('", "')}"]`, function()
+                        test(`new ObjectCompare(${mockLionObj}, ${mockAutomobileObj}).addedKeys === ["${mock.automobileKeys.join('", "')}"]`, function()
                         {
                             assert.deepStrictEqual(new ObjectCompare(mockLionObj, Object.assign({}, mockLionObj, mockAutomobileObj)).addedKeys, automobileKeysNoToStr);
                         });
@@ -120,12 +120,12 @@ suite("ObjectComparer", function testObjectComparer()
         {
             mock.automobiles.forEach(mockAutomobileObj =>
                 mock.lions.forEach(mockLionObj =>{
-                    test(`new ObjectComparer(${mockAutomobileObj}, ${mockLionObj}).sharedProperties === ["toString"]`, function()
+                    test(`new ObjectCompare(${mockAutomobileObj}, ${mockLionObj}).sharedProperties is empty`, function()
                     {
                         assert.isEmpty(new ObjectCompare(mockAutomobileObj, mockLionObj).sharedProperties);
                     });
 
-                    test(`new ObjectComparer(${mockLionObj}, ${mockAutomobileObj}).sharedProperties === ["toString"]`, function()
+                    test(`new ObjectCompare(${mockLionObj}, ${mockAutomobileObj}).sharedProperties is empty`, function()
                     {
                         assert.isEmpty(new ObjectCompare(mockLionObj, mockAutomobileObj).sharedProperties);
                     });}
@@ -171,7 +171,7 @@ suite("ObjectComparer", function testObjectComparer()
                     mock.lionKeys.filter(key => key !== "gender");
 
                 mock.objects.forEach(mockObj =>
-                    test(`new ObjectComparer(${mockObj}, ${mockObj}).alteredProperties is empty`, function()
+                    test(`new ObjectCompare(${mockObj}, ${mockObj}).alteredProperties is empty`, function()
                     {
                         assert.isEmpty(new ObjectCompare(mockObj, mockObj).alteredProperties);
                     }));
@@ -288,7 +288,7 @@ suite("ObjectComparer", function testObjectComparer()
        {
            mock.automobiles.forEach(mockAutomobileObj1 =>
                mock.automobiles.forEach(mockAutomobileObj2 =>
-                   test(`new ObjectComparer(${mockAutomobileObj1}, ${mockAutomobileObj2}).has.omittedKeys() === false`, function()
+                   test(`new ObjectCompare(${mockAutomobileObj1}, ${mockAutomobileObj2}).has.omittedKeys() === false`, function()
                    {
                        assert.isFalse(new ObjectCompare(mockAutomobileObj1, mockAutomobileObj2).has.omittedKeys());
                    })
@@ -296,7 +296,7 @@ suite("ObjectComparer", function testObjectComparer()
 
            mock.lions.forEach(mockLionObj1 => {
                mock.lions.forEach(mockLionObj2 =>
-                   test(`new ObjectComparer(${mockLionObj1}, ${mockLionObj2}).has.omittedKeys() === false`, function()
+                   test(`new ObjectCompare(${mockLionObj1}, ${mockLionObj2}).has.omittedKeys() === false`, function()
                    {
                        assert.isFalse(new ObjectCompare(mockLionObj1, mockLionObj2).has.omittedKeys());
                    })
@@ -305,7 +305,7 @@ suite("ObjectComparer", function testObjectComparer()
 
            mock.arrays.forEach(mockArray1 => {
                mock.arrays.forEach(mockArray2 =>
-                   test(`new ObjectComparer(${toStr(mockArray1)}, ${toStr(mockArray2)}).has.omittedKeys() === false`, function()
+                   test(`new ObjectCompare(${toStr(mockArray1)}, ${toStr(mockArray2)}).has.omittedKeys() === false`, function()
                    {
                        assert.isFalse(new ObjectCompare(mockArray1, mockArray2).has.omittedKeys());
                    })
@@ -314,24 +314,24 @@ suite("ObjectComparer", function testObjectComparer()
 
            mock.automobiles.forEach(mockAutomobileObj => {
                mock.lions.forEach(mockLionObj => {
-                   test(`new ObjectComparer(${mockAutomobileObj}, ${mockLionObj}).has.omittedKeys() === true`, function()
+                   test(`new ObjectCompare(${mockAutomobileObj}, ${mockLionObj}).has.omittedKeys() === true`, function()
                    {
                        assert.isTrue(new ObjectCompare(mockAutomobileObj, mockLionObj).has.omittedKeys());
                    });
 
-                   test(`new ObjectComparer(${mockLionObj}, ${mockAutomobileObj}).has.omittedKeys() === true`, function()
+                   test(`new ObjectCompare(${mockLionObj}, ${mockAutomobileObj}).has.omittedKeys() === true`, function()
                    {
                        assert.isTrue(new ObjectCompare(mockLionObj, mockAutomobileObj).has.omittedKeys());
                    });
                });
 
                mock.arrays.forEach(mockArray => {
-                   test(`new ObjectComparer(${mockAutomobileObj}, ${toStr(mockArray)}).has.omittedKeys() === true`, function()
+                   test(`new ObjectCompare(${mockAutomobileObj}, ${toStr(mockArray)}).has.omittedKeys() === true`, function()
                    {
                        assert.isTrue(new ObjectCompare(mockAutomobileObj, mockArray).has.omittedKeys());
                    });
 
-                   test(`new ObjectComparer(${toStr(mockArray)}, ${mockAutomobileObj}).has.omittedKeys() === true`, function()
+                   test(`new ObjectCompare(${toStr(mockArray)}, ${mockAutomobileObj}).has.omittedKeys() === true`, function()
                    {
                        assert.isTrue(new ObjectCompare(mockArray, mockAutomobileObj).has.omittedKeys());
                    });
@@ -340,12 +340,12 @@ suite("ObjectComparer", function testObjectComparer()
 
            mock.lions.forEach(mockLionObj =>
                mock.arrays.forEach(mockArray => {
-                   test(`new ObjectComparer(${mockLionObj}, ${toStr(mockArray)}).has.omittedKeys() === true`, function()
+                   test(`new ObjectCompare(${mockLionObj}, ${toStr(mockArray)}).has.omittedKeys() === true`, function()
                    {
                        assert.isTrue(new ObjectCompare(mockLionObj, mockArray).has.omittedKeys());
                    });
 
-                   test(`new ObjectComparer(${toStr(mockArray)}, ${mockLionObj}).has.omittedKeys() === true`, function()
+                   test(`new ObjectCompare(${toStr(mockArray)}, ${mockLionObj}).has.omittedKeys() === true`, function()
                    {
                        assert.isTrue(new ObjectCompare(mockArray, mockLionObj).has.omittedKeys());
                    });
