@@ -1,7 +1,7 @@
-import {ObjPropValueDiff} from "./objPropValueDiff";
+import {PropertyDifference} from "./propertyDifference";
 import {isEqual} from "./isEqual";
 
-export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): ObjPropValueDiff[] =>
+export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): PropertyDifference[] =>
 {
     if (typeof source !== "object" || source === null || source === undefined)
     {
@@ -22,7 +22,7 @@ export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNull
                 srcObjEntry[0] === targetObjEntry[0]
                 && ! isEqual(srcObjEntry[1], targetObjEntry[1])))
         .map(srcObjEntry => (
-            new ObjPropValueDiff(srcObjEntry[0],
+            new PropertyDifference(srcObjEntry[0],
                                  srcObjEntry[1],
                                  targetObjEntries.find(targetObjEntry => srcObjEntry[0] === targetObjEntry[0])?.[1])));
 };

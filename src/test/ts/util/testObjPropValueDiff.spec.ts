@@ -1,4 +1,4 @@
-import {ObjPropValueDiff} from "../../../main/ts/util/objPropValueDiff";
+import {PropertyDifference} from "../../../main/ts/util/propertyDifference";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
@@ -25,7 +25,7 @@ suite("ObjPropValueDiff", function testObjPropValueDiff()
             mocks.forEach(mock =>
                 test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).key === "${mock[0]}"`, function()
                 {
-                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2]).key, mock[0]);
+                    assert.strictEqual(new PropertyDifference(mock[0], mock[1], mock[2]).key, mock[0]);
                 }));
         });
 
@@ -34,7 +34,7 @@ suite("ObjPropValueDiff", function testObjPropValueDiff()
             mocks.forEach(mock =>
                 test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).sourceValue === ${toStr(mock[1])}`, function()
                 {
-                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2]).sourceValue, mock[1]);
+                    assert.strictEqual(new PropertyDifference(mock[0], mock[1], mock[2]).sourceValue, mock[1]);
                 }));
         });
 
@@ -43,7 +43,7 @@ suite("ObjPropValueDiff", function testObjPropValueDiff()
             mocks.forEach(mock =>
                 test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).sourceValue === ${toStr(mock[2])}`, function()
                 {
-                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2]).targetValue, mock[2]);
+                    assert.strictEqual(new PropertyDifference(mock[0], mock[1], mock[2]).targetValue, mock[2]);
                 }));
         });
     });
@@ -55,7 +55,7 @@ suite("ObjPropValueDiff", function testObjPropValueDiff()
             mocks.forEach(mock =>
                 test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[0] === "${mock[0]}"`, function()
                 {
-                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2])[0], mock[0]);
+                    assert.strictEqual(new PropertyDifference(mock[0], mock[1], mock[2])[0], mock[0]);
                 }));
         });
 
@@ -64,7 +64,7 @@ suite("ObjPropValueDiff", function testObjPropValueDiff()
             mocks.forEach(mock =>
                 test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[1] === ${toStr(mock[1])}`, function()
                 {
-                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2])[1], mock[1]);
+                    assert.strictEqual(new PropertyDifference(mock[0], mock[1], mock[2])[1], mock[1]);
                 }));
         });
 
@@ -73,7 +73,7 @@ suite("ObjPropValueDiff", function testObjPropValueDiff()
             mocks.forEach(mock =>
                 test(`new ObjPropValueDiff("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[2] === ${toStr(mock[2])}`, function()
                 {
-                    assert.strictEqual(new ObjPropValueDiff(mock[0], mock[1], mock[2])[2], mock[2]);
+                    assert.strictEqual(new PropertyDifference(mock[0], mock[1], mock[2])[2], mock[2]);
                 }));
         });
     });

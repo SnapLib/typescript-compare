@@ -1,4 +1,4 @@
-import {ObjPropValueDiff} from "./util/objPropValueDiff";
+import {PropertyDifference} from "./util/propertyDifference";
 import {evalPropValueDiffs} from "./util/evalPropValueDiffs";
 import type {ObjectCompareQuery} from "./objectCompareQuery";
 
@@ -8,7 +8,7 @@ export class ObjectCompare<SourceType, TargetType>
     private readonly _targetObj: Readonly<TargetType>;
     private readonly _omittedKeys: ReadonlyArray<string>;
     private readonly _addedKeys: ReadonlyArray<string>;
-    private readonly _alteredProperties: readonly Readonly<ObjPropValueDiff>[];
+    private readonly _alteredProperties: readonly Readonly<PropertyDifference>[];
     private readonly _alteredPropValueKeys: ReadonlyArray<string>;
     private readonly _sharedProperties: ReadonlyArray<string>;
 
@@ -51,7 +51,7 @@ export class ObjectCompare<SourceType, TargetType>
     public get omittedKeys(): ReadonlyArray<string> { return this._omittedKeys; }
     public get addedKeys(): ReadonlyArray<string> { return this._addedKeys; }
     public get sharedProperties(): ReadonlyArray<string> { return this._sharedProperties; }
-    public get alteredProperties(): readonly Readonly<ObjPropValueDiff>[] { return this._alteredProperties; }
+    public get alteredProperties(): readonly Readonly<PropertyDifference>[] { return this._alteredProperties; }
     public get alteredPropValueKeys(): ReadonlyArray<string> { return this._alteredPropValueKeys; }
 
     public readonly has: ObjectCompareQuery<boolean> = Object.freeze({
