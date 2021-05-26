@@ -122,30 +122,34 @@ suite("ObjectComparer", function testObjectComparer()
                 mock.lions.forEach(mockLionObj =>{
                     test(`new ObjectComparer(${mockAutomobileObj}, ${mockLionObj}).sharedProperties === ["toString"]`, function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(mockAutomobileObj, mockLionObj).sharedProperties, ["toString"]);
+                        assert.isEmpty(new ObjectCompare(mockAutomobileObj, mockLionObj).sharedProperties);
                     });
 
                     test(`new ObjectComparer(${mockLionObj}, ${mockAutomobileObj}).sharedProperties === ["toString"]`, function()
                     {
-                        assert.deepStrictEqual(new ObjectCompare(mockLionObj, mockAutomobileObj).sharedProperties, ["toString"]);
+                        assert.isEmpty(new ObjectCompare(mockLionObj, mockAutomobileObj).sharedProperties);
                     });}
             ));
 
-            mock.automobiles.forEach(mockAutomobileObj1 =>
-                mock.automobiles.forEach(mockAutomobileObj2 =>
-                        test(`new ObjectComparer(${mockAutomobileObj1}, ${mockAutomobileObj2}).sharedProperties === ${toStr(mock.automobileKeys)}`, function()
-                        {
-                            assert.deepStrictEqual(new ObjectCompare(mockAutomobileObj1, mockAutomobileObj2).sharedProperties, mock.automobileKeys);
-                        })
-            ));
+            test('new ObjectCompare(Car, Motorcycle).sharedProperties === ["fuel"]', function()
+            {
+                assert.deepStrictEqual(new ObjectCompare(mock.Car, mock.Motorcycle).sharedProperties, ["fuel"]);
+            });
 
-            mock.lions.forEach(mockLionObj1 =>
-                mock.lions.forEach(mockLionObj2 =>
-                    test(`new ObjectComparer(${mockLionObj1}, ${mockLionObj2}).sharedProperties === ${toStr(mock.lionKeys)}`, function()
-                    {
-                        assert.deepStrictEqual(new ObjectCompare(mockLionObj1, mockLionObj2).sharedProperties, mock.lionKeys);
-                    })
-            ));
+            test('new ObjectCompare(Motorcycle, Car).sharedProperties === ["fuel"]', function()
+            {
+                assert.deepStrictEqual(new ObjectCompare(mock.Motorcycle, mock.Car).sharedProperties, ["fuel"]);
+            });
+
+            test('new ObjectCompare(Simba, Kion).sharedProperties === ["gender"]', function()
+            {
+                assert.deepStrictEqual(new ObjectCompare(mock.Simba, mock.Kion).sharedProperties, ["gender"]);
+            });
+
+            test('new ObjectCompare(Kion, Simba).sharedProperties === ["gender"]', function()
+            {
+                assert.deepStrictEqual(new ObjectCompare(mock.Kion, mock.Simba).sharedProperties, ["gender"]);
+            });
         });
 
         suite("alteredProperties", function testGetAlteredProperties()
