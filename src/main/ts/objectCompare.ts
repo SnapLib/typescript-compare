@@ -44,7 +44,6 @@ export class ObjectCompare<SourceType, TargetType>
 
         this._sharedProperties = Object.freeze(
             srcKeys.filter(srcObjKey => srcObjKey in targetObject && ! this._alteredPropValueKeys.includes(srcObjKey)));
-
     }
 
     public get sourceObject(): Readonly<SourceType> { return this._srcObj; }
