@@ -27,8 +27,11 @@ export class ObjectCompare<SourceType, TargetType>
         this._srcObj = Object.freeze(sourceObject);
         this._targetObj = Object.freeze(targetObject);
 
+        const srcKeys: ReadonlyArray<string> =
+            Object.freeze(Object.keys(sourceObject));
+
         this._omittedKeys = Object.freeze(
-            Object.keys(sourceObject).filter(srcObjKey => ! (srcObjKey in targetObject)));
+            srcKeys.filter(srcObjKey => ! (srcObjKey in targetObject)));
 
         this._addedKeys = Object.freeze(
             Object.keys(targetObject).filter(targetObjKey => ! Object.prototype.hasOwnProperty.call(sourceObject, targetObjKey)));
@@ -40,7 +43,7 @@ export class ObjectCompare<SourceType, TargetType>
             Object.freeze(this._alteredProperties.map(diff => diff.key));
 
         this._sharedProperties = Object.freeze(
-            Object.keys(sourceObject).filter(srcObjKey => srcObjKey in targetObject && ! this._alteredPropValueKeys.includes(srcObjKey)));
+            srcKeys.filter(srcObjKey => srcObjKey in targetObject && ! this._alteredPropValueKeys.includes(srcObjKey)));
 
     }
 
