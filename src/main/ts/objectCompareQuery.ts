@@ -1,4 +1,13 @@
 /**
+ * This module contains the interface responsible for defining the `count` and
+ * `has` queries of the {@link ObjectCompare} class. That is, the return type
+ * of the {@link ObjectCompare.count} and {@link ObjectCompare.has} properties.
+ *
+ * @overview
+ * @author Snap
+ */
+
+/**
  * The return type returned by {@link ObjectCompare.count} and
  * {@link ObjectCompare.has}.
  *
