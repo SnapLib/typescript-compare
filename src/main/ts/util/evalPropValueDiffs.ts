@@ -1,6 +1,20 @@
 import {PropertyDifference} from "./propertyDifference";
 import {isEqual} from "./isEqual";
 
+/**
+ * Consumes 2 non-nullable objects, referred to as the *source* and *target*
+ * object, and returns the properties that are present in both, but "altered" in
+ * the target object. By altered, that means the property key is the same in
+ * both the source and target objects, but it's mapped to a different value in
+ * the target object.
+ *
+ * @param {NonNullable<Object>} source The object being compared to the passed target object
+ * @param {NonNullable<Object>} target The object being compared to the passed source object
+ *
+ * @returns {PropertyDifference[]} An array containing the properties that have
+ *          the same keys but differing values between the source and target
+ *          objects.
+ */
 export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): PropertyDifference[] =>
 {
     if (typeof source !== "object" || source === null || source === undefined)
