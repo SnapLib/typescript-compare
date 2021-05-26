@@ -73,4 +73,6 @@ export class ObjectCompare<SourceType, TargetType>
     });
 }
 
+export {isEqual} from "./util/isEqual";
+
 export {ObjectCompare as default};
