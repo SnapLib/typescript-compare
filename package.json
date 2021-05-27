@@ -1,5 +1,5 @@
 {
-  "name": "@snaplib/object-compare",
+  "name": "@snaplib/compare",
   "version": "0.0.4",
   "description": "Compare 2 JavaScript objects to each other.",
   "private": true,
