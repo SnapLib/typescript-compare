@@ -37,8 +37,8 @@ export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNull
                 && ! isEqual(srcObjEntry[1], targetObjEntry[1])))
         .map(srcObjEntry => (
             new PropertyDifference(srcObjEntry[0],
-                                 srcObjEntry[1],
-                                 targetObjEntries.find(targetObjEntry => srcObjEntry[0] === targetObjEntry[0])?.[1])));
+                                   srcObjEntry[1],
+                                   targetObjEntries.find(targetObjEntry => srcObjEntry[0] === targetObjEntry[0])?.[1])));
 };
 
 export {evalPropValueDiffs as default};
