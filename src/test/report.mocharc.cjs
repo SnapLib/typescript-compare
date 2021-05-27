@@ -12,8 +12,8 @@ module.exports =
         "json=false",
         `reportDir=${join(__dirname, "..", "..", "build", "test-report")}`,
         "reportFilename=index",
-        "reportPageTitle=ObjectCompare test report",
-        "reportTitle=SnapLib Object Comparer Test Report",
+        "reportPageTitle=Compare test report",
+        "reportTitle=SnapLib Compare Test Report",
         "showSkipped=false"
     ]
 };
