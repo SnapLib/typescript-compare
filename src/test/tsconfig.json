@@ -8,7 +8,7 @@
  * root tsconfig file and must be updated separately.
  */
 {
-  "include": ["./ts/**/*.ts"],
+  "include": ["./ts/**/*.spec.ts"],
   "compilerOptions":
   {
     "allowSyntheticDefaultImports": true,
