@@ -1,21 +1,21 @@
-# Object Compare
+# Compare
 
 Compare 2 JavaScript objects to each other.
 
 ![npm (scoped)][1] ![NPM][2] ![node-current (scoped)][3]
 
-This npm package exports the `ObjectCompare` class as well as the `isEqual()`
+This npm package exports the `Compare` class as well as the `isEqual()`
 function.
 
-## ObjectCompare class
+## Compare class
 
-The `ObjectCompare` class consumes 2 objects and provides methods to query
+The `Compare` class consumes 2 objects and provides methods to query
 the differences and similarities between the consumed objects. To differentiate
 between the 2 consumed objects, one object is referred to as the *source* object
 and the other object it's being compared to is referred to as the *target*
 object.
 
-There are 4 different types of comparison queries `ObjectCompare` objects
+There are 4 different types of comparison queries `Compare` objects
 contain:
 
 1. `omittedKeys`
@@ -64,7 +64,7 @@ const motorcycle = {
 }
 
 // Pass `car` as source and `motorcycle` as target object argument
-const objectComparer = new ObjectCompare(car, motorcycle);
+const objectComparer = new Compare(car, motorcycle);
 
 console.log(objectComparer.omittedKeys);
 // prints: ["bodyTypes", "engineLocations"]
@@ -84,13 +84,13 @@ console.log(`[ ${objectComparer.alteredProperties.join(",\n  ")} ]`)
 ```
 
 This class is intended to be used for analyzing/reading as opposed to
-mutating/altering. As a result the objects returned by `ObjectCompare` objects
+mutating/altering. As a result the objects returned by `Compare` objects
 are immutable and attempting to mutate them will result in an error.
 
-It should also be noted that the `ObjectCompare` class is intended to compare
+It should also be noted that the `Compare` class is intended to compare
 objects or values that can be interpreted as objects and contain iterable
 properties (string keys paired with values) or indexes (number keys paired with
-values). Attempting to construct an `ObjectCompare` object with `null`,
+values). Attempting to construct a `Compare` object with `null`,
 `undefined`, or primitive values as source and/or target arguments will result
 in, ideally, an error to be thrown or undefined behavior.
 
