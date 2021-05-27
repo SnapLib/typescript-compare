@@ -1,5 +1,6 @@
 import {PropertyDifference} from "./propertyDifferences/propertyDifference";
 import {evalPropValueDiffs} from "./propertyDifferences/evalPropValueDiffs";
+import {isEqual} from "../../../build/dist/object-compare";
 import type {ObjectCompareQuery} from "./objectCompareQuery";
 
 export class ObjectCompare<SourceType, TargetType>
@@ -48,12 +49,12 @@ export class ObjectCompare<SourceType, TargetType>
 
     public constructor(sourceObject: NonNullable<SourceType>, targetObject: NonNullable<TargetType>)
     {
-        if (typeof sourceObject !== "object" || sourceObject === null || sourceObject === undefined)
+        if (typeof sourceObject !== "object" || sourceObject === null)
         {
             throw new Error( ! sourceObject ? `${sourceObject} source object argument` : "source object argument not parsable to object");
         }
 
-        if (typeof targetObject !== "object" || targetObject === null || targetObject === undefined)
+        if (typeof targetObject !== "object" || targetObject === null)
         {
             throw new Error( ! targetObject ? `${targetObject} target object argument` : "target object argument not parsable to object");
         }
