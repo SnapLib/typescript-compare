@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/SnapLib/typescript-object-compare.git"
+    "url": "https://www.github.com/SnapLib/typescript-compare.git"
   },
   "engines": {
     "node": ">=14.0.0"
