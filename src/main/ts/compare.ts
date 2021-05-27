@@ -2,7 +2,7 @@ import {PropertyDifference} from "./propertyDifferences/propertyDifference";
 import {evalPropValueDiffs} from "./propertyDifferences/evalPropValueDiffs";
 import type {ObjectCompareQuery} from "./objectCompareQuery";
 
-export class ObjectCompare<SourceType, TargetType>
+export class Compare<SourceType, TargetType>
 {
     /**
      * @private
@@ -111,4 +111,4 @@ export class ObjectCompare<SourceType, TargetType>
 
 export {isEqual} from "./util/isEqual";
 
-export {ObjectCompare as default};
+export {Compare as default};
