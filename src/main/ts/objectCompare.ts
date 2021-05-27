@@ -1,6 +1,5 @@
 import {PropertyDifference} from "./propertyDifferences/propertyDifference";
 import {evalPropValueDiffs} from "./propertyDifferences/evalPropValueDiffs";
-import {isEqual} from "../../../build/dist/object-compare";
 import type {ObjectCompareQuery} from "./objectCompareQuery";
 
 export class ObjectCompare<SourceType, TargetType>
