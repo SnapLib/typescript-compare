@@ -50,8 +50,7 @@ const car = {
     makes: ["Koenigsegg", "Pagani"],
     bodyTypes: ["coup", "sedan", "suv"],
     engineLocations: ["front", "middle", "rear"],
-    isSafe: true,
-    toString: () => "Car"
+    isSafe: true
 }
 
 const motorcycle = {
@@ -59,8 +58,7 @@ const motorcycle = {
     fuel: "petrol",
     makes: ["MV Agusta", "Triumph"],
     driveTypes: ["chain", "belt", "shaft"],
-    isSafe: false,
-    toString: () => "Motorcycle"
+    isSafe: false
 }
 
 // Pass `car` as source and `motorcycle` as target object argument
