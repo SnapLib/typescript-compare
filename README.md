@@ -112,6 +112,6 @@ console.log(isEqual([], []));
 // prints: true
 ```
 
-[1]: https://img.shields.io/npm/v/@snaplib/object?color=%2366ff66&logo=npm&style=flat-square
-[2]: https://img.shields.io/npm/l/@snaplib/object?color=%2366ff66&style=flat-square
-[3]: https://img.shields.io/node/v/@snaplib/object?color=%2366ff66&&logo=node.js&style=flat-square
+[1]: https://img.shields.io/npm/v/@snaplib/compare?color=%2366ff66&logo=npm&style=flat-square
+[2]: https://img.shields.io/npm/l/@snaplib/compare?color=%2366ff66&style=flat-square
+[3]: https://img.shields.io/node/v/@snaplib/compare?color=%2366ff66&&logo=node.js&style=flat-square
