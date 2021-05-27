@@ -7,11 +7,11 @@
   "types": "./types/compare.d.ts",
   "type": "commonjs",
   "license": "MIT",
-  "homepage": "https://www.github.com/SnapLib",
+  "homepage": "https://www.github.com/SnapLib/typescript-compare.git",
   "author": {
     "name": "Snap",
     "email": "snap@snaplib.org",
-    "url": "https://www.snaplib.org"
+    "url": "https://www.github.com/SnapLib"
   },
   "repository": {
     "type": "git",
