@@ -1,5 +1,5 @@
-import {PropertyDifference} from "./util/propertyDifference";
-import {evalPropValueDiffs} from "./util/evalPropValueDiffs";
+import {PropertyDifference} from "./propertyDifferences/propertyDifference";
+import {evalPropValueDiffs} from "./propertyDifferences/evalPropValueDiffs";
 import type {ObjectCompareQuery} from "./objectCompareQuery";
 
 export class ObjectCompare<SourceType, TargetType>
