@@ -100,7 +100,7 @@ export class PropertyDifference
      */
     public toString(): string
     {
-        return `{key: "${this._key}", sourceValue: ${toStr(this._sourceValue)}, targetValue: ${toStr(this._targetValue)}`;
+        return `{key: "${this._key}", sourceValue: ${toStr(this._sourceValue)}, targetValue: ${toStr(this._targetValue)}}`;
     }
 }
 
