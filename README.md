@@ -4,8 +4,8 @@ Compare 2 JavaScript objects to each other.
 
 ![npm (scoped)][1] ![NPM][2] ![node-current (scoped)][3]
 
-This npm package exports the `Compare` class as well as the `isEqual()`
-function.
+This npm package exports the `Compare` class as well as the
+`isEqual(unknown, unknown)` function.
 
 ## Compare class
 
@@ -35,9 +35,9 @@ contain:
 
 1. `alteredProperties`
 
-    Property keys that are present in both the target and source object, but
-    are mapped to different values. The key, source property value, and target
-    property value are returned.
+    Properties with  keys that are present in both the target and source object,
+    but are mapped to different values. The key, source property value, and
+    target property value are returned.
 
 ### Examples
 
@@ -61,7 +61,7 @@ const motorcycle = {
     isSafe: false
 }
 
-// Pass `car` as source and `motorcycle` as target object argument
+// Pass `car` as source object to compare to `motorcycle` target object
 const objectComparer = new Compare(car, motorcycle);
 
 console.log(objectComparer.omittedKeys);
@@ -98,15 +98,15 @@ The `isEqual` function is a predicate function that consumes 2 arguments and
 tests them for ***equality***, <u>***not***</u> ***sameness***. If the passed
 arguments are of the same type and contain equal values or properties, they're
 considered equal and `true` is returned. Alternatively, if 2 arrays are passed
-as arguments, if they contain the same number of elements in the same order then
-`true` is returned.
+as arguments that contain the same elements in the same order then `true` is
+returned.
 
 For example:
 ```typescript
-console.log([] === []);
+console.log(["Simba", "Kion"] === ["Simba", "Kion"]);
 // prints: false
 
-console.log(isEqual([], []));
+console.log(isEqual(["Simba", "Kion"], ["Simba", "Kion"]));
 // prints: true
 ```
 
