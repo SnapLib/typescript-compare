@@ -1,6 +1,6 @@
 import {PropertyDifference} from "./propertyDifferences/propertyDifference";
 import {evalPropValueDiffs} from "./propertyDifferences/evalPropValueDiffs";
-import type {ObjectCompareQuery} from "./objectCompareQuery";
+import type {ObjectCompareQuery} from "./compare/objectCompareQuery";
 
 export class Compare<SourceType, TargetType>
 {
