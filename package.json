@@ -7,7 +7,7 @@
   "types": "./types/compare.d.ts",
   "type": "commonjs",
   "license": "MIT",
-  "homepage": "https://www.github.com/SnapLib/typescript-compare.git",
+  "homepage": "https://www.github.com/SnapLib/typescript-compare/tree/release",
   "author": {
     "name": "Snap",
     "email": "snap@snaplib.org",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/SnapLib/typescript-compare.git"
+    "url": "https://www.github.com/SnapLib/typescript-compare/tree/release"
   },
   "engines": {
     "node": ">=14.0.0"
