@@ -30,7 +30,6 @@
   "scripts": {
     "build-dist": "tsc -p ./tsconfig.json",
     "build-tsdoc": "typedoc --options ./typedoc.json",
-    "git-merge-push-all": "git push snaplib-gh unstable && git checkout stable && git merge unstable && git checkout release && git merge unstable && git push snaplib-gh stable && git push snaplib-gh release && git checkout unstable",
     "lint": "eslint --quiet --ext ts ./src/**/*.ts",
     "lint-strict": "eslint --ext ts ./src/**/*.ts",
     "test": "env TS_NODE_PROJECT='./src/test/tsconfig.json' mocha --config ./src/test/.mocharc.cjs",
