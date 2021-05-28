@@ -17,12 +17,7 @@ export const isEqual = (source: unknown, target: unknown): boolean =>
     }
     else if (typeof source === "symbol")
     {
-        if (typeof target !== "symbol")
-        {
-            return false;
-        }
-
-        return source.description === target.description;
+        return typeof target === "symbol" ? source.description === target.description : false;
     }
     else if (typeof source === "function")
     {
@@ -49,17 +44,13 @@ export const isEqual = (source: unknown, target: unknown): boolean =>
     }
     else if (Array.isArray(source))
     {
-        if ( ! Array.isArray(target))
-        {
-            return false;
-        }
-
-        if (source.length !== target.length)
-        {
-            return false;
-        }
-
-        return Array.from(source.entries()).every(sourceEntry => isEqual(sourceEntry[1], target[sourceEntry[0]]));
+        return Array.isArray(target) && source.length === target.length
+               ? Array.from(source.entries()).every(sourceEntry => isEqual(sourceEntry[1], target[sourceEntry[0]]))
+               : false;
+    }
+    else if (source === null || target === null)
+    {
+        return source === target;
     }
     // If source and target arguments are objects, but not arrays or null
     else
@@ -84,12 +75,10 @@ export const isEqual = (source: unknown, target: unknown): boolean =>
         const targetEntries: readonly Readonly<[string, Readonly<unknown>]>[] =
             Object.freeze(Object.entries(target));
 
-        if (srcEntries.length !== targetEntries.length)
-        {
-            return false;
-        }
-
-        return srcEntries.every(srcEntry => srcEntry[0] in target && isEqual(srcEntry[1], targetEntries.find(targetEntry => srcEntry[0] === targetEntry[0])?.[1]));
+        return srcEntries.length === targetEntries.length
+               ? srcEntries.every(srcEntry =>
+                   srcEntry[0] in target && isEqual(srcEntry[1], targetEntries.find(targetEntry => srcEntry[0] === targetEntry[0])?.[1]))
+               : false;
     }
 };
 
