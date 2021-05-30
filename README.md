@@ -62,18 +62,18 @@ const motorcycle = {
 }
 
 // Pass `car` as source object to compare to `motorcycle` target object
-const objectComparer = new Compare(car, motorcycle);
+const objectComparison = new Compare(car, motorcycle);
 
-console.log(objectComparer.omittedKeys);
+console.log(objectComparison.omittedKeys);
 // prints: ["bodyTypes", "engineLocations"]
 
-console.log(objectComparer.addedKeys);
+console.log(objectComparison.addedKeys);
 // prints: ["driveTypes"]
 
-console.log(objectComparer.sharedProperties);
+console.log(objectComparison.sharedProperties);
 // prints: ["fuel"]
 
-console.log(`[ ${objectComparer.alteredProperties.join(",\n  ")} ]`)
+console.log(`[ ${objectComparison.alteredProperties.join(",\n  ")} ]`)
 /*
  * prints: [ {key: "numOfWheels", sourceValue: 4, targetValue: 2},
  *           {key: "makes", sourceValue: ["Koenigsegg", "Lamborghini], targetValue: ["MV Agusta", "Triumph"]},
