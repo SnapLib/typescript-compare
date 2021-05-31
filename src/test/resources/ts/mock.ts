@@ -4,6 +4,7 @@ import {strArrayA, strArrayB, intArrayA, intArrayB} from "./array";
 
 export class Mock
 {
+    public static readonly primitiveSingletons: ReadonlyArray<unknown> = [undefined, null, true, false];
     public static readonly Simba: Readonly<unknown> = Object.freeze(Simba);
     public static readonly Kion: Readonly<unknown> = Object.freeze(Kion);
     public static readonly Car: Readonly<unknown> = Object.freeze(Car);
