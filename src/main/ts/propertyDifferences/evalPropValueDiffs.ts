@@ -17,12 +17,12 @@ import {isEqual} from "../util/isEqual";
  */
 export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): PropertyDifference[] =>
 {
-    if (typeof source !== "object" || source === null)
+    if (typeof source !== "string" && typeof source !== "object" || source === null)
     {
         throw new Error( ! source ? `${source} source object argument` : "source object argument not parsable to object");
     }
 
-    if (typeof target !== "object" || target === null)
+    if (typeof target !== "string" && typeof target !== "object" || target === null)
     {
         throw new Error( ! target ? `${target} target object argument` : "target object argument not parsable to object");
     }
