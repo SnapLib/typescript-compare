@@ -4,6 +4,8 @@ import {evalPropValueDiffs} from "../../../main/ts/propertyDifferences/evalPropV
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
+const primitivesExceptString = mock.primitiveSingletons.concat([42, BigInt(999999)]);
+
 const diffCarValues =
     Object.entries(Car).filter(entry => entry[0] !== "fuel").map(entry => entry[1]);
 const diffMotoValues =
@@ -27,6 +29,18 @@ const toStr = (o: unknown): string =>
 
 suite("evalPropValueDiffs()", function testEvalPropValueDiffs()
 {
+    suite("invalid comparisons", function testInvalidComparisonSourceAndTargetThrows()
+    {
+        Array.from(primitivesExceptString.entries()).forEach(entry => {
+            const primVal = primitivesExceptString[ primitivesExceptString.length - 1 - entry[0]];
+            const str = `evalPropValueDiffs(${toStr(entry[1])}, ${toStr(primVal)}) throws error`;
+            test(str, function()
+            {
+                assert.throws(() => evalPropValueDiffs(entry[1], primVal));
+            });
+        });
+    });
+
     suite("of objects", function testEvalPropValueDiffsOfObjs()
     {
         mock.allMocks.forEach(mock => {
@@ -106,6 +120,29 @@ suite("evalPropValueDiffs()", function testEvalPropValueDiffs()
             test("diff target values are 111, 222, and 333", function()
             {
                 assert.deepStrictEqual(evalPropValueDiffs(strArrayA, intArrayA).map(diff => diff.targetValue), [111, 222, 333]);
+            });
+        });
+
+        suite("strings", function testEvalPropValueStringDiffs()
+        {
+            test('evalPropValueDiffs("foo", "foo") is empty', function testEvalPropValueSameStringDiffsReturnEmpty()
+            {
+                assert.isEmpty(evalPropValueDiffs("foo", "foo"));
+            });
+
+            test('evalPropValueDiffs("this", "that") keys are ["2", "3"]', function()
+            {
+                assert.deepStrictEqual(evalPropValueDiffs("this", "that").map(diff => diff.key), ["2", "3"]);
+            });
+
+            test('evalPropValueDiffs("this", "that") keys are ["i", "s"]', function()
+            {
+                assert.deepStrictEqual(evalPropValueDiffs("this", "that").map(diff => diff.sourceValue), ["i", "s"]);
+            });
+
+            test('evalPropValueDiffs("this", "that") keys are ["a", "t"]', function()
+            {
+                assert.deepStrictEqual(evalPropValueDiffs("this", "that").map(diff => diff.targetValue), ["a", "t"]);
             });
         });
 
