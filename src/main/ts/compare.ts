@@ -1,6 +1,6 @@
 import {PropertyDifference} from "./propertyDifferences/propertyDifference";
 import {evalPropValueDiffs} from "./propertyDifferences/evalPropValueDiffs";
-import type {ObjectCompareQuery} from "./compare/objectCompareQuery";
+import type {Query} from "./compare/query";
 
 export class Compare<SourceType, TargetType>
 {
@@ -88,7 +88,7 @@ export class Compare<SourceType, TargetType>
     public get alteredProperties(): readonly Readonly<PropertyDifference>[] { return this._alteredProperties; }
     public get alteredPropValueKeys(): ReadonlyArray<string> { return this._alteredPropValueKeys; }
 
-    public readonly has: ObjectCompareQuery<boolean> = Object.freeze({
+    public readonly has: Query<boolean> = Object.freeze({
         omittedKeys: (): boolean => this._omittedKeys.length !== 0,
 
         addedKeys: (): boolean => this._addedKeys.length !== 0,
@@ -98,7 +98,7 @@ export class Compare<SourceType, TargetType>
         alteredProperties: (): boolean => this._alteredProperties.length !== 0
     });
 
-    public readonly count: ObjectCompareQuery<number> = Object.freeze({
+    public readonly count: Query<number> = Object.freeze({
         omittedKeys: (): number => this._omittedKeys.length,
 
         addedKeys: (): number => this._addedKeys.length,

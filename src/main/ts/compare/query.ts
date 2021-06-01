@@ -1,17 +1,17 @@
 /**
  * This module contains the interface responsible for defining the `count` and
- * `has` queries of the {@link ObjectCompare} class. That is, the return type
- * of the {@link ObjectCompare.count} and {@link ObjectCompare.has} properties.
+ * `has` queries of the {@link Compare} class. That is, the return type
+ * of the {@link Compare.count} and {@link Compare.has} properties.
  *
  * @overview
  * @author Snap
  */
 
 /**
- * The return type returned by {@link ObjectCompare.count} and
- * {@link ObjectCompare.has}.
+ * The return type returned by {@link Compare.count} and
+ * {@link Compare.has}.
  *
- * This interface defines the return type when querying {@link ObjectCompare}
+ * This interface defines the return type when querying {@link Compare}
  * objects for the number or existence of `omittedKeys`, `addedKeys`,
  * `sharedProperties`, or `alteredProperties`. When querying for the *count*,
  * this interface's properties are based on numbers, when querying for the
@@ -19,7 +19,7 @@
  *
  * @interface
  */
-export interface ObjectCompareQuery<QueryReturnType extends number | boolean>
+export interface Query<QueryReturnType extends number | boolean>
 {
     /**
      * Query to check either the number or existence of omitted property keys
@@ -80,4 +80,4 @@ export interface ObjectCompareQuery<QueryReturnType extends number | boolean>
     readonly alteredProperties: () => QueryReturnType;
 }
 
-export type {ObjectCompareQuery as default};
+export type {Query as default};
