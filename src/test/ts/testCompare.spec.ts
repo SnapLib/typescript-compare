@@ -6,6 +6,8 @@ import {suite, test} from "mocha";
 const automobileKeysNoToStr: ReadonlyArray<string> = Object.freeze(mock.automobileKeys.filter(key => key !== "toString"));
 const lionKeysNoToStr: ReadonlyArray<string> = Object.freeze(mock.lionKeys.filter(key => key !== "toString"));
 
+const validCtorArgs = mock.objects.concat(mock.strArrayA);
+
 const toStr = (o: unknown): string =>
 {
     return typeof o === "string" ? `"${o}"`
@@ -17,9 +19,9 @@ suite("Compare", function testCompare()
 {
     suite("new Compare(NonNullable<unknown>, NonNullable<unknown>)", function testValidCompareConstruction()
     {
-        mock.objects.forEach(mockObj1 =>
+        validCtorArgs.forEach(mockObj1 =>
             mock.objects.forEach(mockObj2 =>
-                test(`new Compare(${mockObj1}, ${mockObj2}) does not throw`, function()
+                test(`new Compare(${toStr(mockObj1)}, ${toStr(mockObj2)}) does not throw`, function()
                 {
                     assert.doesNotThrow(() => new Compare(mockObj1, mockObj2));
                 })
@@ -30,11 +32,11 @@ suite("Compare", function testCompare()
     {
         suite("sourceObject", function testGetSourceObject()
         {
-            mock.objects.forEach(mockObj1 =>
-                mock.objects.forEach(mockObj2 =>
-                    test(`new Compare(${mockObj1}, ${mockObj2}).sourceObject === ${mockObj1}`, function()
+            validCtorArgs.forEach(mockObj1 =>
+                validCtorArgs.forEach(mockObj2 =>
+                    test(`new Compare(${toStr(mockObj1)}, ${toStr(mockObj2)}).sourceObject === ${mockObj1}`, function()
                     {
-                        assert.strictEqual(new Compare(mockObj1, mockObj2).sourceObject, mockObj1);
+                        assert.strictEqual(new Compare(mockObj1, mockObj2).source, mockObj1);
                     })
             ));
         });
@@ -45,7 +47,7 @@ suite("Compare", function testCompare()
                 mock.objects.forEach(mockObj2 =>
                     test(`new Compare(${mockObj1}, ${mockObj2}).targetObject === ${mockObj2}`, function()
                     {
-                        assert.strictEqual(new Compare(mockObj1, mockObj2).targetObject, mockObj2);
+                        assert.strictEqual(new Compare(mockObj1, mockObj2).target, mockObj2);
                     })
             ));
         });
