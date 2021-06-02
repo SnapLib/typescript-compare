@@ -43,7 +43,7 @@ suite("evalPropValueDiffs()", function testEvalPropValueDiffs()
 
     suite("of objects", function testEvalPropValueDiffsOfObjs()
     {
-        mock.allMocks.forEach(mock => {
+        mock.mockObjsAndArrays.concat(mock.strArrayA).forEach(mock => {
             test(`evalPropValueDiffs(${mock}, ${mock}) is empty`, function()
             {
                 assert.isEmpty(evalPropValueDiffs(mock, mock));
