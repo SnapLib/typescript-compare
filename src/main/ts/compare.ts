@@ -65,13 +65,13 @@ export class Compare<SourceType, TargetType>
             typeof targetObject === "string" ? Array.from(targetObject) : targetObject);
 
         const srcKeys: ReadonlyArray<string> =
-            Object.freeze(Object.keys(sourceObject));
+            Object.freeze(Object.getOwnPropertyNames(sourceObject));
 
         this._omittedKeys = Object.freeze(
             srcKeys.filter(srcObjKey => ! (srcObjKey in convertedTarget)));
 
         this._addedKeys = Object.freeze(
-            Object.keys(targetObject).filter(targetObjKey => ! Object.prototype.hasOwnProperty.call(sourceObject, targetObjKey)));
+            Object.getOwnPropertyNames(targetObject).filter(targetObjKey => ! Object.prototype.hasOwnProperty.call(sourceObject, targetObjKey)));
 
         this._alteredProperties =
             Object.freeze(evalPropValueDiffs(sourceObject, targetObject));
