@@ -6,7 +6,7 @@ import {suite, test} from "mocha";
 const automobileKeysNoToStr: ReadonlyArray<string> = Object.freeze(mock.automobileKeys.filter(key => key !== "toString"));
 const lionKeysNoToStr: ReadonlyArray<string> = Object.freeze(mock.lionKeys.filter(key => key !== "toString"));
 
-const validCtorArgs = mock.objects.concat(mock.strArrayA);
+const validCtorArgs = mock.mockObjsAndArrays.concat(...mock.strArrayA);
 
 const toStr = (o: unknown): string =>
 {
@@ -22,55 +22,77 @@ suite("Compare", function testCompare()
     suite("new Compare(NonNullable<unknown>, NonNullable<unknown>)", function testValidCompareConstruction()
     {
         validCtorArgs.forEach(mockObj1 =>
-            mock.objects.forEach(mockObj2 =>
-                test(`new Compare(${toStr(mockObj1)}, ${toStr(mockObj2)}) does not throw`, function()
+            validCtorArgs.forEach(mockObj2 => {
+
+                const str = `new Compare(${toStr(mockObj1)}, ${toStr(mockObj2)})`;
+
+                test(str + " does not throw", function()
                 {
-                    assert.doesNotThrow(() => new Compare(mockObj1, mockObj2));
-                })
-        ));
+                    assert.doesNotThrow(() => new Compare(mockObj1, mockObj2), str + " threw");
+                });
+            }));
     });
 
     suite("get", function testGetters()
     {
         suite("sourceObject", function testGetSourceObject()
         {
-            validCtorArgs.forEach(mockObj1 =>
-                validCtorArgs.forEach(mockObj2 =>
-                    test(`new Compare(${toStr(mockObj1)}, ${toStr(mockObj2)}).sourceObject === ${mockObj1}`, function()
-                    {
-                        assert.strictEqual(new Compare(mockObj1, mockObj2).source, mockObj1);
-                    })
-            ));
+            Array.from(validCtorArgs.keys()).forEach(index => {
+                const mockObj1 = validCtorArgs[index];
+                const mockObj2 = validCtorArgs[validCtorArgs.length - 1 - index];
+
+                const str = `new Compare(${toStr(mockObj1)}, ${toStr(mockObj2)}).source`;
+
+                test(str + ` === ${toStr(mockObj1)}`, function()
+                {
+                    assert.strictEqual(new Compare(mockObj1, mockObj2).source, mockObj1, str + ` !== ${toStr(mockObj1)}`);
+                });
+            });
         });
 
         suite("targetObject", function testGetTargetObject()
         {
-            mock.objects.forEach(mockObj1 =>
-                mock.objects.forEach(mockObj2 =>
-                    test(`new Compare(${mockObj1}, ${mockObj2}).targetObject === ${mockObj2}`, function()
-                    {
-                        assert.strictEqual(new Compare(mockObj1, mockObj2).target, mockObj2);
-                    })
-            ));
+            validCtorArgs.forEach((mockArg, index, arr) => {
+                const mockArg2 = arr[arr.length - 1 - index];
+
+                const str = `new Compare(${toStr(mockArg)}, ${toStr(mockArg2)}).target`;
+
+                test(str + `  === ${mockArg2}`, function()
+                {
+                    assert.strictEqual(new Compare(mockArg, mockArg2).target, mockArg2, str + `  !== ${mockArg2}`);
+                });
+            });
         });
 
         suite("omittedKeys", function testGetOmittedKeys()
         {
-            mock.automobiles.forEach(mockAutomobileObj1 =>
-                mock.automobiles.forEach(mockAutomobileObj2 =>
-                    test(`new Compare(${mockAutomobileObj1}, ${mockAutomobileObj2}).omittedKeys is empty`, function()
-                    {
-                        assert.isEmpty(new Compare(mockAutomobileObj1, mockAutomobileObj2).omittedKeys);
-                    })
-            ));
+            mock.automobiles.forEach((mockAutomobileObj, index, autoMobileArr) => {
+                const mockAutomobileObj2 = autoMobileArr[autoMobileArr.length - 1 - index];
 
-            mock.lions.forEach(mockLionObj1 =>
-                mock.lions.forEach(mockLionObj2 =>
-                    test(`new Compare(${mockLionObj1}, ${mockLionObj2}).omittedKeys is empty`, function()
-                    {
-                        assert.isEmpty(new Compare(mockLionObj1, mockLionObj2).omittedKeys);
-                    })
-            ));
+                test(`new Compare(${mockAutomobileObj}, ${mockAutomobileObj}).omittedKeys is empty`, function()
+                {
+                    assert.isEmpty(new Compare(mockAutomobileObj, mockAutomobileObj).omittedKeys);
+                });
+
+                test(`new Compare(${mockAutomobileObj}, ${mockAutomobileObj2}).omittedKeys is empty`, function()
+                {
+                    assert.isEmpty(new Compare(mockAutomobileObj, mockAutomobileObj2).omittedKeys);
+                });
+            });
+
+            mock.lions.forEach((mockLionObj, index, lionArray) => {
+                const mockLionObj2 = lionArray[lionArray.length - 1 - index];
+
+                test(`new Compare(${mockLionObj}, ${mockLionObj}).omittedKeys is empty`, function()
+                {
+                    assert.isEmpty(new Compare(mockLionObj, mockLionObj).omittedKeys);
+                });
+
+                test(`new Compare(${mockLionObj}, ${mockLionObj2}).omittedKeys is empty`, function()
+                {
+                    assert.isEmpty(new Compare(mockLionObj, mockLionObj2).omittedKeys);
+                });
+            });
 
             mock.automobiles.forEach(mockAutomobileObj =>
                     mock.lions.forEach(mockLionObj => {
@@ -89,21 +111,33 @@ suite("Compare", function testCompare()
 
         suite("addedKeys", function testGetAddedKeys()
         {
-            mock.automobiles.forEach(mockAutomobileObj1 =>
-                mock.automobiles.forEach(mockAutomobileObj2 =>
-                    test(`new Compare(${mockAutomobileObj1}, ${mockAutomobileObj2}).addedKeys is empty`, function()
-                    {
-                        assert.isEmpty(new Compare(mockAutomobileObj1, mockAutomobileObj2).addedKeys);
-                    })
-            ));
+            mock.automobiles.forEach((mockAutomobileObj, index, automobileArray) => {
+                const mockAutomobileObj2 = automobileArray[automobileArray.length - 1 - index];
 
-            mock.lions.forEach(mockLionObj1 =>
-                mock.lions.forEach(mockLionObj2 =>
-                    test(`new Compare(${mockLionObj1}, ${mockLionObj2}).addedKeys is empty`, function()
-                    {
-                        assert.isEmpty(new Compare(mockLionObj1, mockLionObj2).addedKeys);
-                    })
-            ));
+                test(`new Compare(${mockAutomobileObj}, ${mockAutomobileObj}).addedKeys is empty`, function()
+                {
+                    assert.isEmpty(new Compare(mockAutomobileObj, mockAutomobileObj).addedKeys);
+                });
+
+                test(`new Compare(${mockAutomobileObj}, ${mockAutomobileObj2}).addedKeys is empty`, function()
+                {
+                    assert.isEmpty(new Compare(mockAutomobileObj, mockAutomobileObj2).addedKeys);
+                });
+            });
+
+            mock.lions.forEach((mockLionObj, index, lionArray) => {
+                const mockLionObj2 = lionArray[lionArray.length - 1 - index];
+
+                test(`new Compare(${mockLionObj}, ${mockLionObj}).addedKeys is empty`, function()
+                {
+                    assert.isEmpty(new Compare(mockLionObj, mockLionObj).addedKeys);
+                });
+
+                test(`new Compare(${mockLionObj}, ${mockLionObj2}).addedKeys is empty`, function()
+                {
+                    assert.isEmpty(new Compare(mockLionObj, mockLionObj2).addedKeys);
+                });
+            });
 
             mock.automobiles.forEach(mockAutomobileObj =>
                     mock.lions.forEach(mockLionObj => {
@@ -112,7 +146,7 @@ suite("Compare", function testCompare()
                             assert.deepStrictEqual(new Compare(mockAutomobileObj, Object.assign({}, mockAutomobileObj, mockLionObj)).addedKeys, lionKeysNoToStr);
                         });
 
-                        test(`new Compare(${mockLionObj}, ${mockAutomobileObj}).addedKeys === ["${mock.automobileKeys.join('", "')}"]`, function()
+                        test(`new Compare(${mockLionObj}, ${mockAutomobileObj}).addedKeys === ${toStr(automobileKeysNoToStr)}`, function()
                         {
                             assert.deepStrictEqual(new Compare(mockLionObj, Object.assign({}, mockLionObj, mockAutomobileObj)).addedKeys, automobileKeysNoToStr);
                         });
@@ -135,24 +169,43 @@ suite("Compare", function testCompare()
                     });}
             ));
 
-            test('new Compare(Car, Motorcycle).sharedProperties === ["fuel"]', function()
-            {
-                assert.deepStrictEqual(new Compare(mock.Car, mock.Motorcycle).sharedProperties, ["fuel"]);
+            mock.automobiles.forEach((mockAutomobile, index, arr) => {
+                const mockAutomobileObj2 = arr[arr.length - 1 - index];
+                test(`new Compare(${mockAutomobile}, ${mockAutomobile}).sharedProperties returns ${toStr(Object.keys(mockAutomobile))}`, function()
+                {
+                    assert.deepStrictEqual(new Compare(mockAutomobile, mockAutomobile).sharedProperties, Object.keys(mockAutomobile));
+                });
+
+                test(`new Compare(${mockAutomobile}, ${mockAutomobileObj2}).sharedProperties returns ["fuel"]`, function()
+                {
+                    assert.deepStrictEqual(new Compare(mockAutomobile, mockAutomobileObj2).sharedProperties, ["fuel"]);
+                });
             });
 
-            test('new Compare(Motorcycle, Car).sharedProperties === ["fuel"]', function()
-            {
-                assert.deepStrictEqual(new Compare(mock.Motorcycle, mock.Car).sharedProperties, ["fuel"]);
+            mock.lions.forEach((mockLion, index, arr) => {
+                const mockLionObj2 = arr[arr.length - 1 - index];
+                test(`new Compare(${mockLion}, ${mockLion}).sharedProperties returns ${toStr(Object.keys(mockLion))}`, function()
+                {
+                    assert.deepStrictEqual(new Compare(mockLion, mockLion).sharedProperties, Object.keys(mockLion));
+                });
+
+                test(`new Compare(${mockLion}, ${mockLionObj2}).sharedProperties returns ["gender"]`, function()
+                {
+                    assert.deepStrictEqual(new Compare(mockLion, mockLionObj2).sharedProperties, ["gender"]);
+                });
             });
 
-            test('new Compare(Simba, Kion).sharedProperties === ["gender"]', function()
-            {
-                assert.deepStrictEqual(new Compare(mock.Simba, mock.Kion).sharedProperties, ["gender"]);
-            });
+            [mock.automobiles, mock.lions].forEach((mockObjs, index, arr) => {
+                const otherMockObjs = arr[arr.length - 1 - index];
 
-            test('new Compare(Kion, Simba).sharedProperties === ["gender"]', function()
-            {
-                assert.deepStrictEqual(new Compare(mock.Kion, mock.Simba).sharedProperties, ["gender"]);
+                mockObjs.forEach(mockObj =>
+                    otherMockObjs.forEach(otherMockObj =>
+                        test(`new Compare(${mockObj}, ${otherMockObj}).sharedProperties is empty`, function()
+                        {
+                            assert.isEmpty(new Compare(mockObj, otherMockObj).sharedProperties);
+                        })
+                    )
+                );
             });
         });
 
