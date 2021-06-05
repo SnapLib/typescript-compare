@@ -32,7 +32,7 @@ suite("evalPropValueDiffs()", function testEvalPropValueDiffs()
     suite("invalid comparisons", function testInvalidComparisonSourceAndTargetThrows()
     {
         Array.from(primitivesExceptString.entries()).forEach(entry => {
-            const primVal = primitivesExceptString[ primitivesExceptString.length - 1 - entry[0]];
+            const primVal = primitivesExceptString[primitivesExceptString.length - 1 - entry[0]];
             const str = `evalPropValueDiffs(${toStr(entry[1])}, ${toStr(primVal)}) throws error`;
             test(str, function()
             {
@@ -148,7 +148,7 @@ suite("evalPropValueDiffs()", function testEvalPropValueDiffs()
 
         suite(`${toStr(intArrayA)} -> ${toStr(intArrayB)}`, function testEvalStrIntArrayDiff()
         {
-            test('diff keys is "2"', function()
+            test('diff key is "2"', function()
             {
                 assert.deepStrictEqual(evalPropValueDiffs(intArrayA, intArrayB).map(diff => diff.key), ["2"]);
             });
