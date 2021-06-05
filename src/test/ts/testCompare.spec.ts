@@ -231,14 +231,28 @@ suite("Compare", function testCompare()
                     test(`new Compare(${mockObj}, ${mockObj}).alteredProperties is empty`, function()
                     {
                         assert.isEmpty(new Compare(mockObj, mockObj).alteredProperties);
-                    }));
+                    })
+                );
 
-                test("diff keys", function()
+                suite("diff keys", function testDiffKeys()
                 {
-                  assert.deepStrictEqual(new Compare(mock.Car, mock.Motorcycle).alteredProperties.map(diff => diff.key), autoMobileKeysNoFuel);
-                  assert.deepStrictEqual(new Compare(mock.Motorcycle, mock.Car).alteredProperties.map(diff => diff.key), autoMobileKeysNoFuel);
-                  assert.deepStrictEqual(new Compare(mock.Simba, mock.Kion).alteredProperties.map(diff => diff.key), lionKeysNoGender);
-                  assert.deepStrictEqual(new Compare(mock.Kion, mock.Simba).alteredProperties.map(diff => diff.key), lionKeysNoGender);
+                    [mock.automobiles, mock.lions].forEach(mockObjs => {
+                        mockObjs.forEach((mockObj, index, arr) => {
+                            const otherMockObj = arr[arr.length - 1 - index];
+
+                            test(`new Compare(${mockObj}, ${mockObj}).sharedProperties is empty`, function()
+                            {
+                                assert.isEmpty(new Compare(mockObj, mockObj).alteredProperties.map(diff => diff.key));
+                            });
+
+                            const alteredPropKeys = mockObjs === mock.automobiles ? autoMobileKeysNoFuel : lionKeysNoGender;
+
+                            test(`new Compare(${mockObj}, ${otherMockObj}).sharedProperties returns ${toStr(alteredPropKeys)}`, function()
+                            {
+                                assert.deepStrictEqual(new Compare(mockObj, otherMockObj).alteredProperties.map(diff => diff.key), alteredPropKeys);
+                            });
+                        });
+                    });
                 });
 
                 test("diff sourceValues", function()
