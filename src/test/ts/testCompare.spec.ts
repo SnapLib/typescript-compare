@@ -156,19 +156,6 @@ suite("Compare", function testCompare()
 
         suite("sharedProperties", function testGeSharedProperties()
         {
-            mock.automobiles.forEach(mockAutomobileObj =>
-                mock.lions.forEach(mockLionObj =>{
-                    test(`new Compare(${mockAutomobileObj}, ${mockLionObj}).sharedProperties is empty`, function()
-                    {
-                        assert.isEmpty(new Compare(mockAutomobileObj, mockLionObj).sharedProperties);
-                    });
-
-                    test(`new Compare(${mockLionObj}, ${mockAutomobileObj}).sharedProperties is empty`, function()
-                    {
-                        assert.isEmpty(new Compare(mockLionObj, mockAutomobileObj).sharedProperties);
-                    });}
-            ));
-
             mock.automobiles.forEach((mockAutomobile, index, arr) => {
                 const mockAutomobileObj2 = arr[arr.length - 1 - index];
                 test(`new Compare(${mockAutomobile}, ${mockAutomobile}).sharedProperties returns ${toStr(Object.keys(mockAutomobile))}`, function()
@@ -213,21 +200,7 @@ suite("Compare", function testCompare()
         {
             suite("of objects", function testAlteredPropertiesOfObjs()
             {
-                const diffCarValues =
-                    Object.entries(mock.Car).filter(entry => entry[0] !== "fuel").map(entry => entry[1]);
-                const diffMotoValues =
-                    Object.entries(mock.Motorcycle).filter(entry => entry[0] !== "fuel").map(entry => entry[1]);
-                const autoMobileKeysNoFuel =
-                    mock.automobileKeys.filter(key => key !== "fuel");
-
-                const diffSimbaValues =
-                    Object.entries(mock.Simba).filter(entry => entry[0] !== "gender").map(entry => entry[1]);
-                const diffKionValues =
-                    Object.entries(mock.Kion).filter(entry => entry[0] !== "gender").map(entry => entry[1]);
-                const lionKeysNoGender =
-                    mock.lionKeys.filter(key => key !== "gender");
-
-                mock.objects.forEach(mockObj =>
+                mock.mockObjsAndArrays.forEach(mockObj =>
                     test(`new Compare(${mockObj}, ${mockObj}).alteredProperties is empty`, function()
                     {
                         assert.isEmpty(new Compare(mockObj, mockObj).alteredProperties);
@@ -245,7 +218,7 @@ suite("Compare", function testCompare()
                                 assert.isEmpty(new Compare(mockObj, mockObj).alteredProperties.map(diff => diff.key));
                             });
 
-                            const alteredPropKeys = mockObjs === mock.automobiles ? autoMobileKeysNoFuel : lionKeysNoGender;
+                            const alteredPropKeys = mockObjs === mock.automobiles ? mock.automobileKeys.filter(key => key !== "fuel") : mock.lionKeys.filter(key => key !== "gender");
 
                             test(`new Compare(${mockObj}, ${otherMockObj}).sharedProperties returns ${toStr(alteredPropKeys)}`, function()
                             {
@@ -255,20 +228,46 @@ suite("Compare", function testCompare()
                     });
                 });
 
-                test("diff sourceValues", function()
+                suite("diff sourceValues", function testDiffKeys()
                 {
-                  assert.deepStrictEqual(new Compare(mock.Car, mock.Motorcycle).alteredProperties.map(diff => diff.sourceValue), diffCarValues);
-                  assert.deepStrictEqual(new Compare(mock.Motorcycle, mock.Car).alteredProperties.map(diff => diff.sourceValue), diffMotoValues);
-                  assert.deepStrictEqual(new Compare(mock.Simba, mock.Kion).alteredProperties.map(diff => diff.sourceValue), diffSimbaValues);
-                  assert.deepStrictEqual(new Compare(mock.Kion, mock.Simba).alteredProperties.map(diff => diff.sourceValue), diffKionValues);
+                    [mock.automobiles, mock.lions].forEach(mockObjs => {
+                        mockObjs.forEach((mockObj, index, arr) => {
+                            const otherMockObj = arr[arr.length - 1 - index];
+
+                            test(`new Compare(${mockObj}, ${mockObj}).alteredProperties sourceValues are empty`, function()
+                            {
+                                assert.isEmpty(new Compare(mockObj, mockObj).alteredProperties.map(diff => diff.sourceValue));
+                            });
+
+                            const diffSourceValue = Object.entries(mockObj).filter(entry => entry[0] !== "fuel" && entry[0] !== "gender").map(entry => entry[1]);
+
+                            test(`new Compare(${mockObj}, ${otherMockObj}).alteredProperties sourceValues return ${toStr(diffSourceValue)}`, function()
+                            {
+                                assert.deepStrictEqual(new Compare(mockObj, otherMockObj).alteredProperties.map(diff => diff.sourceValue), diffSourceValue);
+                            });
+                        });
+                    });
                 });
 
-                test("diff targetValues", function()
+                suite("diff targetValues", function testDiffKeys()
                 {
-                  assert.deepStrictEqual(new Compare(mock.Car, mock.Motorcycle).alteredProperties.map(diff => diff.targetValue), diffMotoValues);
-                  assert.deepStrictEqual(new Compare(mock.Motorcycle, mock.Car).alteredProperties.map(diff => diff.targetValue), diffCarValues);
-                  assert.deepStrictEqual(new Compare(mock.Simba, mock.Kion).alteredProperties.map(diff => diff.targetValue), diffKionValues);
-                  assert.deepStrictEqual(new Compare(mock.Kion, mock.Simba).alteredProperties.map(diff => diff.targetValue), diffSimbaValues);
+                    [mock.automobiles, mock.lions].forEach(mockObjs => {
+                        mockObjs.forEach((mockObj, index, arr) => {
+                            const otherMockObj = arr[arr.length - 1 - index];
+
+                            test(`new Compare(${mockObj}, ${mockObj}).alteredProperties sourceValues are empty`, function()
+                            {
+                                assert.isEmpty(new Compare(mockObj, mockObj).alteredProperties.map(diff => diff.targetValue));
+                            });
+
+                            const diffTargetValue = Object.entries(otherMockObj).filter(entry => entry[0] !== "fuel" && entry[0] !== "gender").map(entry => entry[1]);
+
+                            test(`new Compare(${mockObj}, ${otherMockObj}).alteredProperties sourceValues return ${toStr(diffTargetValue)}`, function()
+                            {
+                                assert.deepStrictEqual(new Compare(mockObj, otherMockObj).alteredProperties.map(diff => diff.targetValue), diffTargetValue);
+                            });
+                        });
+                    });
                 });
             });
 
