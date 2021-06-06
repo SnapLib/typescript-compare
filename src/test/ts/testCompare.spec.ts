@@ -338,17 +338,6 @@ suite("Compare", function testCompare()
                         })
                 ));
             });
-
-            suite("array and object", function testArrayObjDiff()
-            {
-                mock.arrays.forEach(mockArr =>
-                    mock.objects.forEach(mockObj =>
-                        test(`${toStr(mockArr)} -> {${mockObj}} property value diffs are empty`, function()
-                        {
-                            assert.isEmpty(new Compare(mockArr, mockObj).alteredProperties);
-                        })
-                ));
-            });
         });
     });
 
