@@ -345,71 +345,30 @@ suite("Compare", function testCompare()
     {
        suite("omittedKeys", function testHasOmittedKeys()
        {
-           mock.automobiles.forEach(mockAutomobileObj1 =>
-               mock.automobiles.forEach(mockAutomobileObj2 =>
-                   test(`new Compare(${mockAutomobileObj1}, ${mockAutomobileObj2}).has.omittedKeys() === false`, function()
-                   {
-                       assert.isFalse(new Compare(mockAutomobileObj1, mockAutomobileObj2).has.omittedKeys());
-                   })
-           ));
+            [mock.automobiles, mock.lions, mock.arrays].forEach((mockObjs, index, mockObjsArr) => {
+                const otherMockObjs = Array.from(mockObjsArr.entries()).filter(entry => entry[0] !== index).map(entry => entry[1]);
 
-           mock.lions.forEach(mockLionObj1 => {
-               mock.lions.forEach(mockLionObj2 =>
-                   test(`new Compare(${mockLionObj1}, ${mockLionObj2}).has.omittedKeys() === false`, function()
-                   {
-                       assert.isFalse(new Compare(mockLionObj1, mockLionObj2).has.omittedKeys());
-                   })
-               );
+                mockObjs.forEach((mockObj, i, arr) => {
+                    const anotherMockObj = arr[arr.length - 1 - i];
+
+                    test(`new Compare(${toStr(mockObj)}, ${toStr(mockObj)}).has.omittedKeys() === false`, function()
+                    {
+                        assert.isFalse(new Compare(mockObj, mockObj).has.omittedKeys());
+                    });
+
+                    test(`new Compare(${toStr(mockObj)}, ${toStr(anotherMockObj)}).has.omittedKeys() === false`, function()
+                    {
+                        assert.isFalse(new Compare(mockObj, mockObj).has.omittedKeys());
+                    });
+
+                    otherMockObjs.forEach(otherMockObj => {
+                        test(`new Compare(${toStr(mockObj)}, ${toStr(otherMockObj)}).has.omittedKeys() === true`, function()
+                        {
+                            assert.isTrue(new Compare(mockObj, otherMockObj).has.omittedKeys());
+                        });
+                    });
+                });
            });
-
-           mock.arrays.forEach(mockArray1 => {
-               mock.arrays.forEach(mockArray2 =>
-                   test(`new Compare(${toStr(mockArray1)}, ${toStr(mockArray2)}).has.omittedKeys() === false`, function()
-                   {
-                       assert.isFalse(new Compare(mockArray1, mockArray2).has.omittedKeys());
-                   })
-               );
-           });
-
-           mock.automobiles.forEach(mockAutomobileObj => {
-               mock.lions.forEach(mockLionObj => {
-                   test(`new Compare(${mockAutomobileObj}, ${mockLionObj}).has.omittedKeys() === true`, function()
-                   {
-                       assert.isTrue(new Compare(mockAutomobileObj, mockLionObj).has.omittedKeys());
-                   });
-
-                   test(`new Compare(${mockLionObj}, ${mockAutomobileObj}).has.omittedKeys() === true`, function()
-                   {
-                       assert.isTrue(new Compare(mockLionObj, mockAutomobileObj).has.omittedKeys());
-                   });
-               });
-
-               mock.arrays.forEach(mockArray => {
-                   test(`new Compare(${mockAutomobileObj}, ${toStr(mockArray)}).has.omittedKeys() === true`, function()
-                   {
-                       assert.isTrue(new Compare(mockAutomobileObj, mockArray).has.omittedKeys());
-                   });
-
-                   test(`new Compare(${toStr(mockArray)}, ${mockAutomobileObj}).has.omittedKeys() === true`, function()
-                   {
-                       assert.isTrue(new Compare(mockArray, mockAutomobileObj).has.omittedKeys());
-                   });
-               });
-           });
-
-           mock.lions.forEach(mockLionObj =>
-               mock.arrays.forEach(mockArray => {
-                   test(`new Compare(${mockLionObj}, ${toStr(mockArray)}).has.omittedKeys() === true`, function()
-                   {
-                       assert.isTrue(new Compare(mockLionObj, mockArray).has.omittedKeys());
-                   });
-
-                   test(`new Compare(${toStr(mockArray)}, ${mockLionObj}).has.omittedKeys() === true`, function()
-                   {
-                       assert.isTrue(new Compare(mockArray, mockLionObj).has.omittedKeys());
-                   });
-               })
-           );
        });
     });
 });
