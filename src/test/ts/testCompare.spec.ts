@@ -273,55 +273,55 @@ suite("Compare", function testCompare()
 
             suite("of arrays", function testAlteredPropertiesOfArrays()
             {
-               suite(`${toStr(mock.strArrayA)} -> ${toStr(mock.strArrayB)}`, function testStrArrayDiff()
+               suite("diff keys", function testStrArrayDiff()
                 {
-                    test('diff keys are "0" and "2"', function()
+                    test(`new Compare(${toStr(mock.strArrayA)}, ${toStr(mock.strArrayB)}) diff keys are ["0", "2"]`, function()
                     {
                         assert.deepStrictEqual(new Compare(mock.strArrayA, mock.strArrayB).alteredProperties.map(diff => diff.key), ["0", "2"]);
                     });
 
-                    test('diff source values are "first" and "third"', function()
-                    {
-                        assert.deepStrictEqual(new Compare(mock.strArrayA, mock.strArrayB).alteredProperties.map(diff => diff.sourceValue), ["first", "third"]);
-                    });
-
-                    test('diff target values are "foo" and "baz"', function()
-                    {
-                        assert.deepStrictEqual(new Compare(mock.strArrayA, mock.strArrayB).alteredProperties.map(diff => diff.targetValue), ["foo", "baz"]);
-                    });
-                });
-
-                suite(`${toStr(mock.strArrayA)} -> ${toStr(mock.intArrayA)}`, function testStrIntArrayDiff()
-                {
-                    test('diff keys are "0", "1", and "2"', function()
+                    test(`new Compare(${toStr(mock.strArrayA)}, ${toStr(mock.intArrayA)}) diff keys are ["0", "1", "2"]`, function()
                     {
                         assert.deepStrictEqual(new Compare(mock.strArrayA, mock.intArrayA).alteredProperties.map(diff => diff.key), ["0", "1", "2"]);
                     });
 
-                    test('diff source values are "first", "second", and "third"', function()
+                    test(`new Compare(${toStr(mock.intArrayA)}, ${toStr(mock.intArrayB)}) diff key is ["2"]`, function()
+                    {
+                        assert.deepStrictEqual(new Compare(mock.intArrayA, mock.intArrayB).alteredProperties.map(diff => diff.key), ["2"]);
+                    });
+                });
+
+                suite("diff sourceValues", function testStrIntArrayDiff()
+                {
+                    test(`new Compare(${toStr(mock.strArrayA)}, ${toStr(mock.strArrayB)}) diff source values are ["first", "third"]`, function()
+                    {
+                        assert.deepStrictEqual(new Compare(mock.strArrayA, mock.strArrayB).alteredProperties.map(diff => diff.sourceValue), ["first", "third"]);
+                    });
+
+                    test(`new Compare(${toStr(mock.strArrayA)}, ${toStr(mock.intArrayA)}) diff source values are ["first", "second", "third"]`, function()
                     {
                         assert.deepStrictEqual(new Compare(mock.strArrayA, mock.intArrayA).alteredProperties.map(diff => diff.sourceValue), ["first", "second", "third"]);
                     });
 
-                    test("diff target values are 111, 222, and 333", function()
-                    {
-                        assert.deepStrictEqual(new Compare(mock.strArrayA, mock.intArrayA).alteredProperties.map(diff => diff.targetValue), [111, 222, 333]);
-                    });
-                });
-
-                suite(`${toStr(mock.intArrayA)} -> ${toStr(mock.intArrayB)}`, function testStrIntArrayDiff()
-                {
-                    test('diff key is "2"', function()
-                    {
-                        assert.deepStrictEqual(new Compare(mock.intArrayA, mock.intArrayB).alteredProperties.map(diff => diff.key), ["2"]);
-                    });
-
-                    test("diff source values is 333", function()
+                    test(`new Compare(${toStr(mock.intArrayA)}, ${toStr(mock.intArrayB)}) diff source values is [333]`, function()
                     {
                         assert.deepStrictEqual(new Compare(mock.intArrayA, mock.intArrayB).alteredProperties.map(diff => diff.sourceValue), [333]);
                     });
+                });
 
-                    test("diff target value is 999", function()
+                suite("diff targetValues", function testStrIntArrayDiff()
+                {
+                    test(`new Compare(${toStr(mock.strArrayA)}, ${toStr(mock.strArrayB)}) diff target values are ["foo", "baz"]`, function()
+                    {
+                        assert.deepStrictEqual(new Compare(mock.strArrayA, mock.strArrayB).alteredProperties.map(diff => diff.targetValue), ["foo", "baz"]);
+                    });
+
+                    test(`new Compare(${toStr(mock.strArrayA)}, ${toStr(mock.intArrayA)}) diff target values are [111, 222, 333]`, function()
+                    {
+                        assert.deepStrictEqual(new Compare(mock.strArrayA, mock.intArrayA).alteredProperties.map(diff => diff.targetValue), [111, 222, 333]);
+                    });
+
+                    test(`new Compare(${toStr(mock.intArrayA)}, ${toStr(mock.intArrayB)}) diff target value is [999]`, function()
                     {
                         assert.deepStrictEqual(new Compare(mock.intArrayA, mock.intArrayB).alteredProperties.map(diff => diff.targetValue), [999]);
                     });
