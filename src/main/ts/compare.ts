@@ -46,7 +46,9 @@ export class Compare<SourceType, TargetType>
      */
     private readonly _sharedProperties: ReadonlyArray<string>;
 
-    public constructor(sourceObject: NonNullable<SourceType>, targetObject: NonNullable<TargetType>, options: {enumerableOnly: boolean} = {enumerableOnly: true})
+    public constructor(sourceObject: NonNullable<SourceType>,
+                       targetObject: NonNullable<TargetType>,
+                       options: {enumerableOnly: boolean, ownPropertiesOnly: boolean} = {enumerableOnly: true, ownPropertiesOnly: true})
     {
         if (typeof sourceObject !== "string" && typeof sourceObject !== "object" || sourceObject === null)
         {
@@ -71,10 +73,16 @@ export class Compare<SourceType, TargetType>
             Object.freeze(options?.enumerableOnly ? Object.keys(targetObject) : Object.getOwnPropertyNames(targetObject));
 
         this._omittedKeys = Object.freeze(
-            srcKeys.filter(srcObjKey => ! (srcObjKey in convertedTarget)));
+            srcKeys.filter(srcObjKey =>
+                options.ownPropertiesOnly
+                ? ! Object.prototype.hasOwnProperty.call(convertedTarget, srcObjKey)
+                : ! (srcObjKey in convertedTarget)));
 
         this._addedKeys = Object.freeze(
-            targetKeys.filter(targetObjKey => ! Object.prototype.hasOwnProperty.call(sourceObject, targetObjKey)));
+            targetKeys.filter(targetObjKey =>
+                options.ownPropertiesOnly
+                ? ! Object.prototype.hasOwnProperty.call(sourceObject, targetObjKey)
+                : ! (targetObjKey in sourceObject)));
 
         this._alteredProperties =
             Object.freeze(evalPropValueDiffs(sourceObject, targetObject));
