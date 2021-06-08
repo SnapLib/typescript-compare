@@ -19,7 +19,7 @@ const toStr = (o: unknown): string =>
 
 suite("Compare", function testCompare()
 {
-    suite("new Compare(NonNullable<unknown>, NonNullable<unknown>)", function testValidCompareConstruction()
+    suite("constructor", function testValidCompareCtor()
     {
         validCtorArgs.forEach(mockObj1 =>
             validCtorArgs.forEach(mockObj2 => {
