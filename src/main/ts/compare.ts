@@ -88,7 +88,7 @@ export class Compare<SourceType, TargetType>
                 : ! (targetObjKey in convertedSource)));
 
         this._alteredProperties =
-            Object.freeze(evalPropValueDiffs(convertedSource, targetObject));
+            Object.freeze(evalPropValueDiffs(sourceObject, targetObject));
 
         this._alteredPropValueKeys =
             Object.freeze(this._alteredProperties.map(diff => diff.key));
