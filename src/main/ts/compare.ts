@@ -46,6 +46,7 @@ export class Compare<SourceType, TargetType>
      */
     private readonly _sharedProperties: ReadonlyArray<string>;
 
+    // TODO Make ownPropertiesOnly walk prototype chain if set to false.
     public constructor(sourceObject: NonNullable<SourceType>,
                        targetObject: NonNullable<TargetType>,
                        options: {enumerableOnly: boolean, ownPropertiesOnly: boolean} = {enumerableOnly: true, ownPropertiesOnly: true})
