@@ -102,6 +102,7 @@ as arguments that contain the same elements in the same order then `true` is
 returned.
 
 For example:
+
 ```typescript
 console.log(["Simba", "Kion"] === ["Simba", "Kion"]);
 // prints: false
