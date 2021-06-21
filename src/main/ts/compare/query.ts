@@ -33,7 +33,7 @@ export interface Query<QueryReturnType extends number | boolean>
      *          omitted keys the target object does not contain or a boolean
      *          indicating whether or not any omitted keys are present.
      */
-    readonly omittedKeys: () => QueryReturnType;
+    readonly omittedProperties: () => QueryReturnType;
 
     /**
      * Query to check either the number or existence of added property keys
@@ -48,7 +48,7 @@ export interface Query<QueryReturnType extends number | boolean>
      *          source object or a boolean indicating whether or not any added
      *          keys are present in the target object.
      */
-    readonly addedKeys: () => QueryReturnType;
+    readonly extraProperties: () => QueryReturnType;
 
     /**
      * Query to check either the number or existence of shared properties
