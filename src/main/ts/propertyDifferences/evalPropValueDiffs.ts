@@ -15,7 +15,7 @@ import {isEqual} from "../util/isEqual";
  *          the same keys but differing values between the source and target
  *          objects.
  */
-export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): PropertyDifference[] =>
+export const evalPropValueDiffs = (source: NonNullable<unknown>, target: NonNullable<unknown>): Array<PropertyDifference> =>
 {
     if (typeof source !== "string" && typeof source !== "object" || source === null)
     {
