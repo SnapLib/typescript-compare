@@ -31,6 +31,12 @@ export class Compare<SourceType, TargetType>
      * @private
      * @readonly
      */
+    readonly #hasOmittedProperties: boolean;
+
+    /**
+     * @private
+     * @readonly
+     */
     readonly #omittedKeys: ReadonlyArray<keyof SourceType>;
 
     /**
@@ -43,6 +49,12 @@ export class Compare<SourceType, TargetType>
      * @private
      * @readonly
      */
+    readonly #hasExtraProperties: boolean;
+
+    /**
+     * @private
+     * @readonly
+     */
     readonly #extraKeys: ReadonlyArray<keyof TargetType>;
 
     /**
@@ -50,6 +62,12 @@ export class Compare<SourceType, TargetType>
      * @readonly
      */
     readonly #sharedProperties: Readonly<SharedProps<SourceType, TargetType>>;
+
+    /**
+     * @private
+     * @readonly
+     */
+    readonly #hasSharedProperties: boolean;
 
     /**
      * @private
@@ -102,6 +120,14 @@ export class Compare<SourceType, TargetType>
                     ! Object.prototype.hasOwnProperty.call(convertedTarget, srcEntry[0])
                     && ! (srcEntry[0] in convertedTarget))) as {readonly [srcPropKey in keyof SourceType]: SourceType[srcPropKey]});
 
+        this.#hasOmittedProperties = (() => {
+            for (const omittedProp in this.#omittedProperties) {
+                return true;
+            }
+
+            return false;
+        })();
+
         this.#omittedKeys = Object.freeze(
             Object.keys(this.#omittedProperties) as Array<keyof SourceType>);
 
@@ -111,6 +137,14 @@ export class Compare<SourceType, TargetType>
                     ! Object.prototype.hasOwnProperty.call(convertedSource, targetEntry[0])
                     && ! (targetEntry[0] in convertedSource))) as {readonly [targetPropKey in keyof TargetType]: TargetType[targetPropKey]});
 
+        this.#hasExtraProperties = (() => {
+            for (const extraProp in this.#extraProperties) {
+                return true;
+            }
+
+            return false;
+        })();
+
         this.#extraKeys = Object.freeze(
             Object.keys(this.#extraProperties) as Array<keyof TargetType>);
 
@@ -119,6 +153,14 @@ export class Compare<SourceType, TargetType>
                 .filter(srcEntry => targetEntries
                     .some(targetEntry => srcEntry[0] === targetEntry[0]
                         && isEqual(srcEntry[1], targetEntry[1])))) as SharedProps<SourceType, TargetType>);
+
+        this.#hasSharedProperties = (() => {
+            for (const sharedProp in this.#sharedProperties) {
+                return true;
+            }
+
+            return false;
+        })();
 
         this.#sharedPropertyKeys = Object.freeze(
             Object.keys(this.#sharedProperties) as Array<keyof SourceType & keyof TargetType>);
@@ -142,32 +184,11 @@ export class Compare<SourceType, TargetType>
     public get alteredPropertyKeys(): ReadonlyArray<keyof SourceType & keyof TargetType> { return this.#alteredPropertyKeys; }
 
     public readonly has: Query<boolean> = Object.freeze({
-        omittedProperties: (): boolean => {
-            for (const omittedProp in this.#omittedProperties)
-            {
-                return true;
-            }
+        omittedProperties: (): boolean => this.#hasOmittedProperties,
 
-            return false;
-        },
+        extraProperties: (): boolean => this.#hasExtraProperties,
 
-        extraProperties: (): boolean => {
-            for (const extraProp in this.#extraProperties)
-            {
-                return true;
-            }
-
-            return false;
-        },
-
-        sharedProperties: (): boolean => {
-            for (const sharedProp in this.#sharedProperties)
-            {
-                return true;
-            }
-
-            return false;
-        },
+        sharedProperties: (): boolean => this.#hasSharedProperties,
 
         alteredProperties: (): boolean => this.#alteredProperties.length !== 0
     });
