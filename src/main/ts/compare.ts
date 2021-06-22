@@ -4,8 +4,7 @@ import {isEqual} from "./util/isEqual";
 import type {Query} from "./compare/query";
 
 type SharedProps<SourceType, TargetType> =
-    {readonly [srcPropKey in keyof SourceType]: SourceType[srcPropKey]}
-    & {readonly [targetPropKey in keyof TargetType]: TargetType[targetPropKey]};
+    {readonly [propKey in keyof SourceType & keyof TargetType]: SourceType[propKey] & TargetType[propKey]};
 
 export class Compare<SourceType, TargetType>
 {
