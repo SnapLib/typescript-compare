@@ -143,11 +143,6 @@ export class Compare<SourceType, TargetType>
     });
 }
 
-const obj1 = {prop1: 1, prop2: true, prop3: "third"};
-const obj2 = {prop2: 999, prop3: "third", prop4: {foo: "fourth"}};
-
-console.log(new Compare(obj1, obj2).sharedProperties);
-
 export {isEqual} from "./util/isEqual";
 
 export {Compare as default};
