@@ -3,6 +3,10 @@ import {evalPropValueDiffs} from "./propertyDifferences/evalPropValueDiffs";
 import {isEqual} from "./util/isEqual";
 import type {Query} from "./compare/query";
 
+type SharedProps<SourceType, TargetType> =
+    {readonly [srcPropKey in keyof SourceType]: SourceType[srcPropKey]}
+    & {readonly [targetPropKey in keyof TargetType]: TargetType[targetPropKey]};
+
 export class Compare<SourceType, TargetType>
 {
     /**
@@ -39,7 +43,7 @@ export class Compare<SourceType, TargetType>
      * @private
      * @readonly
      */
-    readonly #sharedProperties: Readonly<{readonly [srcPropKey in keyof SourceType]: SourceType[srcPropKey]} & {readonly [targetPropKey in keyof TargetType]: TargetType[targetPropKey]}>;
+    readonly #sharedProperties: Readonly<SharedProps<SourceType, TargetType>>;
 
     // TODO Make ownPropertiesOnly walk prototype chain if set to false.
     public constructor(sourceObject: NonNullable<SourceType>,
@@ -87,14 +91,14 @@ export class Compare<SourceType, TargetType>
             Object.fromEntries(srcEntries
                 .filter(srcEntry => targetEntries
                     .some(targetEntry => srcEntry[0] === targetEntry[0]
-                        && isEqual(srcEntry[1], targetEntry[1])))) as {readonly [srcPropKey in keyof SourceType]: SourceType[srcPropKey]} & {readonly [targetPropKey in keyof TargetType]: TargetType[targetPropKey]});
+                        && isEqual(srcEntry[1], targetEntry[1])))) as SharedProps<SourceType, TargetType>);
     }
 
     public get source(): Readonly<SourceType> { return this.#srcObj; }
     public get target(): Readonly<TargetType> { return this.#targetObj; }
     public get omittedProperties(): Readonly<{readonly [srcPropKey in keyof SourceType]: SourceType[srcPropKey]}> { return this.#omittedProperties; }
     public get extraProperties(): Readonly<{readonly [targetPropKey in keyof TargetType]: TargetType[targetPropKey]}> { return this.#extraProperties; }
-    public get sharedProperties(): Readonly<{readonly [srcPropKey in keyof SourceType]: SourceType[srcPropKey]} & {readonly [targetPropKey in keyof TargetType]: TargetType[targetPropKey]}> { return this.#sharedProperties; }
+    public get sharedProperties(): Readonly<SharedProps<SourceType, TargetType>> { return this.#sharedProperties; }
     public get alteredProperties(): readonly Readonly<PropertyDifference>[] { return this.#alteredProperties; }
 
     public readonly has: Query<boolean> = Object.freeze({
@@ -138,6 +142,11 @@ export class Compare<SourceType, TargetType>
         alteredProperties: (): number => this.#alteredProperties.length
     });
 }
+
+const obj1 = {prop1: 1, prop2: true, prop3: "third"};
+const obj2 = {prop2: 999, prop3: "third", prop4: {foo: "fourth"}};
+
+console.log(new Compare(obj1, obj2).sharedProperties);
 
 export {isEqual} from "./util/isEqual";
 
