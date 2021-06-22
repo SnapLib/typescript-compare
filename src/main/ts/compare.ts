@@ -55,7 +55,7 @@ export class Compare<SourceType, TargetType>
      * @private
      * @readonly
      */
-    readonly #sharedPropertyKeys: ReadonlyArray<keyof SourceType & TargetType>;
+    readonly #sharedPropertyKeys: ReadonlyArray<keyof SourceType & keyof TargetType>;
 
     /**
      * @private
@@ -67,7 +67,7 @@ export class Compare<SourceType, TargetType>
      * @private
      * @readonly
      */
-    readonly #alteredPropertyKeys: ReadonlyArray<keyof SourceType & TargetType>;
+    readonly #alteredPropertyKeys: ReadonlyArray<keyof SourceType & keyof TargetType>;
 
     // TODO Make ownPropertiesOnly walk prototype chain if set to false.
     public constructor(sourceObject: NonNullable<SourceType>,
@@ -121,13 +121,13 @@ export class Compare<SourceType, TargetType>
                         && isEqual(srcEntry[1], targetEntry[1])))) as SharedProps<SourceType, TargetType>);
 
         this.#sharedPropertyKeys = Object.freeze(
-            Object.keys(this.#sharedProperties) as Array<keyof SourceType & TargetType>);
+            Object.keys(this.#sharedProperties) as Array<keyof SourceType & keyof TargetType>);
 
         this.#alteredProperties =
             Object.freeze(evalPropValueDiffs(convertedSource, convertedTarget));
 
         this.#alteredPropertyKeys = Object.freeze(
-            this.#alteredProperties.map(diff => diff.key) as Array<keyof SourceType & TargetType>);
+            this.#alteredProperties.map(diff => diff.key) as Array<keyof SourceType & keyof TargetType>);
     }
 
     public get source(): Readonly<SourceType> { return this.#srcObj; }
@@ -137,9 +137,9 @@ export class Compare<SourceType, TargetType>
     public get extraProperties(): Readonly<{readonly [targetPropKey in keyof TargetType]: TargetType[targetPropKey]}> { return this.#extraProperties; }
     public get extraKeys(): ReadonlyArray<keyof TargetType> { return this.#extraKeys; }
     public get sharedProperties(): Readonly<SharedProps<SourceType, TargetType>> { return this.#sharedProperties; }
-    public get sharedPropertyKeys(): ReadonlyArray<keyof SourceType & TargetType> { return this.#sharedPropertyKeys; }
+    public get sharedPropertyKeys(): ReadonlyArray<keyof SourceType & keyof TargetType> { return this.#sharedPropertyKeys; }
     public get alteredProperties(): readonly Readonly<PropertyDifference>[] { return this.#alteredProperties; }
-    public get alteredPropertyKeys(): ReadonlyArray<keyof SourceType & TargetType> { return this.#alteredPropertyKeys; }
+    public get alteredPropertyKeys(): ReadonlyArray<keyof SourceType & keyof TargetType> { return this.#alteredPropertyKeys; }
 
     public readonly has: Query<boolean> = Object.freeze({
         omittedProperties: (): boolean => {
