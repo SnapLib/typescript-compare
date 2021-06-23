@@ -11,6 +11,97 @@ import type {PropertyDifferences} from "./propertyDifferences/propertyDifference
 import {isEqual} from "./util/isEqual";
 import type {Query} from "./compare/query";
 
+/**
+ * The `Compare` class compares 2 objects to each other. It simplifies the
+ * process of querying the differences and similarities between the 2 objects
+ * being compared. The types of relationships between the objects is relative to
+ * how the ***source*** *object compares to the* ***target*** *object*. There
+ * are 4 types of relations that can be queried via properties of a `Compare`
+ * object:
+ *
+ * 1. {@link omittedProperties}
+ *
+ *     Properties that are present in the *source* object but not in the
+ *     *target* object are considered "omitted" properties. As in they're
+ *     properties that are present in the source object but *omitted* in the
+ *     target object.
+ *
+ *     ```typescript
+ *     const obj1 = { prop1: 1,
+ *                    prop2: "foo" };
+ *
+ *     const obj2 = { prop1: 1 };
+ *
+ *     console.log(new Compare(obj1, obj2).omittedProperties);
+ *     // prints: { prop2: "foo" }
+ *     ```
+ *
+ * 1. {@link extraProperties}
+ *
+ *     Properties that are not present in the *source* object but are present in
+ *     the *target* object are considered "extra" properties. As in they're
+ *     *extra* properties that are present in the target object but not in the
+ *     source object.
+ *
+ *     ```typescript
+ *     const obj1 = { prop1: 1,
+ *                    prop2: "foo" };
+ *
+ *     const obj2 = { prop1: 1,
+ *                    prop2: "foo",
+ *                    prop3: true };
+ *
+ *     console.log(new Compare(obj1, obj2).extraProperties);
+ *     // prints: { prop3: true }
+ *     ```
+ *
+ * 1. {@link sharedProperties}
+ *
+ *     Properties that are present in both the *source* and *target* object that
+ *     are equivalent are considered "shared" properties. If there are keys that
+ *     are present in both the source and target objects *that are also mapped*
+ *     *to equivalent values* then the key-value pairs are considered shared
+ *     properties.
+ *
+ *     ```typescript
+ *     const obj1 = { prop1: 1,
+ *                    prop2: "foo",
+ *                    prop3: false };
+ *
+ *     const obj2 = { prop1: 1,
+ *                    prop2: "foo",
+ *                    prop3: true };
+ *
+ *     console.log(new Compare(obj1, obj2).sharedProperties);
+ *     // prints: { prop1: 1,
+ *     //           prop2: "foo" }
+ *     ```
+ *
+ * 1. {@link alteredProperties}
+ *
+ *     Properties that are present in both the *source* and *target* object that
+ *     contain differing values are considered "altered" properties. If there
+ *     are keys that are present in both the source and target objects *that*
+ *     *are mapped to differing values* then the key-value pairs are considered
+ *     altered properties.
+ *
+ *     ```typescript
+ *     const obj1 = { prop1: 1,
+ *                    prop2: "foo",
+ *                    prop3: false };
+ *
+ *     const obj2 = { prop1: 1,
+ *                    prop2: "foo",
+ *                    prop3: true };
+ *
+ *     console.log(new Compare(obj1, obj2).alteredProperties);
+ *     // prints: { prop3: { sourceValue: false,
+ *     //                    targetValue: true } }
+ *     ```
+ *
+ * @classdesc
+ * @author Snap
+ */
 export class Compare<SourceType, TargetType>
 {
     /**
