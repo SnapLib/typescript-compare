@@ -3,7 +3,7 @@
  * `has` queries of the {@link Compare} class. That is, the return type
  * of the {@link Compare.count} and {@link Compare.has} properties.
  *
- * @overview
+ * @module
  * @author Snap
  */
 
@@ -12,10 +12,11 @@
  * {@link Compare.has}.
  *
  * This interface defines the return type when querying {@link Compare}
- * objects for the number or existence of `omittedKeys`, `addedKeys`,
- * `sharedProperties`, or `alteredProperties`. When querying for the *count*,
- * this interface's properties are based on numbers, when querying for the
- * existence this interface's properties are based on boolean values.
+ * objects for the number or existence of `omittedProperties`,
+ * `extraProperties`, `sharedProperties`, or `alteredProperties`. When querying
+ * for the *count*, this interface's properties are based on numbers, when
+ * querying for the existence this interface's properties are based on boolean
+ * values.
  *
  * @interface
  */
