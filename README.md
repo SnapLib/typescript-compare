@@ -9,35 +9,34 @@ This npm package exports the `Compare` class as well as the
 
 ## Compare class
 
-The `Compare` class consumes 2 objects and provides methods to query
-the differences and similarities between the consumed objects. To differentiate
+The `Compare` class consumes 2 objects and provides methods to query the
+differences and similarities between the consumed objects. To differentiate
 between the 2 consumed objects, one object is referred to as the *source* object
 and the other object it's being compared to is referred to as the *target*
 object.
 
-There are 4 different types of comparison queries `Compare` objects
+There are 4 different types of "relation" queries `Compare` objects
 contain:
 
-1. `omittedKeys`
+1. `omittedProperties`
 
-    Property keys that are present in the source object but not in the target
+    Properties that are present in the source object but not in the target
     object.
 
-1. `addedKeys`
+1. `extraProperties`
 
-    Property keys that are not present in the source object but are present in
-    the target object.
+    Properties that are not present in the source object but are present in the
+    target object.
 
 1. `sharedProperties`
 
-    The keys of properties that are present in both the source and target object
-    and also mapped to equivalent values.
+    Properties that are present in both the source and target object that are
+    mapped to equivalent values.
 
 1. `alteredProperties`
 
-    Properties with  keys that are present in both the target and source object,
-    but are mapped to different values. The key, source property value, and
-    target property value are returned.
+    Properties that are present in both the source and target object that are
+    mapped to differing values.
 
 ### Examples
 
@@ -64,20 +63,37 @@ const motorcycle = {
 // Pass `car` as source object to compare to `motorcycle` target object
 const objectComparison = new Compare(car, motorcycle);
 
-console.log(objectComparison.omittedKeys);
-// prints: ["bodyTypes", "engineLocations"]
+console.log(objectComparison.omittedProperties);
+/* prints:
+ * {
+ *   bodyTypes: ["coup", "sedan", "suv"],
+ *   engineLocations: ["front", "middle", "rear"]
+ * }
+ */
 
-console.log(objectComparison.addedKeys);
-// prints: ["driveTypes"]
+console.log(objectComparison.extraProperties);
+/* prints:
+ * {
+ *   driveTypes: ["chain", "belt", "shaft"]
+ * }
+ */
 
 console.log(objectComparison.sharedProperties);
-// prints: ["fuel"]
+/* prints:
+ * {
+ *   fuel: "petrol"
+ * }
+ */
 
-console.log(`[ ${objectComparison.alteredProperties.join(",\n  ")} ]`)
+console.log(objectComparison.alteredProperties)
 /*
- * prints: [ {key: "numOfWheels", sourceValue: 4, targetValue: 2},
- *           {key: "makes", sourceValue: ["Koenigsegg", "Lamborghini], targetValue: ["MV Agusta", "Triumph"]},
- *           {key: "isSafe", sourceValue: true, targetValue: false} ]
+ * prints:
+ * {
+ *   numOfWheels: {sourceValue: 4, targetValue: 2},
+ *   makes: { sourceValue: ["Koenigsegg", "Lamborghini],
+              targetValue: ["MV Agusta", "Triumph"] },
+ *   isSafe: {sourceValue: true, targetValue: false}
+ * }
  */
 ```
 
@@ -86,11 +102,10 @@ mutating/altering. As a result the objects returned by `Compare` objects
 are immutable and attempting to mutate them will result in an error.
 
 It should also be noted that the `Compare` class is intended to compare
-objects or values that can be interpreted as objects and contain iterable
-properties (string keys paired with values) or indexes (number keys paired with
-values). Attempting to construct a `Compare` object with `null`,
-`undefined`, or primitive values as source and/or target arguments will result
-in, ideally, an error to be thrown or undefined behavior.
+objects or values that can be interpreted as objects and contain enumerable
+properties (keys-value pairs). Attempting to construct a `Compare` object with
+`null`, `undefined`, or non-string primitive values as source and/or target
+arguments will result in, ideally, an error to be thrown or undefined behavior.
 
 ## isEqual(unknown, unknown) function
 
