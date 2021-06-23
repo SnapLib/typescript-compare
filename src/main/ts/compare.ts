@@ -1,5 +1,5 @@
-import {PropertyDifference} from "./propertyDifferences/propertyDifference";
 import {evalPropValueDiffs} from "./propertyDifferences/evalPropValueDiffs";
+import type {PropertyDifferences} from "./propertyDifferences/propertyDifferences";
 import {isEqual} from "./util/isEqual";
 import type {Query} from "./compare/query";
 
@@ -112,7 +112,7 @@ export class Compare<SourceType, TargetType>
      * @private
      * @readonly
      */
-    readonly #alteredProperties: readonly Readonly<PropertyDifference>[];
+    readonly #alteredProperties: Readonly<PropertyDifferences>;
 
     /**
      * Boolean indicating if there are properties in the source and target
@@ -217,12 +217,17 @@ export class Compare<SourceType, TargetType>
         this.#sharedPropertyKeys = Object.freeze(Object.keys(this.#sharedProperties));
 
         this.#alteredProperties =
-            Object.freeze(evalPropValueDiffs(convertedSource, convertedTarget));
+            Object.freeze(Object.fromEntries(evalPropValueDiffs(convertedSource, convertedTarget).map(diff => [diff.key, {sourceValue: diff.sourceValue, targetValue: diff.targetValue}])));
 
-        this.#hasAlteredProperties = this.#alteredProperties.length !== 0;
+        this.#hasAlteredProperties = (() => {
+            for (const alteredProp in this.#alteredProperties) {
+                return true;
+            }
 
-        this.#alteredPropertyKeys = Object.freeze(
-            this.#alteredProperties.map(diff => diff.key));
+            return false;
+        })();
+
+        this.#alteredPropertyKeys = Object.freeze(Object.keys(this.#alteredProperties));
     }
 
     public get source(): Readonly<SourceType> { return this.#srcObj; }
@@ -233,7 +238,7 @@ export class Compare<SourceType, TargetType>
     public get extraKeys(): ReadonlyArray<string> { return this.#extraKeys; }
     public get sharedProperties(): Readonly<{readonly [sharedPropKey: string]: Readonly<unknown>}> { return this.#sharedProperties; }
     public get sharedPropertyKeys(): ReadonlyArray<string> { return this.#sharedPropertyKeys; }
-    public get alteredProperties(): readonly Readonly<PropertyDifference>[] { return this.#alteredProperties; }
+    public get alteredProperties(): Readonly<PropertyDifferences> { return this.#alteredProperties; }
     public get alteredPropertyKeys(): ReadonlyArray<string> { return this.#alteredPropertyKeys; }
 
     public readonly has: Query<boolean> = Object.freeze({
@@ -253,7 +258,7 @@ export class Compare<SourceType, TargetType>
 
         sharedProperties: (): number => this.#sharedPropertyKeys.length,
 
-        alteredProperties: (): number => this.#alteredProperties.length
+        alteredProperties: (): number => this.#alteredPropertyKeys.length
     });
 }
 
