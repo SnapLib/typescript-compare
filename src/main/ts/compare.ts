@@ -42,13 +42,13 @@ export class Compare<SourceType, TargetType>
     readonly #hasOmittedProperties: boolean;
 
     /**
-     * A string array of the keys of properties that are present in the source
-     * object but not the target object.
+     * Number of properties the source object contains that aren't present in
+     * the target object it's being compared to.
      *
      * @private
      * @readonly
      */
-    readonly #omittedKeys: ReadonlyArray<string>;
+    readonly #omittedPropsCount: number;
 
     /**
      * An object containing the keys and their mapped values that are present in
@@ -69,13 +69,13 @@ export class Compare<SourceType, TargetType>
     readonly #hasExtraProperties: boolean;
 
     /**
-     * A string array of the keys of properties that are present in the target
-     * object but not the source object.
+     * Number of properties the target object contains that aren't present in
+     * the source object being compared to it.
      *
      * @private
      * @readonly
      */
-    readonly #extraKeys: ReadonlyArray<string>;
+    readonly #extraPropsCount: number;
 
     /**
      * An object containing properties that are present in both the source and
@@ -97,13 +97,13 @@ export class Compare<SourceType, TargetType>
     readonly #hasSharedProperties: boolean;
 
     /**
-     * A string array of the keys of properties that are present in the source
-     * and target object that are also mapped to equivalent values.
+     * Number of properties that both the source and target object contain that
+     * are equivalent.
      *
      * @private
      * @readonly
      */
-    readonly #sharedPropertyKeys: ReadonlyArray<string>;
+    readonly #sharedPropertiesCount: number;
 
     /**
      * An object containing properties whose keys are present in both the source
@@ -124,13 +124,13 @@ export class Compare<SourceType, TargetType>
     readonly #hasAlteredProperties: boolean;
 
     /**
-     * A string array of the keys of properties that are present in the source
-     * and target object that are also mapped to differing values.
+     * Number of properties that are present in both the source and target
+     * objects, but are mapped to differing values.
      *
      * @private
      * @readonly
      */
-    readonly #alteredPropertyKeys: ReadonlyArray<string>;
+    readonly #alteredPropertiesCount: number;
 
     public constructor(sourceObject: NonNullable<SourceType>,
                        targetObject: NonNullable<TargetType>)
@@ -178,7 +178,7 @@ export class Compare<SourceType, TargetType>
             return false;
         })();
 
-        this.#omittedKeys = Object.freeze(Object.keys(this.#omittedProperties));
+        this.#omittedPropsCount = Object.keys(this.#omittedProperties).length;
 
         // Create new object out of entries whose keys are in target object but
         // not in source object.
@@ -196,7 +196,7 @@ export class Compare<SourceType, TargetType>
             return false;
         })();
 
-        this.#extraKeys = Object.freeze(Object.keys(this.#extraProperties));
+        this.#extraPropsCount = Object.keys(this.#extraProperties).length;
 
         // Create new object out of entries whose keys are in source and target
         // object and are also mapped to equivalent values.
@@ -214,7 +214,7 @@ export class Compare<SourceType, TargetType>
             return false;
         })();
 
-        this.#sharedPropertyKeys = Object.freeze(Object.keys(this.#sharedProperties));
+        this.#sharedPropertiesCount = Object.keys(this.#sharedProperties).length;
 
         this.#alteredProperties =
             Object.freeze(Object.fromEntries(evalPropValueDiffs(convertedSource, convertedTarget).map(diff => [diff.key, {sourceValue: diff.sourceValue, targetValue: diff.targetValue}])));
@@ -227,10 +227,29 @@ export class Compare<SourceType, TargetType>
             return false;
         })();
 
-        this.#alteredPropertyKeys = Object.freeze(Object.keys(this.#alteredProperties));
+        this.#alteredPropertiesCount = Object.keys(this.#alteredProperties).length;
     }
 
+    /**
+     * Returns the source object being compared to the target object. The
+     * returned object is frozen to prevent inadvertently mutating it.
+     *
+     * @returns {Readonly<Object>>} The source object being compared to the
+     *          target object.
+     *
+     * @public
+     */
     public get source(): Readonly<SourceType> { return this.#srcObj; }
+
+    /**
+     * Returns the target object that the source object is being compared to.
+     * The returned object is frozen to prevent inadvertently mutating it.
+     *
+     * @returns {Readonly<Object>>} The target object the source object is being
+     *          compared to.
+     *
+     * @public
+     */
     public get target(): Readonly<TargetType> { return this.#targetObj; }
     public get omittedProperties(): Readonly<{readonly [srcPropKey: string]: Readonly<unknown>}> { return this.#omittedProperties; }
     public get extraProperties(): Readonly<{readonly [targetPropKey: string]: Readonly<unknown>}> { return this.#extraProperties; }
@@ -248,13 +267,13 @@ export class Compare<SourceType, TargetType>
     });
 
     public readonly count: Query<number> = Object.freeze({
-        omittedProperties: (): number => this.#omittedKeys.length,
+        omittedProperties: (): number => this.#omittedPropsCount,
 
-        extraProperties: (): number => this.#extraKeys.length,
+        extraProperties: (): number => this.#extraPropsCount,
 
-        sharedProperties: (): number => this.#sharedPropertyKeys.length,
+        sharedProperties: (): number => this.#sharedPropertiesCount,
 
-        alteredProperties: (): number => this.#alteredPropertyKeys.length
+        alteredProperties: (): number => this.#alteredPropertiesCount
     });
 }
 
