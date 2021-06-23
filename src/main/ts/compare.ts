@@ -233,13 +233,9 @@ export class Compare<SourceType, TargetType>
     public get source(): Readonly<SourceType> { return this.#srcObj; }
     public get target(): Readonly<TargetType> { return this.#targetObj; }
     public get omittedProperties(): Readonly<{readonly [srcPropKey: string]: Readonly<unknown>}> { return this.#omittedProperties; }
-    public get omittedKeys(): ReadonlyArray<string> { return this.#omittedKeys; }
     public get extraProperties(): Readonly<{readonly [targetPropKey: string]: Readonly<unknown>}> { return this.#extraProperties; }
-    public get extraKeys(): ReadonlyArray<string> { return this.#extraKeys; }
     public get sharedProperties(): Readonly<{readonly [sharedPropKey: string]: Readonly<unknown>}> { return this.#sharedProperties; }
-    public get sharedPropertyKeys(): ReadonlyArray<string> { return this.#sharedPropertyKeys; }
     public get alteredProperties(): Readonly<PropertyDifferences> { return this.#alteredProperties; }
-    public get alteredPropertyKeys(): ReadonlyArray<string> { return this.#alteredPropertyKeys; }
 
     public readonly has: Query<boolean> = Object.freeze({
         omittedProperties: (): boolean => this.#hasOmittedProperties,
