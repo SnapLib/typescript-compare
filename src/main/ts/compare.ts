@@ -79,8 +79,9 @@ export class Compare<SourceType, TargetType>
 
     /**
      * An object containing properties that are present in both the source and
-     * target objects being compared. Keys that are present in both the source
-     * and target objects that are mapped to equivalent values.
+     * target objects being compared that are equivalent. That is, Keys that are
+     * present in both the source and target objects that are mapped to
+     * equivalent values.
      *
      * @private
      * @readonly
@@ -236,8 +237,6 @@ export class Compare<SourceType, TargetType>
      *
      * @returns {Readonly<Object>>} The source object being compared to the
      *          target object.
-     *
-     * @public
      */
     public get source(): Readonly<SourceType> { return this.#srcObj; }
 
@@ -247,15 +246,54 @@ export class Compare<SourceType, TargetType>
      *
      * @returns {Readonly<Object>>} The target object the source object is being
      *          compared to.
-     *
-     * @public
      */
     public get target(): Readonly<TargetType> { return this.#targetObj; }
+
+    /**
+     * Returns the properties that are present in the source object but not the
+     * target object it's being compared to.
+     *
+     * @returns {Readonly<Object>>} An object containing the properties that are
+     *          present in the source object but not the target object.
+     */
     public get omittedProperties(): Readonly<{readonly [srcPropKey: string]: Readonly<unknown>}> { return this.#omittedProperties; }
+
+    /**
+     * Returns the properties that are present in the target object but not the
+     * source object that's being compared to it.
+     *
+     * @returns {Readonly<Object>>} An object containing the properties that are
+     *          not present in the source object but are present in the target
+     *          object.
+     */
     public get extraProperties(): Readonly<{readonly [targetPropKey: string]: Readonly<unknown>}> { return this.#extraProperties; }
+
+    /**
+     * Returns the properties that are present in both the source and target
+     * object that are equivalent. That is, keys that are present in both the
+     * source and target object that are also mapped to equivalent values.
+     *
+     * @returns {Readonly<Object>>} An object containing the properties that are
+     *          present and equivalent in the source and target object.
+     */
     public get sharedProperties(): Readonly<{readonly [sharedPropKey: string]: Readonly<unknown>}> { return this.#sharedProperties; }
+
+    /**
+     * Returns the properties that are present in both the source and target
+     * object that have differing values. That is, keys that are present in both
+     * the source and target object that are mapped to differing values.
+     *
+     * @returns {Readonly<Object>>} An object containing the properties that are
+     *          present in the source and target object but are mapped to
+     *          differing values.
+     */
     public get alteredProperties(): Readonly<PropertyDifferences> { return this.#alteredProperties; }
 
+    /**
+     * Returns a boolean representing whether omitted, extra, shared, and/or
+     * altered properties are present in the source and target objects being
+     * compared.
+     */
     public readonly has: Query<boolean> = Object.freeze({
         omittedProperties: (): boolean => this.#hasOmittedProperties,
 
@@ -266,6 +304,11 @@ export class Compare<SourceType, TargetType>
         alteredProperties: (): boolean => this.#hasAlteredProperties
     });
 
+    /**
+     * Returns a number representing the amount of omitted, extra, shared,
+     * and/or altered properties that are present in the source and target
+     * objects being compared.
+     */
     public readonly count: Query<number> = Object.freeze({
         omittedProperties: (): number => this.#omittedPropsCount,
 
