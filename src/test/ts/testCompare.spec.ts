@@ -90,7 +90,7 @@ suite("Compare", function testCompare()
         });
     });
 
-    suite.only("sharedProperties", function testSharedProperties()
+    suite("sharedProperties", function testSharedProperties()
     {
         validCtorArgs.forEach(mock => {
             test(`new Compare(${toStr(mock)}, MockObj).sharedProperties returns empty`, function()
