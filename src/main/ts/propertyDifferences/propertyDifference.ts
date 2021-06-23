@@ -7,7 +7,7 @@ export class PropertyDifference
      * @private
      * @readonly
      */
-    private readonly _key: string;
+    readonly #key: string;
 
     /**
      * The value the property key is mapped to in the source object.
@@ -15,7 +15,7 @@ export class PropertyDifference
      * @private
      * @readonly
      */
-    private readonly _sourceValue: Readonly<unknown>;
+    readonly #sourceValue: Readonly<unknown>;
 
     /**
      * The value the property key is mapped to in the target object.
@@ -23,7 +23,7 @@ export class PropertyDifference
      * @private
      * @readonly
      */
-    private readonly _targetValue: Readonly<unknown>;
+    readonly #targetValue: Readonly<unknown>;
 
     /**
      * Index access to the key that the differing source and target property
@@ -54,11 +54,11 @@ export class PropertyDifference
 
     public constructor(key: string, sourceValue: unknown, targetValue: unknown)
     {
-        this._key = Object.freeze(key);
+        this.#key = Object.freeze(key);
         this[0] = Object.freeze(key);
-        this._sourceValue = Object.freeze(sourceValue);
+        this.#sourceValue = Object.freeze(sourceValue);
         this[1] = Object.freeze(sourceValue);
-        this._targetValue = Object.freeze(targetValue);
+        this.#targetValue = Object.freeze(targetValue);
         this[2] = Object.freeze(targetValue);
     }
 
@@ -70,7 +70,7 @@ export class PropertyDifference
      * @returns {string} The key that the differing source and target property
      *                   values are mapped to.
      */
-    public get key(): string { return this._key; }
+    public get key(): string { return this.#key; }
 
     /**
      * Returns the value the property key is mapped to in the source object.
@@ -79,7 +79,7 @@ export class PropertyDifference
      * @returns {Readonly<object>} The value the property key is mapped to in
      *                             the source object.
      */
-    public get sourceValue(): Readonly<unknown> { return this._sourceValue; }
+    public get sourceValue(): Readonly<unknown> { return this.#sourceValue; }
 
     /**
      * Returns the value the property key is mapped to in the target object.
@@ -88,7 +88,7 @@ export class PropertyDifference
      * @returns {Readonly<object>} The value the property key is mapped to in
      *                             the target object.
      */
-    public get targetValue(): Readonly<unknown> { return this._targetValue; }
+    public get targetValue(): Readonly<unknown> { return this.#targetValue; }
 
     /**
      * Returns a string representation of this object that conveys the key,
@@ -100,7 +100,7 @@ export class PropertyDifference
      */
     public toString(): string
     {
-        return `{key: "${this._key}", sourceValue: ${toStr(this._sourceValue)}, targetValue: ${toStr(this._targetValue)}}`;
+        return `{key: "${this.#key}", sourceValue: ${toStr(this.#sourceValue)}, targetValue: ${toStr(this.#targetValue)}}`;
     }
 }
 
