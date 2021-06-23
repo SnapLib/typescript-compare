@@ -243,8 +243,8 @@ export class Compare<SourceType, TargetType>
      *
      * @remarks
      * Strings are converted to string arrays where each character of the string
-     * is mapped to its index in the string, so it's possible to compare strings
-     * to each other (or other objects).
+     * is mapped to an index that corresponds to its position in the string. So
+     * it's possible to compare strings to each other (or other objects).
      *
      * @param sourceObject - The object being compared to the target object.
      *
