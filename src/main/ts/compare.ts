@@ -1,6 +1,9 @@
 /**
  * This is the primary exported module intended to be imported and used by other
- * libraries/modules.
+ * libraries/modules. This module contains the sole `Compare` class used to
+ * simplify the process of querying the differences and similarities between 2
+ * objects. Refer to the {@link Compare} documentation for more in depth details
+ * regarding its implementation.
  *
  * @module
  * @author Snap
