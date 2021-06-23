@@ -406,6 +406,10 @@ export class Compare<SourceType, TargetType>
      * object that have differing values. That is, keys that are present in both
      * the source and target object that are mapped to differing values.
      *
+     * @remarks The key of the property and property value from the source and
+     *          target object is returned.
+     *
+     *
      * @returns {Readonly<Object>>} An object containing the properties that are
      *          present in the source and target object but are mapped to
      *          differing values.
