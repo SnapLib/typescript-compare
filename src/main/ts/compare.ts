@@ -1,3 +1,11 @@
+/**
+ * This is the primary exported module intended to be imported and used by other
+ * libraries/modules.
+ *
+ * @module
+ * @author Snap
+ */
+
 import {evalPropValueDiffs} from "./propertyDifferences/evalPropValueDiffs";
 import type {PropertyDifferences} from "./propertyDifferences/propertyDifferences";
 import {isEqual} from "./util/isEqual";
@@ -133,19 +141,43 @@ export class Compare<SourceType, TargetType>
      */
     readonly #alteredPropertiesCount: number;
 
+    /**
+     * Constructs an instance of a `Compare` object. The only required arguments
+     * are 2 "comparable" non-null objects to compare to each other. As long as
+     * the passed arguments can be interpreted as sets of properties (key-value
+     * pairs) then they're considered comparable.
+     *
+     * @remarks
+     * Strings are converted to string arrays where each character of the string
+     * is mapped to its index in the string, so it's possible to compare strings
+     * to each other (or other objects).
+     *
+     * @param sourceObject - The object being compared to the target object.
+     *
+     * @param targetObject - The object the source object is being compared to.
+     *
+     * @returns {Compare<SourceType, TargetType>>} Returns instantiated
+     *          `Compare` object.
+     *
+     * @throws {TypeError} If source or target object is an invalid type that
+     *         can't be interpreted as an enumerable set of properties (key
+     *         value pairs).
+     *
+     * @constructor
+     */
     public constructor(sourceObject: NonNullable<SourceType>,
                        targetObject: NonNullable<TargetType>)
     {
         // Ensure source object can be interpreted as enumerable object
         if (typeof sourceObject !== "string" && typeof sourceObject !== "object" || sourceObject === null)
         {
-            throw new Error( ! sourceObject ? `${sourceObject} source object argument` : "source object argument not parsable to object");
+            throw new TypeError( ! sourceObject ? `${sourceObject} source object argument` : "source object argument not parsable to object");
         }
 
         // Ensure target object can be interpreted as enumerable object
         if (typeof targetObject !== "string" && typeof targetObject !== "object" || targetObject === null)
         {
-            throw new Error( ! targetObject ? `${targetObject} target object argument` : "target object argument not parsable to object");
+            throw new TypeError( ! targetObject ? `${targetObject} target object argument` : "target object argument not parsable to object");
         }
 
         this.#srcObj = Object.freeze(sourceObject);
