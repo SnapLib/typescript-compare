@@ -89,4 +89,36 @@ suite("Compare", function testCompare()
             });
         });
     });
+
+    suite.only("sharedProperties", function testSharedProperties()
+    {
+        validCtorArgs.forEach(mock => {
+            test(`new Compare(${toStr(mock)}, MockObj).sharedProperties returns empty`, function()
+            {
+                assert.isEmpty(new Compare(mock, mockObj).sharedProperties);
+            });
+
+            test(`new Compare(MockObj, ${toStr(mock)}).sharedProperties returns empty`, function()
+            {
+                assert.isEmpty(new Compare(mockObj, mock).sharedProperties);
+            });
+
+            test(`new Compare(${toStr(mock)}, ${toStr(mock)}).sharedProperties returns ${toStr(convertToComparableObj(mock))}`, function()
+            {
+                assert.deepStrictEqual(new Compare(mock, mock).sharedProperties, convertToComparableObj(mock));
+            });
+        });
+
+        mock.automobiles.forEach((automobile, index, arr) =>
+            test(`new Compare(${automobile}, ${arr[arr.length - 1 - index]}).sharedProperties returns {fuel: "petrol"}`, function()
+            {
+                assert.deepStrictEqual(new Compare(automobile, arr[arr.length - 1 - index]).sharedProperties, {fuel: "petrol"});
+        }));
+
+        mock.lions.forEach((lion, index, arr) =>
+            test(`new Compare(${lion}, ${arr[arr.length - 1 - index]}).sharedProperties returns {gender: "male"}`, function()
+            {
+                assert.deepStrictEqual(new Compare(lion, arr[arr.length - 1 - index]).sharedProperties, {gender: "male"});
+        }));
+    });
 });
