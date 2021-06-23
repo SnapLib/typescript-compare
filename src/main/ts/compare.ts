@@ -6,92 +6,142 @@ import type {Query} from "./compare/query";
 export class Compare<SourceType, TargetType>
 {
     /**
+     * Contains the source object passed to the constructor during
+     * instantiation.
+     *
      * @private
      * @readonly
      */
     readonly #srcObj: Readonly<SourceType>;
 
     /**
+     * Contains the target object passed to the constructor during
+     * instantiation.
+     *
      * @private
      * @readonly
      */
     readonly #targetObj: Readonly<TargetType>;
 
     /**
+     * An object containing the keys and their mapped values that are present in
+     * the source object but not the target object.
+     *
      * @private
      * @readonly
      */
     readonly #omittedProperties: Readonly<{readonly [srcPropKey: string]: Readonly<unknown>}>;
 
     /**
+     * Boolean indicating if there are properties in the source object
+     * that are not present in the target object.
+     *
      * @private
      * @readonly
      */
     readonly #hasOmittedProperties: boolean;
 
     /**
+     * A string array of the keys of properties that are present in the source
+     * object but not the target object.
+     *
      * @private
      * @readonly
      */
     readonly #omittedKeys: ReadonlyArray<string>;
 
     /**
+     * An object containing the keys and their mapped values that are present in
+     * the target object but not the source object.
+     *
      * @private
      * @readonly
      */
     readonly #extraProperties: Readonly<{readonly [targetPropKey: string]: Readonly<unknown>}>;
 
     /**
+     * Boolean indicating if there are properties in the target object
+     * that are not present in the source object.
+     *
      * @private
      * @readonly
      */
     readonly #hasExtraProperties: boolean;
 
     /**
+     * A string array of the keys of properties that are present in the target
+     * object but not the source object.
+     *
      * @private
      * @readonly
      */
     readonly #extraKeys: ReadonlyArray<string>;
 
     /**
+     * An object containing properties that are present in both the source and
+     * target objects being compared. Keys that are present in both the source
+     * and target objects that are mapped to equivalent values.
+     *
      * @private
      * @readonly
      */
     readonly #sharedProperties: Readonly<{readonly [sharedPropKey: string]: Readonly<unknown>}>;
 
     /**
+     * Boolean indicating if there are equivalent properties in the source
+     * and target object.
+     *
      * @private
      * @readonly
      */
     readonly #hasSharedProperties: boolean;
 
     /**
+     * A string array of the keys of properties that are present in the source
+     * and target object that are also mapped to equivalent values.
+     *
      * @private
      * @readonly
      */
     readonly #sharedPropertyKeys: ReadonlyArray<string>;
 
     /**
+     * An object containing properties whose keys are present in both the source
+     * and target objects, but are mapped to differing values.
+     *
      * @private
      * @readonly
      */
     readonly #alteredProperties: readonly Readonly<PropertyDifference>[];
 
     /**
+     * Boolean indicating if there are properties in the source and target
+     * object mapped to differing values.
+     *
+     * @private
+     * @readonly
+     */
+    readonly #hasAlteredProperties: boolean;
+
+    /**
+     * A string array of the keys of properties that are present in the source
+     * and target object that are also mapped to differing values.
+     *
      * @private
      * @readonly
      */
     readonly #alteredPropertyKeys: ReadonlyArray<string>;
 
-    // TODO Make ownPropertiesOnly walk prototype chain if set to false.
     public constructor(sourceObject: NonNullable<SourceType>,
                        targetObject: NonNullable<TargetType>)
     {
+        // Ensure source object can be interpreted as enumerable object
         if (typeof sourceObject !== "string" && typeof sourceObject !== "object" || sourceObject === null)
         {
             throw new Error( ! sourceObject ? `${sourceObject} source object argument` : "source object argument not parsable to object");
         }
 
+        // Ensure target object can be interpreted as enumerable object
         if (typeof targetObject !== "string" && typeof targetObject !== "object" || targetObject === null)
         {
             throw new Error( ! targetObject ? `${targetObject} target object argument` : "target object argument not parsable to object");
@@ -100,9 +150,11 @@ export class Compare<SourceType, TargetType>
         this.#srcObj = Object.freeze(sourceObject);
         this.#targetObj = Object.freeze(targetObject);
 
+        // Convert source object to string array if source argument is a string
         const convertedSource: Readonly<SourceType> | ReadonlyArray<string> = Object.freeze(
             typeof sourceObject === "string" ? Array.from(sourceObject) : sourceObject);
 
+        // Convert target object to string array if target argument is a string
         const convertedTarget: Readonly<TargetType> | ReadonlyArray<string> = Object.freeze(
             typeof targetObject === "string" ? Array.from(targetObject) : targetObject);
 
@@ -110,6 +162,8 @@ export class Compare<SourceType, TargetType>
 
         const targetEntries = Object.freeze(Object.entries(targetObject));
 
+        // Create new object out of entries whose keys are in source object but
+        // not in target object.
         this.#omittedProperties = Object.freeze(
             Object.fromEntries(srcEntries
                 .filter(srcEntry =>
@@ -126,6 +180,8 @@ export class Compare<SourceType, TargetType>
 
         this.#omittedKeys = Object.freeze(Object.keys(this.#omittedProperties));
 
+        // Create new object out of entries whose keys are in target object but
+        // not in source object.
         this.#extraProperties = Object.freeze(
             Object.fromEntries(targetEntries
                 .filter(targetEntry =>
@@ -142,6 +198,8 @@ export class Compare<SourceType, TargetType>
 
         this.#extraKeys = Object.freeze(Object.keys(this.#extraProperties));
 
+        // Create new object out of entries whose keys are in source and target
+        // object and are also mapped to equivalent values.
         this.#sharedProperties = Object.freeze(
             Object.fromEntries(srcEntries
                 .filter(srcEntry => targetEntries
@@ -160,6 +218,8 @@ export class Compare<SourceType, TargetType>
 
         this.#alteredProperties =
             Object.freeze(evalPropValueDiffs(convertedSource, convertedTarget));
+
+        this.#hasAlteredProperties = this.#alteredProperties.length !== 0;
 
         this.#alteredPropertyKeys = Object.freeze(
             this.#alteredProperties.map(diff => diff.key));
@@ -183,7 +243,7 @@ export class Compare<SourceType, TargetType>
 
         sharedProperties: (): boolean => this.#hasSharedProperties,
 
-        alteredProperties: (): boolean => this.#alteredProperties.length !== 0
+        alteredProperties: (): boolean => this.#hasAlteredProperties
     });
 
     public readonly count: Query<number> = Object.freeze({
