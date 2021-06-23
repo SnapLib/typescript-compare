@@ -91,7 +91,7 @@ console.log(objectComparison.alteredProperties)
  * {
  *   numOfWheels: {sourceValue: 4, targetValue: 2},
  *   makes: { sourceValue: ["Koenigsegg", "Lamborghini],
-              targetValue: ["MV Agusta", "Triumph"] },
+ *            targetValue: ["MV Agusta", "Triumph"] },
  *   isSafe: {sourceValue: true, targetValue: false}
  * }
  */
