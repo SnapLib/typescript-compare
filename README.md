@@ -1,6 +1,6 @@
 # Compare
 
-Compare 2 JavaScript objects to each other.
+Compare 2 objects to each other.
 
 ![npm (scoped)][1] ![NPM][2] ![node-current (scoped)][3]
 
