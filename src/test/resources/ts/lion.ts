@@ -25,9 +25,9 @@ export const Simba: Lion =
     toString: () => "Simba"
 };
 
-const kionFriends: Array<unknown> = ["Jasiri", "Bunga", "Kovu"];
+export const kionFriends: Array<unknown> = ["Jasiri", "Bunga", "Kovu"];
 
-const kionFamily: unknown | null | undefined =
+export const kionFamily: unknown | null | undefined =
     {dad: "Mufasa", mom: "Nala", sister: "Kiara", brother: "Nguruma"};
 
 export const Kion: Lion =
