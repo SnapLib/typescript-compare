@@ -4,14 +4,14 @@ type Lion =
     gender: string;
     age: number;
     friends: Array<unknown>;
-    family: unknown | null | undefined;
+    family: {[key: string]: string | null | undefined};
     isKing: boolean;
     toString: () => string;
 };
 
-export const simbaFriends: Array<unknown> = ["Timon", "Pumbaa", "Rafiki"];
+export const simbaFriends: Array<string> = ["Timon", "Pumbaa", "Rafiki"];
 
-export const simbaFamily: unknown | null | undefined =
+export const simbaFamily: {[key: string]: string | null | undefined} =
     {dad: "Mufasa", mom: "Sarabi", sister: null, brother: undefined};
 
 export const Simba: Lion =
@@ -25,9 +25,9 @@ export const Simba: Lion =
     toString: () => "Simba"
 };
 
-export const kionFriends: Array<unknown> = ["Jasiri", "Bunga", "Kovu"];
+export const kionFriends: Array<string> = ["Jasiri", "Bunga", "Kovu"];
 
-export const kionFamily: unknown | null | undefined =
+export const kionFamily: {[key: string]: string | null | undefined} =
     {dad: "Mufasa", mom: "Nala", sister: "Kiara", brother: "Nguruma"};
 
 export const Kion: Lion =
