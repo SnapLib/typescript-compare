@@ -4,8 +4,7 @@ Compare 2 JavaScript objects to each other.
 
 ![npm (scoped)][1] ![NPM][2] ![node-current (scoped)][3]
 
-This npm package exports the `Compare` class as well as the
-`isEqual(unknown, unknown)` function.
+This npm package exports the `Compare` class.
 
 ## Compare class
 
@@ -60,7 +59,7 @@ const motorcycle = {
     isSafe: false
 }
 
-// Pass `car` as source object to compare to `motorcycle` target object
+// Pass `car` as the source object to compare to `motorcycle` as the target object
 const objectComparison = new Compare(car, motorcycle);
 
 console.log(objectComparison.omittedProperties);
@@ -103,28 +102,9 @@ are immutable and attempting to mutate them will result in an error.
 
 It should also be noted that the `Compare` class is intended to compare
 objects or values that can be interpreted as objects and contain enumerable
-properties (keys-value pairs). Attempting to construct a `Compare` object with
+properties (key-value pairs). Attempting to construct a `Compare` object with
 `null`, `undefined`, or non-string primitive values as source and/or target
 arguments will result in, ideally, an error to be thrown or undefined behavior.
-
-## isEqual(unknown, unknown) function
-
-The `isEqual` function is a predicate function that consumes 2 arguments and
-tests them for ***equality***, <u>***not***</u> ***sameness***. If the passed
-arguments are of the same type and contain equal values or properties, they're
-considered equal and `true` is returned. Alternatively, if 2 arrays are passed
-as arguments that contain the same elements in the same order then `true` is
-returned.
-
-For example:
-
-```typescript
-console.log(["Simba", "Kion"] === ["Simba", "Kion"]);
-// prints: false
-
-console.log(isEqual(["Simba", "Kion"], ["Simba", "Kion"]));
-// prints: true
-```
 
 [1]: https://img.shields.io/npm/v/@snaplib/compare?color=%2366ff66&logo=npm&style=flat-square
 [2]: https://img.shields.io/npm/l/@snaplib/compare?color=%2366ff66&style=flat-square
