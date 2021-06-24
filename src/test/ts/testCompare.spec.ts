@@ -1,3 +1,5 @@
+import {carMakes, carModels, Car, motorcycleMakes, motorcycleModels, Motorcycle} from "../resources/ts/autoMobile";
+import {simbaFriends, simbaFamily, Simba, kionFriends, kionFamily, Kion} from "../resources/ts/lion";
 import mock from "../resources/ts/mock";
 import {Compare} from "../../main/ts/compare";
 import {assert} from "chai";
@@ -120,5 +122,68 @@ suite("Compare", function testCompare()
             {
                 assert.deepStrictEqual(new Compare(lion, arr[arr.length - 1 - index]).sharedProperties, {gender: "male"});
         }));
+    });
+
+    suite.only("alteredProperties", function testAlteredProperties()
+    {
+        const alteredCarSource =
+        {
+            type: {sourceValue: "car", targetValue: "motorcycle"},
+            numOfWheels: {sourceValue: 4, targetValue: 2},
+            makes: {sourceValue: carMakes, targetValue: motorcycleMakes},
+            models: {sourceValue: carModels, targetValue: motorcycleModels},
+            isSafe: {sourceValue: true, targetValue: false},
+            toString: {sourceValue: Car.toString, targetValue: Motorcycle.toString}
+        };
+
+        const alteredMotorcycleSource =
+        {
+            type: {sourceValue: "motorcycle", targetValue: "car"},
+            numOfWheels: {sourceValue: 2, targetValue: 4},
+            makes: {sourceValue: motorcycleMakes, targetValue: carMakes},
+            models: {sourceValue: motorcycleModels, targetValue: carModels},
+            isSafe: {sourceValue: false, targetValue: true},
+            toString: {sourceValue: Motorcycle.toString, targetValue: Car.toString}
+        };
+
+        const alteredSimbaSource =
+        {
+            name: {sourceValue: "Simba", targetValue: "Kion"},
+            age: {sourceValue: 7, targetValue: 3},
+            friends: {sourceValue: simbaFriends, targetValue: kionFriends},
+            family: {sourceValue: simbaFamily, targetValue: kionFamily},
+            isKing: {sourceValue: true, targetValue: false},
+            toString: {sourceValue: Simba.toString, targetValue: Kion.toString}
+        };
+
+        const alteredKionSource =
+        {
+            name: {sourceValue: "Kion", targetValue: "Simba"},
+            age: {sourceValue: 3, targetValue: 7},
+            friends: {sourceValue: kionFriends, targetValue: simbaFriends},
+            family: {sourceValue: kionFamily, targetValue: simbaFamily},
+            isKing: {sourceValue: false, targetValue: true},
+            toString: {sourceValue: Kion.toString, targetValue: Simba.toString}
+        };
+
+        test(`new Compare(Car, Motorcycle).alteredProperties returns\n${JSON.stringify(alteredCarSource, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare(Car, Motorcycle).alteredProperties, alteredCarSource);
+        });
+
+        test(`new Compare(Motorcycle, Car).alteredProperties returns\n${JSON.stringify(alteredMotorcycleSource, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare(Motorcycle, Car).alteredProperties, alteredMotorcycleSource);
+        });
+
+        test(`new Compare(Simba, Kion).alteredProperties returns\n${JSON.stringify(alteredSimbaSource, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare(Simba, Kion).alteredProperties, alteredSimbaSource);
+        });
+
+        test(`new Compare(Kion, Simba).alteredProperties returns\n${JSON.stringify(alteredKionSource, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare(Kion, Simba).alteredProperties, alteredKionSource);
+        });
     });
 });
