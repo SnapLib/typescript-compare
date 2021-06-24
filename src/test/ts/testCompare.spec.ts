@@ -70,6 +70,18 @@ suite("Compare", function testCompare()
                 assert.deepStrictEqual(new Compare(mockObj, mock).omittedProperties, mockObj);
             });
         });
+
+        const javascriptStr = {4: "s", 5: "c", 6: "r", 7: "i", 8: "p", 9: "t"};
+
+        test('new Compare("java", "javascript").omittedProperties returns empty', function()
+        {
+            assert.isEmpty(new Compare("java", "javascript").omittedProperties);
+        });
+
+        test(`new Compare("javascript", "java").omittedProperties returns\n${JSON.stringify(javascriptStr, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare("javascript", "java").omittedProperties, javascriptStr);
+        });
     });
 
     suite("extraProperties", function testExtraProperties()
@@ -89,6 +101,18 @@ suite("Compare", function testCompare()
             {
                 assert.deepStrictEqual(new Compare(mockObj, mock).extraProperties, convertToComparableObj(mock));
             });
+        });
+
+        const javascriptStr = {4: "s", 5: "c", 6: "r", 7: "i", 8: "p", 9: "t"};
+
+        test(`new Compare("java", "javascript").extraProperties returns\n${JSON.stringify(javascriptStr, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare("java", "javascript").extraProperties, javascriptStr);
+        });
+
+        test('new Compare("javascript", "java").extraProperties returns empty', function()
+        {
+            assert.isEmpty(new Compare("javascript", "java").extraProperties);
         });
     });
 
@@ -122,9 +146,21 @@ suite("Compare", function testCompare()
             {
                 assert.deepStrictEqual(new Compare(lion, arr[arr.length - 1 - index]).sharedProperties, {gender: "male"});
         }));
+
+        const javaStr = Object.fromEntries(Array.from("java").entries());
+
+        test(`new Compare("java", "javascript").sharedProperties returns\n${JSON.stringify(javaStr, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare("java", "javascript").sharedProperties, javaStr);
+        });
+
+        test(`new Compare("javascript", "java").sharedProperties returns\n${JSON.stringify(javaStr, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare("javascript", "java").sharedProperties, javaStr);
+        });
     });
 
-    suite.only("alteredProperties", function testAlteredProperties()
+    suite("alteredProperties", function testAlteredProperties()
     {
         const alteredCarSource =
         {
@@ -184,6 +220,18 @@ suite("Compare", function testCompare()
         test(`new Compare(Kion, Simba).alteredProperties returns\n${JSON.stringify(alteredKionSource, undefined, 2)}`, function()
         {
             assert.deepStrictEqual(new Compare(Kion, Simba).alteredProperties, alteredKionSource);
+        });
+
+        const fooBarStringDiff =
+        {
+            0: {sourceValue: "f", targetValue: "b"},
+            1: {sourceValue: "o", targetValue: "a"},
+            2: {sourceValue: "o", targetValue: "r"}
+        };
+
+        test(`new Compare("foo", "bar").alteredProperties returns\n${JSON.stringify(fooBarStringDiff, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare("foo", "bar").alteredProperties, fooBarStringDiff);
         });
     });
 });
