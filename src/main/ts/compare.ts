@@ -102,6 +102,11 @@ import type {Query} from "./compare/query";
  *     //                    targetValue: true } }
  *     ```
  *
+ * @template SourceType The type of object being compared to the target object.
+ *
+ * @template TargetType The type of object the source object is being compared
+ *                      to.
+ *
  * @classdesc
  * @author Snap
  */
@@ -238,13 +243,19 @@ export class Compare<SourceType, TargetType>
     /**
      * Constructs an instance of a `Compare` object. The only required arguments
      * are 2 "comparable" non-null objects to compare to each other. As long as
-     * the passed arguments can be interpreted as sets of properties (key-value
-     * pairs) then they're considered comparable.
+     * the passed arguments can be interpreted as sets of enumerable properties
+     * (key-value pairs) then they're considered comparable.
      *
      * @remarks
      * Strings are converted to string arrays where each character of the string
      * is mapped to an index that corresponds to its position in the string. So
      * it's possible to compare strings to each other (or other objects).
+     *
+     * @template SourceType The type of object being compared to the target
+     *                      object.
+     *
+     * @template TargetType The type of object the source object is being
+     *                      compared to.
      *
      * @param sourceObject - The object being compared to the target object.
      *
@@ -257,6 +268,7 @@ export class Compare<SourceType, TargetType>
      *         can't be interpreted as an enumerable set of properties (key
      *         value pairs).
      *
+     * @public
      * @constructor
      */
     public constructor(sourceObject: NonNullable<SourceType>,
@@ -363,6 +375,8 @@ export class Compare<SourceType, TargetType>
      *
      * @returns {Readonly<Object>>} The source object being compared to the
      *          target object.
+     *
+     * @public
      */
     public get source(): Readonly<SourceType> { return this.#srcObj; }
 
@@ -372,6 +386,8 @@ export class Compare<SourceType, TargetType>
      *
      * @returns {Readonly<Object>>} The target object the source object is being
      *          compared to.
+     *
+     * @public
      */
     public get target(): Readonly<TargetType> { return this.#targetObj; }
 
@@ -381,6 +397,8 @@ export class Compare<SourceType, TargetType>
      *
      * @returns {Readonly<Object>>} An object containing the properties that are
      *          present in the source object but not the target object.
+     *
+     * @public
      */
     public get omittedProperties(): Readonly<{readonly [srcPropKey: string]: Readonly<unknown>}> { return this.#omittedProperties; }
 
@@ -391,6 +409,8 @@ export class Compare<SourceType, TargetType>
      * @returns {Readonly<Object>>} An object containing the properties that are
      *          not present in the source object but are present in the target
      *          object.
+     *
+     * @public
      */
     public get extraProperties(): Readonly<{readonly [targetPropKey: string]: Readonly<unknown>}> { return this.#extraProperties; }
 
@@ -401,6 +421,8 @@ export class Compare<SourceType, TargetType>
      *
      * @returns {Readonly<Object>>} An object containing the properties that are
      *          present and equivalent in the source and target object.
+     *
+     * @public
      */
     public get sharedProperties(): Readonly<{readonly [sharedPropKey: string]: Readonly<unknown>}> { return this.#sharedProperties; }
 
@@ -416,6 +438,8 @@ export class Compare<SourceType, TargetType>
      * @returns {Readonly<Object>>} An object containing the properties that are
      *          present in the source and target object but are mapped to
      *          differing values.
+     *
+     * @public
      */
     public get alteredProperties(): Readonly<PropertyDifferences> { return this.#alteredProperties; }
 
@@ -423,6 +447,25 @@ export class Compare<SourceType, TargetType>
      * Returns a boolean representing whether omitted, extra, shared, and/or
      * altered properties are present in the source and target objects being
      * compared.
+     *
+     * @property {boolean} has.omittedProperties() - `boolean` indicating
+     *           whether the source object contains properties that aren't
+     *           present in the target object it's being compared to.
+     *
+     * @property {boolean} has.extraProperties() - `boolean` indicating
+     *           whether the source object does not contain properties that are
+     *           present in the target object it's being compared to.
+     *
+     * @property {boolean} has.sharedProperties() - `boolean` indicating
+     *           whether the source and target object contain equivalent
+     *           properties.
+     *
+     * @property {boolean} has.alteredProperties() - `boolean` indicating
+     *           whether the source and target object contain equivalent
+     *           keys that are mapped to differing values.
+     *
+     * @public
+     * @readonly
      */
     public readonly has: Query<boolean> = Object.freeze({
         omittedProperties: (): boolean => this.#hasOmittedProperties,
@@ -438,6 +481,25 @@ export class Compare<SourceType, TargetType>
      * Returns a number representing the amount of omitted, extra, shared,
      * and/or altered properties that are present in the source and target
      * objects being compared.
+     *
+     * @property {number} has.omittedProperties() - number of properties that
+     *           are present in the source object, but aren't present in the
+     *           target object it's being compared to.
+     *
+     * @property {number} has.extraProperties() - number of properties that
+     *           are not present in the source object, but are present in the
+     *           target object it's being compared to.
+     *
+     * @property {number} has.sharedProperties() - number of properties that are
+     *           present in both the source and target object that are
+     *           equivalent.
+     *
+     * @property {number} has.alteredProperties() - number of keys present in
+     *           both the the source and target object that are mapped to
+     *           differing values.
+     *
+     * @public
+     * @readonly
      */
     public readonly count: Query<number> = Object.freeze({
         omittedProperties: (): number => this.#omittedPropsCount,
