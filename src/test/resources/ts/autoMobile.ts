@@ -24,17 +24,11 @@ export const carModels: {[make: string]: Array<string>} =
 export const Car: AutoMobile =
 {
     type: "car",
-
     fuel: "petrol",
-
     numOfWheels: 4,
-
     makes: carMakes,
-
     models: carModels,
-
     isSafe: true,
-
     toString: () => "Car"
 };
 
@@ -51,17 +45,11 @@ export const motorcycleModels: {[make: string]: Array<string>} =
 export const Motorcycle: AutoMobile =
 {
     type: "motorcycle",
-
     fuel: "petrol",
-
     numOfWheels: 2,
-
     makes: motorcycleMakes,
-
     models: motorcycleModels,
-
     isSafe: false,
-
     toString: () => "Motorcycle"
 };
 
