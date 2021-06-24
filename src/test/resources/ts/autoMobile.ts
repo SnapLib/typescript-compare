@@ -13,6 +13,14 @@ export const carMakes: Array<string> =
     ["Koenigsegg", "Lamborghini", "Ferrari", "Pagani", "Audi",
      "Porsche", "Nissan", "Honda", "Toyota", "Ford", "Chevrolet"];
 
+export const carModels: {[make: string]: Array<string>} =
+{
+    "Koenigsegg": ["One", "Agera", "CCX", "Jesko"],
+    "Lamborghini": ["Aventador", "Huracan", "Reventon", "Murcielago", "Gallardo"],
+    "Ferrari": ["Enzo Ferrari", "FXX", "458 Italia"],
+    "Audi": ["RS4", "R8", "RS5", "RS6"]
+};
+
 export const Car: AutoMobile =
 {
     type: "car",
@@ -23,12 +31,7 @@ export const Car: AutoMobile =
 
     makes: carMakes,
 
-    models: {
-        "Koenigsegg": ["One", "Agera", "CCX", "Jesko"],
-        "Lamborghini": ["Aventador", "Huracan", "Reventon", "Murcielago", "Gallardo"],
-        "Ferrari": ["Enzo Ferrari", "FXX", "458 Italia"],
-        "Audi": ["RS4", "R8", "RS5", "RS6"]
-    },
+    models: carModels,
 
     isSafe: true,
 
@@ -37,6 +40,13 @@ export const Car: AutoMobile =
 
 export const motorcycleMakes: Array<string> =
     ["MV Agusta", "Triumph", "BMW", "Honda", "Yamaha", "Kawasaki"];
+
+export const motorcycleModels: {[make: string]: Array<string>} =
+{
+    "MV Agusta": ["F3", "Superveloce", "Brutale", "Turismo Veloce"],
+    "Triumph": ["Daytona", "Speed Triple", "Bonneville", "Scrambler"],
+    "Yamaha": ["R1", "R6", "FZ"]
+};
 
 export const Motorcycle: AutoMobile =
 {
@@ -48,11 +58,7 @@ export const Motorcycle: AutoMobile =
 
     makes: motorcycleMakes,
 
-    models: {
-        "MV Agusta": ["F3", "Superveloce", "Brutale", "Turismo Veloce"],
-        "Triumph": ["Daytona", "Speed Triple", "Bonneville", "Scrambler"],
-        "Yamaha": ["R1", "R6", "FZ"]
-    },
+    models: motorcycleModels,
 
     isSafe: false,
 
