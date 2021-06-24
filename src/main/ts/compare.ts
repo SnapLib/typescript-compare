@@ -436,8 +436,8 @@ export class Compare<SourceType, TargetType>
      *
      *
      * @returns {Readonly<Object>>} An object containing the keys that are
-     *          present in the source and target object and the values they are
-     *          mapped to in the source and target object.
+     *          present in the source and target object and the differing values
+     *          they are mapped to in the source and target object.
      *
      * @public
      */
