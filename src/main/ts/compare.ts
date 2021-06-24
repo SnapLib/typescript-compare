@@ -482,19 +482,19 @@ export class Compare<SourceType, TargetType>
      * and/or altered properties that are present in the source and target
      * objects being compared.
      *
-     * @property {number} has.omittedProperties() - number of properties that
+     * @property {number} count.omittedProperties() - number of properties that
      *           are present in the source object, but aren't present in the
      *           target object it's being compared to.
      *
-     * @property {number} has.extraProperties() - number of properties that
+     * @property {number} count.extraProperties() - number of properties that
      *           are not present in the source object, but are present in the
      *           target object it's being compared to.
      *
-     * @property {number} has.sharedProperties() - number of properties that are
+     * @property {number} count.sharedProperties() - number of properties that are
      *           present in both the source and target object that are
      *           equivalent.
      *
-     * @property {number} has.alteredProperties() - number of keys present in
+     * @property {number} count.alteredProperties() - number of keys present in
      *           both the the source and target object that are mapped to
      *           differing values.
      *
