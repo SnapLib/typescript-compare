@@ -233,5 +233,15 @@ suite("Compare", function testCompare()
         {
             assert.deepStrictEqual(new Compare("foo", "bar").alteredProperties, fooBarStringDiff);
         });
+
+        test(`new Compare("foo", "barfoo").alteredProperties returns\n${JSON.stringify(fooBarStringDiff, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare("foo", "bar").alteredProperties, fooBarStringDiff);
+        });
+
+        test.only(`new Compare("foobar", "bar").alteredProperties returns\n${JSON.stringify(fooBarStringDiff, undefined, 2)}`, function()
+        {
+            assert.deepStrictEqual(new Compare("foo", "bar").alteredProperties, fooBarStringDiff);
+        });
     });
 });
