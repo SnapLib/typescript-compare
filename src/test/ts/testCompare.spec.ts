@@ -239,9 +239,171 @@ suite("Compare", function testCompare()
             assert.deepStrictEqual(new Compare("foo", "bar").alteredProperties, fooBarStringDiff);
         });
 
-        test.only(`new Compare("foobar", "bar").alteredProperties returns\n${JSON.stringify(fooBarStringDiff, undefined, 2)}`, function()
+        test(`new Compare("foobar", "bar").alteredProperties returns\n${JSON.stringify(fooBarStringDiff, undefined, 2)}`, function()
         {
             assert.deepStrictEqual(new Compare("foo", "bar").alteredProperties, fooBarStringDiff);
+        });
+    });
+
+    suite("has", function testHas()
+    {
+        suite("omittedProperties", function testHasOmittedProperties()
+        {
+            validCtorArgs.forEach(mock => {
+                test(`new Compare(${toStr(mock)}, ${toStr(mock)}).has.omittedProperties() returns false`, function()
+                {
+                    assert.isFalse(new Compare(mock, mock).has.omittedProperties());
+                });
+
+                test(`new Compare(${toStr(mock)}, MockObj).has.omittedProperties() returns true`, function()
+                {
+                    assert.isTrue(new Compare(mock, mockObj).has.omittedProperties());
+                });
+
+                test(`new Compare(MockObj, ${toStr(mock)}).has.omittedProperties() returns true`, function()
+                {
+                    assert.isTrue(new Compare(mockObj, mock).has.omittedProperties());
+                });
+            });
+
+            test('new Compare("java", "javascript").has.omittedProperties() returns false', function()
+            {
+                assert.isFalse(new Compare("java", "javascript").has.omittedProperties());
+            });
+
+            test('new Compare("javascript", "java").has.omittedProperties() returns true', function()
+            {
+                assert.isTrue(new Compare("javascript", "java").has.omittedProperties());
+            });
+        });
+
+        suite("extraProperties", function testHasExtraProperties()
+        {
+            validCtorArgs.forEach(mock => {
+                test(`new Compare(${toStr(mock)}, ${toStr(mock)}).has.extraProperties() returns false`, function()
+                {
+                    assert.isFalse(new Compare(mock, mock).has.extraProperties());
+                });
+
+                test(`new Compare(${toStr(mock)}, MockObj).has.extraProperties() returns true`, function()
+                {
+                    assert.isTrue(new Compare(mock, mockObj).has.extraProperties());
+                });
+
+                test(`new Compare(MockObj, ${toStr(mock)}).has.extraProperties() returns true`, function()
+                {
+                    assert.isTrue(new Compare(mockObj, mock).has.extraProperties());
+                });
+            });
+
+            test('new Compare("java", "javascript").has.extraProperties() returns true', function()
+            {
+                assert.isTrue(new Compare("java", "javascript").has.extraProperties());
+            });
+
+            test('new Compare("javascript", "java").has.extraProperties() returns false', function()
+            {
+                assert.isFalse(new Compare("javascript", "java").has.extraProperties());
+            });
+        });
+
+        suite("sharedProperties", function testHasSharedProperties()
+        {
+            validCtorArgs.forEach(mock => {
+                test(`new Compare(${toStr(mock)}, MockObj).has.sharedProperties() returns false`, function()
+                {
+                    assert.isFalse(new Compare(mock, mockObj).has.sharedProperties());
+                });
+
+                test(`new Compare(MockObj, ${toStr(mock)}).has.sharedProperties() returns false`, function()
+                {
+                    assert.isFalse(new Compare(mockObj, mock).has.sharedProperties());
+                });
+
+                test(`new Compare(${toStr(mock)}, ${toStr(mock)}).has.sharedProperties() returns true`, function()
+                {
+                    assert.isTrue(new Compare(mock, mock).has.sharedProperties());
+                });
+            });
+
+            mock.automobiles.forEach((automobile, index, arr) =>
+                test(`new Compare(${automobile}, ${arr[arr.length - 1 - index]}).has.sharedProperties() returns true`, function()
+                {
+                    assert.isTrue(new Compare(automobile, arr[arr.length - 1 - index]).has.sharedProperties());
+            }));
+
+            mock.lions.forEach((lion, index, arr) =>
+                test(`new Compare(${lion}, ${arr[arr.length - 1 - index]}).has.sharedProperties() returns true`, function()
+                {
+                    assert.isTrue(new Compare(lion, arr[arr.length - 1 - index]).has.sharedProperties());
+            }));
+
+            test(`new Compare("java", "javascript").has.sharedProperties() returns true`, function()
+            {
+                assert.isTrue(new Compare("java", "javascript").has.sharedProperties());
+            });
+
+            test(`new Compare("javascript", "java").has.sharedProperties() returns true`, function()
+            {
+                assert.isTrue(new Compare("javascript", "java").has.sharedProperties());
+            });
+
+            test(`new Compare("javascript", "foobar").has.sharedProperties() returns false`, function()
+            {
+                assert.isFalse(new Compare("javascript", "foobar").has.sharedProperties());
+            });
+        });
+
+        suite("alteredProperties", function testHasAlteredProperties()
+        {
+            mock.automobiles.forEach((autoMobile, index, arr) => {
+                test(`new Compare(${autoMobile}, ${autoMobile}).has.alteredProperties() returns false`, function()
+                {
+                    assert.isFalse(new Compare(autoMobile, autoMobile).has.alteredProperties());
+                });
+
+                test(`new Compare(${autoMobile}, ${arr[arr.length - 1 - index]}).has.alteredProperties() returns true`, function()
+                {
+                    assert.isTrue(new Compare(autoMobile, arr[arr.length - 1 - index]).has.alteredProperties());
+                });
+            });
+
+            mock.lions.forEach((lion, index, arr) => {
+                test(`new Compare(${lion}, ${lion}).has.alteredProperties() returns false`, function()
+                {
+                    assert.isFalse(new Compare(lion, lion).has.alteredProperties());
+                });
+
+                test(`new Compare(${lion}, ${arr[arr.length - 1 - index]}).has.alteredProperties() returns true`, function()
+                {
+                    assert.isTrue(new Compare(lion, arr[arr.length - 1 - index]).has.alteredProperties());
+                });
+            });
+
+            test(`new Compare("foo", "foo").has.alteredProperties() returns false`, function()
+            {
+                assert.isFalse(new Compare("foo", "foo").has.alteredProperties());
+            });
+
+            test(`new Compare("foo", "foobar").has.alteredProperties() returns false`, function()
+            {
+                assert.isFalse(new Compare("foo", "foobar").has.alteredProperties());
+            });
+
+            test(`new Compare("foo", "bar").has.alteredProperties() returns true`, function()
+            {
+                assert.isTrue(new Compare("foo", "bar").has.alteredProperties());
+            });
+
+            test(`new Compare("foo", "barfoo").has.alteredProperties() returns true`, function()
+            {
+                assert.isTrue(new Compare("foo", "bar").has.alteredProperties());
+            });
+
+            test(`new Compare("foobar", "bar").has.alteredProperties() returns true`, function()
+            {
+                assert.isTrue(new Compare("foo", "bar").has.alteredProperties());
+            });
         });
     });
 });
