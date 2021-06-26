@@ -1,3 +1,5 @@
+type DiffEntry = Readonly<[string, {readonly sourceValue: Readonly<unknown>, readonly targetValue: Readonly<unknown>}]>;
+
 export class PropertyDifference
 {
     /**
@@ -24,6 +26,15 @@ export class PropertyDifference
      * @readonly
      */
     readonly #targetValue: Readonly<unknown>;
+
+    /**
+     * An array consisting of the key in the first index and an object
+     * referencing the source and target values associated with the key.
+     *
+     * @private
+     * @readonly
+     */
+     readonly #entry: DiffEntry;
 
     /**
      * Index access to the key that the differing source and target property
@@ -60,6 +71,7 @@ export class PropertyDifference
         this[1] = Object.freeze(sourceValue);
         this.#targetValue = Object.freeze(targetValue);
         this[2] = Object.freeze(targetValue);
+        this.#entry = [this.#key, Object.freeze({sourceValue: this.#sourceValue, targetValue: this.#targetValue})];
     }
 
     /**
@@ -89,6 +101,15 @@ export class PropertyDifference
      *                             the target object.
      */
     public get targetValue(): Readonly<unknown> { return this.#targetValue; }
+
+    /**
+     * An array consisting of the key in the first index and an object
+     * referencing the source and target values associated with the key in the
+     * second index.
+     *
+     * @public
+     */
+    public get entry(): DiffEntry { return this.#entry; }
 
     /**
      * Returns a string representation of this object that conveys the key,
