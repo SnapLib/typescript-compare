@@ -1,5 +1,5 @@
-import {PropertyDifference} from "./propertyDifference";
-import {isEqual} from "../util/isEqual";
+import {PropertyDifference} from "./propertyDifferences/propertyDifference";
+import {isEqual} from "./util/isEqual";
 
 /**
  * Consumes 2 non-nullable objects, referred to as the *source* and *target*

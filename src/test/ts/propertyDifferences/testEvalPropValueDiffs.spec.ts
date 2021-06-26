@@ -1,6 +1,6 @@
 import {Simba, Kion, Car, Motorcycle, strArrayA, strArrayB, intArrayA, intArrayB} from "../../resources/ts/mock";
 import mock from "../../resources/ts/mock";
-import {propertyValueDifferences} from "../../../main/ts/propertyDifferences/propertyValueDifferences";
+import {propertyValueDifferences} from "../../../main/ts/propertyValueDifferences";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
