@@ -356,7 +356,7 @@ export class Compare<SourceType, TargetType>
         this.#sharedPropertiesCount = Object.keys(this.#sharedProperties).length;
 
         this.#alteredProperties =
-            Object.freeze(Object.fromEntries(evalPropValueDiffs(convertedSource, convertedTarget).map(diff => [diff.key, {sourceValue: diff.sourceValue, targetValue: diff.targetValue}])));
+            Object.freeze(Object.fromEntries(evalPropValueDiffs(convertedSource, convertedTarget).map(diff => diff.entry)));
 
         this.#hasAlteredProperties = (() => {
             for (const alteredProp in this.#alteredProperties) {
