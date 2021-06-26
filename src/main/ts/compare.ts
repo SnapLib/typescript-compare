@@ -9,7 +9,7 @@
  * @author Snap
  */
 
-import {propertyValueDifferences} from "./propertyValueDifferences";
+import {getPropertyValueDifferences} from "./propertyValueDifferences";
 import type {PropertyDifferences} from "./propertyDifferences/propertyDifferences";
 import {isEqual} from "./util/isEqual";
 import type {Query} from "./compare/query";
@@ -356,7 +356,7 @@ export class Compare<SourceType, TargetType>
         this.#sharedPropertiesCount = Object.keys(this.#sharedProperties).length;
 
         this.#alteredProperties =
-            Object.freeze(Object.fromEntries(propertyValueDifferences(convertedSource, convertedTarget).map(diff => diff.entry)));
+            Object.freeze(Object.fromEntries(getPropertyValueDifferences(convertedSource, convertedTarget).map(diff => diff.entry)));
 
         this.#hasAlteredProperties = (() => {
             for (const alteredProp in this.#alteredProperties) {

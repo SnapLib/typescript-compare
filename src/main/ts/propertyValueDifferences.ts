@@ -1,6 +1,12 @@
 import {PropertyValueDifference} from "./propertyDifferences/propertyValueDifference";
 import {isEqual} from "./util/isEqual";
 
+export interface PropertyValueDifferences
+{
+    readonly [propertyKey: string]: { readonly sourceValue: Readonly<unknown>,
+                                      readonly targetValue: Readonly<unknown> };
+}
+
 /**
  * Consumes 2 non-nullable objects, referred to as the *source* and *target*
  * object, and returns the properties that are present in both, but "altered" in
@@ -15,7 +21,7 @@ import {isEqual} from "./util/isEqual";
  *          the same keys but differing values between the source and target
  *          objects.
  */
-export const propertyValueDifferences = (source: NonNullable<unknown>, target: NonNullable<unknown>): Array<PropertyValueDifference> =>
+export const getPropertyValueDifferences = (source: NonNullable<unknown>, target: NonNullable<unknown>): Array<PropertyValueDifference> =>
 {
     if (typeof source !== "string" && typeof source !== "object" || source === null)
     {
@@ -40,5 +46,3 @@ export const propertyValueDifferences = (source: NonNullable<unknown>, target: N
                                    srcObjEntry[1],
                                    targetObjEntries.find(targetObjEntry => srcObjEntry[0] === targetObjEntry[0])?.[1])));
 };
-
-export {propertyValueDifferences as default};

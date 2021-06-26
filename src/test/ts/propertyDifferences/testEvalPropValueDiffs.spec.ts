@@ -1,6 +1,6 @@
 import {Simba, Kion, Car, Motorcycle, strArrayA, strArrayB, intArrayA, intArrayB} from "../../resources/ts/mock";
 import mock from "../../resources/ts/mock";
-import {propertyValueDifferences} from "../../../main/ts/propertyValueDifferences";
+import {getPropertyValueDifferences} from "../../../main/ts/propertyValueDifferences";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
@@ -27,7 +27,7 @@ const toStr = (o: unknown): string =>
                   : `${o}`;
 };
 
-suite("propertyValueDifferences()", function testEvalPropValueDiffs()
+suite("getPropertyValueDifferences()", function testEvalPropValueDiffs()
 {
     suite("invalid comparisons", function testInvalidComparisonSourceAndTargetThrows()
     {
@@ -36,7 +36,7 @@ suite("propertyValueDifferences()", function testEvalPropValueDiffs()
             const str = `evalPropValueDiffs(${toStr(entry[1])}, ${toStr(primVal)}) throws error`;
             test(str, function()
             {
-                assert.throws(() => propertyValueDifferences(entry[1], primVal));
+                assert.throws(() => getPropertyValueDifferences(entry[1], primVal));
             });
         });
     });
@@ -46,42 +46,42 @@ suite("propertyValueDifferences()", function testEvalPropValueDiffs()
         mock.mockObjsAndArrays.concat(mock.strArrayA).forEach(mock => {
             test(`evalPropValueDiffs(${mock}, ${mock}) is empty`, function()
             {
-                assert.isEmpty(propertyValueDifferences(mock, mock));
+                assert.isEmpty(getPropertyValueDifferences(mock, mock));
             });
 
             test(`evalPropValueDiffs(${mock}A, ${mock}B) is empty`, function()
             {
-                assert.isEmpty(propertyValueDifferences(mock, {...mock}));
+                assert.isEmpty(getPropertyValueDifferences(mock, {...mock}));
             });
 
             test(`evalPropValueDiffs(${mock}B, ${mock}A) is empty`, function()
             {
-                assert.isEmpty(propertyValueDifferences({...mock}, mock));
+                assert.isEmpty(getPropertyValueDifferences({...mock}, mock));
             });
         });
 
         test("diff keys", function()
         {
-          assert.deepStrictEqual(propertyValueDifferences(Car, Motorcycle).map(diff => diff.key), autoMobileKeysNoFuel);
-          assert.deepStrictEqual(propertyValueDifferences(Motorcycle, Car).map(diff => diff.key), autoMobileKeysNoFuel);
-          assert.deepStrictEqual(propertyValueDifferences(Simba, Kion).map(diff => diff.key), lionKeysNoGender);
-          assert.deepStrictEqual(propertyValueDifferences(Kion, Simba).map(diff => diff.key), lionKeysNoGender);
+          assert.deepStrictEqual(getPropertyValueDifferences(Car, Motorcycle).map(diff => diff.key), autoMobileKeysNoFuel);
+          assert.deepStrictEqual(getPropertyValueDifferences(Motorcycle, Car).map(diff => diff.key), autoMobileKeysNoFuel);
+          assert.deepStrictEqual(getPropertyValueDifferences(Simba, Kion).map(diff => diff.key), lionKeysNoGender);
+          assert.deepStrictEqual(getPropertyValueDifferences(Kion, Simba).map(diff => diff.key), lionKeysNoGender);
         });
 
         test("diff sourceValues", function()
         {
-          assert.deepStrictEqual(propertyValueDifferences(Car, Motorcycle).map(diff => diff.sourceValue), diffCarValues);
-          assert.deepStrictEqual(propertyValueDifferences(Motorcycle, Car).map(diff => diff.sourceValue), diffMotoValues);
-          assert.deepStrictEqual(propertyValueDifferences(Simba, Kion).map(diff => diff.sourceValue), diffSimbaValues);
-          assert.deepStrictEqual(propertyValueDifferences(Kion, Simba).map(diff => diff.sourceValue), diffKionValues);
+          assert.deepStrictEqual(getPropertyValueDifferences(Car, Motorcycle).map(diff => diff.sourceValue), diffCarValues);
+          assert.deepStrictEqual(getPropertyValueDifferences(Motorcycle, Car).map(diff => diff.sourceValue), diffMotoValues);
+          assert.deepStrictEqual(getPropertyValueDifferences(Simba, Kion).map(diff => diff.sourceValue), diffSimbaValues);
+          assert.deepStrictEqual(getPropertyValueDifferences(Kion, Simba).map(diff => diff.sourceValue), diffKionValues);
         });
 
         test("diff targetValues", function()
         {
-          assert.deepStrictEqual(propertyValueDifferences(Car, Motorcycle).map(diff => diff.targetValue), diffMotoValues);
-          assert.deepStrictEqual(propertyValueDifferences(Motorcycle, Car).map(diff => diff.targetValue), diffCarValues);
-          assert.deepStrictEqual(propertyValueDifferences(Simba, Kion).map(diff => diff.targetValue), diffKionValues);
-          assert.deepStrictEqual(propertyValueDifferences(Kion, Simba).map(diff => diff.targetValue), diffSimbaValues);
+          assert.deepStrictEqual(getPropertyValueDifferences(Car, Motorcycle).map(diff => diff.targetValue), diffMotoValues);
+          assert.deepStrictEqual(getPropertyValueDifferences(Motorcycle, Car).map(diff => diff.targetValue), diffCarValues);
+          assert.deepStrictEqual(getPropertyValueDifferences(Simba, Kion).map(diff => diff.targetValue), diffKionValues);
+          assert.deepStrictEqual(getPropertyValueDifferences(Kion, Simba).map(diff => diff.targetValue), diffSimbaValues);
         });
     });
 
@@ -91,17 +91,17 @@ suite("propertyValueDifferences()", function testEvalPropValueDiffs()
         {
             test('diff keys are "0" and "2"', function()
             {
-                assert.deepStrictEqual(propertyValueDifferences(strArrayA, strArrayB).map(diff => diff.key), ["0", "2"]);
+                assert.deepStrictEqual(getPropertyValueDifferences(strArrayA, strArrayB).map(diff => diff.key), ["0", "2"]);
             });
 
             test('diff source values are "first" and "third"', function()
             {
-                assert.deepStrictEqual(propertyValueDifferences(strArrayA, strArrayB).map(diff => diff.sourceValue), ["first", "third"]);
+                assert.deepStrictEqual(getPropertyValueDifferences(strArrayA, strArrayB).map(diff => diff.sourceValue), ["first", "third"]);
             });
 
             test('diff target values are "foo" and "baz"', function()
             {
-                assert.deepStrictEqual(propertyValueDifferences(strArrayA, strArrayB).map(diff => diff.targetValue), ["foo", "baz"]);
+                assert.deepStrictEqual(getPropertyValueDifferences(strArrayA, strArrayB).map(diff => diff.targetValue), ["foo", "baz"]);
             });
         });
 
@@ -109,40 +109,40 @@ suite("propertyValueDifferences()", function testEvalPropValueDiffs()
         {
             test('diff keys are "0", "1", and "2"', function()
             {
-                assert.deepStrictEqual(propertyValueDifferences(strArrayA, intArrayA).map(diff => diff.key), ["0", "1", "2"]);
+                assert.deepStrictEqual(getPropertyValueDifferences(strArrayA, intArrayA).map(diff => diff.key), ["0", "1", "2"]);
             });
 
             test('diff source values are "first", "second", and "third"', function()
             {
-                assert.deepStrictEqual(propertyValueDifferences(strArrayA, intArrayA).map(diff => diff.sourceValue), ["first", "second", "third"]);
+                assert.deepStrictEqual(getPropertyValueDifferences(strArrayA, intArrayA).map(diff => diff.sourceValue), ["first", "second", "third"]);
             });
 
             test("diff target values are 111, 222, and 333", function()
             {
-                assert.deepStrictEqual(propertyValueDifferences(strArrayA, intArrayA).map(diff => diff.targetValue), [111, 222, 333]);
+                assert.deepStrictEqual(getPropertyValueDifferences(strArrayA, intArrayA).map(diff => diff.targetValue), [111, 222, 333]);
             });
         });
 
         suite("strings", function testEvalPropValueStringDiffs()
         {
-            test('propertyValueDifferences("foo", "foo") is empty', function testEvalPropValueSameStringDiffsReturnEmpty()
+            test('getPropertyValueDifferences("foo", "foo") is empty', function testEvalPropValueSameStringDiffsReturnEmpty()
             {
-                assert.isEmpty(propertyValueDifferences("foo", "foo"));
+                assert.isEmpty(getPropertyValueDifferences("foo", "foo"));
             });
 
-            test('propertyValueDifferences("this", "that") keys are ["2", "3"]', function()
+            test('getPropertyValueDifferences("this", "that") keys are ["2", "3"]', function()
             {
-                assert.deepStrictEqual(propertyValueDifferences("this", "that").map(diff => diff.key), ["2", "3"]);
+                assert.deepStrictEqual(getPropertyValueDifferences("this", "that").map(diff => diff.key), ["2", "3"]);
             });
 
-            test('propertyValueDifferences("this", "that") keys are ["i", "s"]', function()
+            test('getPropertyValueDifferences("this", "that") keys are ["i", "s"]', function()
             {
-                assert.deepStrictEqual(propertyValueDifferences("this", "that").map(diff => diff.sourceValue), ["i", "s"]);
+                assert.deepStrictEqual(getPropertyValueDifferences("this", "that").map(diff => diff.sourceValue), ["i", "s"]);
             });
 
-            test('propertyValueDifferences("this", "that") keys are ["a", "t"]', function()
+            test('getPropertyValueDifferences("this", "that") keys are ["a", "t"]', function()
             {
-                assert.deepStrictEqual(propertyValueDifferences("this", "that").map(diff => diff.targetValue), ["a", "t"]);
+                assert.deepStrictEqual(getPropertyValueDifferences("this", "that").map(diff => diff.targetValue), ["a", "t"]);
             });
         });
 
@@ -150,17 +150,17 @@ suite("propertyValueDifferences()", function testEvalPropValueDiffs()
         {
             test('diff key is "2"', function()
             {
-                assert.deepStrictEqual(propertyValueDifferences(intArrayA, intArrayB).map(diff => diff.key), ["2"]);
+                assert.deepStrictEqual(getPropertyValueDifferences(intArrayA, intArrayB).map(diff => diff.key), ["2"]);
             });
 
             test("diff source value is 333", function()
             {
-                assert.deepStrictEqual(propertyValueDifferences(intArrayA, intArrayB).map(diff => diff.sourceValue), [333]);
+                assert.deepStrictEqual(getPropertyValueDifferences(intArrayA, intArrayB).map(diff => diff.sourceValue), [333]);
             });
 
             test("diff target value is 999", function()
             {
-                assert.deepStrictEqual(propertyValueDifferences(intArrayA, intArrayB).map(diff => diff.targetValue), [999]);
+                assert.deepStrictEqual(getPropertyValueDifferences(intArrayA, intArrayB).map(diff => diff.targetValue), [999]);
             });
         });
     });
@@ -171,7 +171,7 @@ suite("propertyValueDifferences()", function testEvalPropValueDiffs()
             mock.arrays.forEach(mockArray =>
                 test(`{${mockObj}} -> ${toStr(mockArray)} property value diffs are empty`, function()
                 {
-                    assert.isEmpty(propertyValueDifferences(mockObj, mockArray));
+                    assert.isEmpty(getPropertyValueDifferences(mockObj, mockArray));
                 })
         ));
     });
@@ -182,7 +182,7 @@ suite("propertyValueDifferences()", function testEvalPropValueDiffs()
             mock.objects.forEach(mockObj =>
                 test(`${toStr(mockArr)} -> {${mockObj}} property value diffs are empty`, function()
                 {
-                    assert.isEmpty(propertyValueDifferences(mockArr, mockObj));
+                    assert.isEmpty(getPropertyValueDifferences(mockArr, mockObj));
                 })
         ));
     });
