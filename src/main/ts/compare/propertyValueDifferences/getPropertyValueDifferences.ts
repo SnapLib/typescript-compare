@@ -34,15 +34,18 @@ export const getPropertyValueDifferences = (source: NonNullable<unknown>, target
     const targetObjEntries: readonly Readonly<[string, Readonly<unknown>]>[] =
         Object.freeze(Object.entries(target));
 
-    return Object.fromEntries(Object.entries(source)
+    const differingSrcPropertyEntries = Object.freeze(Object.entries(source)
         .filter(srcObjEntry =>
             targetObjEntries.some(targetObjEntry =>
                 srcObjEntry[0] === targetObjEntry[0]
-                && ! isEqual(srcObjEntry[1], targetObjEntry[1])))
-        .map(srcObjEntry => (
+                && ! isEqual(srcObjEntry[1], targetObjEntry[1]))));
+
+    const propertyDifferencesArray = Object.freeze(differingSrcPropertyEntries.map(srcObjEntry => (
             new PropertyValueDifference(srcObjEntry[0],
-                                   srcObjEntry[1],
-                                   targetObjEntries.find(targetObjEntry => srcObjEntry[0] === targetObjEntry[0])?.[1]).entry)));
+                                        srcObjEntry[1],
+                                        targetObjEntries.find(targetObjEntry => srcObjEntry[0] === targetObjEntry[0])?.[1]))));
+
+    return Object.fromEntries(propertyDifferencesArray.map(propDiff => propDiff.entry));
 };
 
 export {getPropertyValueDifferences as default};
