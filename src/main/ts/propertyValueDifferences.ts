@@ -1,4 +1,4 @@
-import {PropertyValueDifference} from "./propertyDifferences/propertyValueDifference";
+import {PropertyValueDifference} from "./propertyValueDifferences/propertyValueDifference";
 import {isEqual} from "./util/isEqual";
 
 export interface PropertyValueDifferences

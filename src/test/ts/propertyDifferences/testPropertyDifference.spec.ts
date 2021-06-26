@@ -1,4 +1,4 @@
-import {PropertyValueDifference} from "../../../main/ts/propertyDifferences/propertyValueDifference";
+import {PropertyValueDifference} from "../../../main/ts/propertyValueDifferences/propertyValueDifference";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 

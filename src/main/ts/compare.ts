@@ -10,7 +10,7 @@
  */
 
 import {getPropertyValueDifferences} from "./propertyValueDifferences";
-import type {PropertyDifferences} from "./propertyDifferences/propertyDifferences";
+import type {PropertyDifferences} from "./propertyValueDifferences/propertyDifferences";
 import {isEqual} from "./util/isEqual";
 import type {Query} from "./compare/query";
 
