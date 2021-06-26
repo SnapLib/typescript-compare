@@ -27,7 +27,7 @@ const toStr = (o: unknown): string =>
                   : `${o}`;
 };
 
-suite.only("getPropertyValueDifferences()", function testEvalPropValueDiffs()
+suite.only("getPropertyValueDifferences()", function testGetPropValueDiffs()
 {
     suite("invalid comparisons", function testInvalidComparisonSourceAndTargetThrows()
     {
@@ -41,7 +41,7 @@ suite.only("getPropertyValueDifferences()", function testEvalPropValueDiffs()
         });
     });
 
-    suite("of objects", function testEvalPropValueDiffsOfObjs()
+    suite("of objects", function testGetPropValueDiffsOfObjs()
     {
         mock.mockObjsAndArrays.concat(mock.strArrayA).forEach(mock => {
             test(`evalPropValueDiffs(${mock}, ${mock}) is empty`, function()
@@ -85,7 +85,7 @@ suite.only("getPropertyValueDifferences()", function testEvalPropValueDiffs()
         });
     });
 
-    suite("of arrays", function testEvalPropValueDiffsOfArrays()
+    suite("of arrays", function testGetPropValueDiffsOfArrays()
     {
        suite(`${toStr(strArrayA)} -> ${toStr(strArrayB)}`, function testEvalStrArrayDiff()
         {
@@ -123,9 +123,9 @@ suite.only("getPropertyValueDifferences()", function testEvalPropValueDiffs()
             });
         });
 
-        suite("strings", function testEvalPropValueStringDiffs()
+        suite("strings", function testGetPropValueStringDiffs()
         {
-            test('getPropertyValueDifferences("foo", "foo") is empty', function testEvalPropValueSameStringDiffsReturnEmpty()
+            test('getPropertyValueDifferences("foo", "foo") is empty', function testGetPropValueSameStringDiffsReturnEmpty()
             {
                 assert.isEmpty(getPropertyValueDifferences("foo", "foo"));
             });
