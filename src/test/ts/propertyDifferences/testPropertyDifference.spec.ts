@@ -16,14 +16,14 @@ const toStr = (o: unknown): string =>
            : `${o}`;
 };
 
-suite("PropertyDifference", function testPropertyDifference()
+suite("PropertyValueDifference", function testPropertyValueDifference()
 {
     suite("get", function testGet()
     {
         suite("key", function testKey()
         {
             mocks.forEach(mock =>
-                test(`new PropertyDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).key === "${mock[0]}"`, function()
+                test(`new PropertyValueDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).key === "${mock[0]}"`, function()
                 {
                     assert.strictEqual(new PropertyValueDifference(mock[0], mock[1], mock[2]).key, mock[0]);
                 }));
@@ -32,7 +32,7 @@ suite("PropertyDifference", function testPropertyDifference()
         suite("sourceValue", function testSourceValue()
         {
             mocks.forEach(mock =>
-                test(`new PropertyDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).sourceValue === ${toStr(mock[1])}`, function()
+                test(`new PropertyValueDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).sourceValue === ${toStr(mock[1])}`, function()
                 {
                     assert.strictEqual(new PropertyValueDifference(mock[0], mock[1], mock[2]).sourceValue, mock[1]);
                 }));
@@ -41,7 +41,7 @@ suite("PropertyDifference", function testPropertyDifference()
         suite("targetValue", function testTargetValue()
         {
             mocks.forEach(mock =>
-                test(`new PropertyDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).sourceValue === ${toStr(mock[2])}`, function()
+                test(`new PropertyValueDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])}).sourceValue === ${toStr(mock[2])}`, function()
                 {
                     assert.strictEqual(new PropertyValueDifference(mock[0], mock[1], mock[2]).targetValue, mock[2]);
                 }));
@@ -53,7 +53,7 @@ suite("PropertyDifference", function testPropertyDifference()
         suite("0", function testKey()
         {
             mocks.forEach(mock =>
-                test(`new PropertyDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[0] === "${mock[0]}"`, function()
+                test(`new PropertyValueDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[0] === "${mock[0]}"`, function()
                 {
                     assert.strictEqual(new PropertyValueDifference(mock[0], mock[1], mock[2])[0], mock[0]);
                 }));
@@ -62,7 +62,7 @@ suite("PropertyDifference", function testPropertyDifference()
         suite("1", function testSourceValue()
         {
             mocks.forEach(mock =>
-                test(`new PropertyDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[1] === ${toStr(mock[1])}`, function()
+                test(`new PropertyValueDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[1] === ${toStr(mock[1])}`, function()
                 {
                     assert.strictEqual(new PropertyValueDifference(mock[0], mock[1], mock[2])[1], mock[1]);
                 }));
@@ -71,7 +71,7 @@ suite("PropertyDifference", function testPropertyDifference()
         suite("2", function testTargetValue()
         {
             mocks.forEach(mock =>
-                test(`new PropertyDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[2] === ${toStr(mock[2])}`, function()
+                test(`new PropertyValueDifference("${mock[0]}", ${toStr(mock[1])}, ${toStr(mock[2])})[2] === ${toStr(mock[2])}`, function()
                 {
                     assert.strictEqual(new PropertyValueDifference(mock[0], mock[1], mock[2])[2], mock[2]);
                 }));
