@@ -10,8 +10,8 @@
  */
 
 import {getPropertyValueDifferences} from "./propertyValueDifferences";
-import type {PropertyDifferences} from "./propertyValueDifferences/propertyDifferences";
 import {isEqual} from "./util/isEqual";
+import type {PropertyValueDifferences} from "./propertyValueDifferences";
 import type {Query} from "./compare/query";
 
 /**
@@ -220,7 +220,7 @@ export class Compare<SourceType, TargetType>
      * @private
      * @readonly
      */
-    readonly #alteredProperties: Readonly<PropertyDifferences>;
+    readonly #alteredProperties: Readonly<PropertyValueDifferences>;
 
     /**
      * Boolean indicating if there are properties in the source and target
@@ -356,7 +356,7 @@ export class Compare<SourceType, TargetType>
         this.#sharedPropertiesCount = Object.keys(this.#sharedProperties).length;
 
         this.#alteredProperties =
-            Object.freeze(Object.fromEntries(getPropertyValueDifferences(convertedSource, convertedTarget).map(diff => diff.entry)));
+            Object.freeze(getPropertyValueDifferences(convertedSource, convertedTarget));
 
         this.#hasAlteredProperties = (() => {
             for (const alteredProp in this.#alteredProperties) {
@@ -440,7 +440,7 @@ export class Compare<SourceType, TargetType>
      *
      * @public
      */
-    public get alteredProperties(): Readonly<PropertyDifferences> { return this.#alteredProperties; }
+    public get alteredProperties(): Readonly<PropertyValueDifferences> { return this.#alteredProperties; }
 
     /**
      * Returns a boolean representing whether omitted, extra, shared, and/or
