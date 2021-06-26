@@ -1,4 +1,4 @@
-import {PropertyDifference} from "./propertyDifferences/propertyDifference";
+import {PropertyValueDifference} from "./propertyDifferences/propertyValueDifference";
 import {isEqual} from "./util/isEqual";
 
 /**
@@ -11,11 +11,11 @@ import {isEqual} from "./util/isEqual";
  * @param {NonNullable<Object>} source The object being compared to the passed target object
  * @param {NonNullable<Object>} target The object being compared to the passed source object
  *
- * @returns {PropertyDifference[]} An array containing the properties that have
+ * @returns {PropertyValueDifference[]} An array containing the properties that have
  *          the same keys but differing values between the source and target
  *          objects.
  */
-export const propertyValueDifferences = (source: NonNullable<unknown>, target: NonNullable<unknown>): Array<PropertyDifference> =>
+export const propertyValueDifferences = (source: NonNullable<unknown>, target: NonNullable<unknown>): Array<PropertyValueDifference> =>
 {
     if (typeof source !== "string" && typeof source !== "object" || source === null)
     {
@@ -36,7 +36,7 @@ export const propertyValueDifferences = (source: NonNullable<unknown>, target: N
                 srcObjEntry[0] === targetObjEntry[0]
                 && ! isEqual(srcObjEntry[1], targetObjEntry[1])))
         .map(srcObjEntry => (
-            new PropertyDifference(srcObjEntry[0],
+            new PropertyValueDifference(srcObjEntry[0],
                                    srcObjEntry[1],
                                    targetObjEntries.find(targetObjEntry => srcObjEntry[0] === targetObjEntry[0])?.[1])));
 };

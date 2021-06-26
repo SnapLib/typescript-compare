@@ -1,6 +1,6 @@
 type DiffEntry = Readonly<[string, {readonly sourceValue: Readonly<unknown>, readonly targetValue: Readonly<unknown>}]>;
 
-export class PropertyDifference
+export class PropertyValueDifference
 {
     /**
      * The key that the differing source and target property values are
@@ -134,4 +134,4 @@ const toStr = (o: unknown): string =>
            : `${o}`;
 };
 
-export {PropertyDifference as default};
+export {PropertyValueDifference as default};
