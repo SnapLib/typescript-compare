@@ -9,9 +9,9 @@
  * @author Snap
  */
 
-import {getPropertyValueDifferences} from "./propertyValueDifferences";
+import {getPropertyValueDifferences} from "./compare/propertyValueDifferences";
 import {isEqual} from "./util/isEqual";
-import type {PropertyValueDifferences} from "./propertyValueDifferences";
+import type {PropertyValueDifferences} from "./compare/propertyValueDifferences";
 import type {Query} from "./compare/query";
 
 /**

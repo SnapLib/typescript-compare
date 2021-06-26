@@ -1,6 +1,6 @@
 import {Simba, Kion, Car, Motorcycle, strArrayA, strArrayB, intArrayA, intArrayB} from "../../resources/ts/mock";
 import mock from "../../resources/ts/mock";
-import {getPropertyValueDifferences} from "../../../main/ts/propertyValueDifferences";
+import {getPropertyValueDifferences} from "../../../main/ts/compare/propertyValueDifferences";
 import {assert} from "chai";
 import {suite, test} from "mocha";
 
@@ -27,7 +27,7 @@ const toStr = (o: unknown): string =>
                   : `${o}`;
 };
 
-suite.only("getPropertyValueDifferences()", function testGetPropValueDiffs()
+suite("getPropertyValueDifferences()", function testGetPropValueDiffs()
 {
     suite("invalid comparisons", function testInvalidComparisonSourceAndTargetThrows()
     {
