@@ -1,6 +1,6 @@
 import type {PropertyValueDifferences} from "../propertyValueDifferences";
 import {PropertyValueDifference} from "./propertyValueDifference";
-import {isEqual} from "../../util/isEqual";
+import {isEqual} from "@snaplib/is-equal";
 
 /**
  * Consumes 2 non-nullable objects, referred to as the *source* and *target*
