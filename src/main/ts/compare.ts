@@ -10,7 +10,7 @@
  */
 
 import {getPropertyValueDifferences} from "./compare/propertyValueDifferences";
-import {isEqual} from "./util/isEqual";
+import {isEqual} from "@snaplib/is-equal";
 import type {PropertyValueDifferences} from "./compare/propertyValueDifferences";
 import type {Query} from "./compare/query";
 
@@ -510,7 +510,5 @@ export class Compare<SourceType, TargetType>
         alteredProperties: (): number => this.#alteredPropertiesCount
     });
 }
-
-export {isEqual} from "./util/isEqual";
 
 export {Compare as default};
