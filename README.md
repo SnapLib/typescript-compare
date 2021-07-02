@@ -63,7 +63,9 @@ const motorcycle = {
 const objectComparison = new Compare(car, motorcycle);
 
 console.log(objectComparison.omittedProperties);
-/* prints:
+/*
+ * prints the properties that are in the `car` object but not in the
+ * `motorcycle` object`:
  * {
  *   bodyTypes: ["coup", "sedan", "suv"],
  *   engineLocations: ["front", "middle", "rear"]
@@ -71,14 +73,18 @@ console.log(objectComparison.omittedProperties);
  */
 
 console.log(objectComparison.extraProperties);
-/* prints:
+/*
+ * prints the properties that are not in the `car` object but are present in the
+ * `motorcycle` object`:
  * {
  *   driveTypes: ["chain", "belt", "shaft"]
  * }
  */
 
 console.log(objectComparison.sharedProperties);
-/* prints:
+/*
+ * prints the properties that are both present and equal in both the `car`
+ * and `motorcycle` object:
  * {
  *   fuel: "petrol"
  * }
@@ -86,7 +92,9 @@ console.log(objectComparison.sharedProperties);
 
 console.log(objectComparison.alteredProperties)
 /*
- * prints:
+ * prints the properties that have the same key in both the `car` and
+ * `motorcycle` object but are mapped to differing values. The values from both
+ * the `car` and `motorcycle` object are included:
  * {
  *   numOfWheels: {sourceValue: 4, targetValue: 2},
  *   makes: { sourceValue: ["Koenigsegg", "Lamborghini],
