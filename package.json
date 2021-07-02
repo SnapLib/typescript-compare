@@ -52,5 +52,8 @@
   },
   "optionalDependencies": {
     "@types/node": "^15.6.1"
+  },
+  "dependencies": {
+    "@snaplib/is-equal": "^0.0.1"
   }
 }
