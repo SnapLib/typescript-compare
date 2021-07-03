@@ -1,10 +1,13 @@
 type DiffEntry = Readonly<[string, {readonly sourceValue: Readonly<unknown>, readonly targetValue: Readonly<unknown>}]>;
 
+/**
+ * @classdesc
+ * @author Snap
+ */
 export class PropertyValueDifference
 {
     /**
-     * The key that the differing source and target property values are
-     * mapped to.
+     * The key that is mapped to the differing source and target property values
      *
      * @private
      * @readonly
@@ -78,27 +81,30 @@ export class PropertyValueDifference
      * Returns the key that the differing source and target property values are
      * mapped to.
      *
-     * @public
      * @returns {string} The key that the differing source and target property
      *                   values are mapped to.
+     *
+     * @public
      */
     public get key(): string { return this.#key; }
 
     /**
      * Returns the value the property key is mapped to in the source object.
      *
-     * @public
      * @returns {Readonly<object>} The value the property key is mapped to in
      *                             the source object.
+     *
+     * @public
      */
     public get sourceValue(): Readonly<unknown> { return this.#sourceValue; }
 
     /**
      * Returns the value the property key is mapped to in the target object.
      *
-     * @public
      * @returns {Readonly<object>} The value the property key is mapped to in
      *                             the target object.
+     *
+     * @public
      */
     public get targetValue(): Readonly<unknown> { return this.#targetValue; }
 
@@ -107,17 +113,23 @@ export class PropertyValueDifference
      * referencing the source and target values associated with the key in the
      * second index.
      *
+     * @returns {DiffEntry} An array that contains the shared key in the first
+     *          index and an object referencing each differing value in the
+     *          second index.
+     *
      * @public
      */
+
     public get entry(): DiffEntry { return this.#entry; }
 
     /**
      * Returns a string representation of this object that conveys the key,
      * source, and target value of the differing property.
      *
-     * @public
      * @returns {string} A string representation of this object that conveys the
      *                   key, source, and target value of the differing property.
+     *
+     * @public
      */
     public toString(): string
     {
