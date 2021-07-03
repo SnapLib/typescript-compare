@@ -48,4 +48,4 @@ export const getPropertyValueDifferences = (source: NonNullable<unknown>, target
     return Object.fromEntries(propertyDifferencesArray.map(propDiff => propDiff.entry));
 };
 
-export {getPropertyValueDifferences as default};
+export default getPropertyValueDifferences;

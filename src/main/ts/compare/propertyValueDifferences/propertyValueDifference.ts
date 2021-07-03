@@ -134,4 +134,4 @@ const toStr = (o: unknown): string =>
            : `${o}`;
 };
 
-export {PropertyValueDifference as default};
+export default PropertyValueDifference;

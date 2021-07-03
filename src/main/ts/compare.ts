@@ -511,4 +511,4 @@ export class Compare<SourceType, TargetType>
     });
 }
 
-export {Compare as default};
+export default Compare;
