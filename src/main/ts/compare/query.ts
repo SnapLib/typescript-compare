@@ -1,7 +1,7 @@
 /**
- * This module contains the interface responsible for defining the `count` and
- * `has` queries of the {@link Compare} class. That is, the return type
- * of the {@link Compare.count} and {@link Compare.has} properties.
+ * This module contains the interface responsible for defining the
+ * {@link Compare.count count} and {@link Compare.has has} queries of the
+ * {@link Compare} class.
  *
  * @module
  * @author Snap
