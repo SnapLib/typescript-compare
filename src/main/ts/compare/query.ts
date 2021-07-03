@@ -1,6 +1,6 @@
 /**
  * This module contains the interface responsible for defining the
- * {@link Compare.count count} and {@link Compare.has has} queries of the
+ * {@link Compare.count `count`} and {@link Compare.has `has`} queries of the
  * {@link Compare} class.
  *
  * @module
@@ -12,13 +12,21 @@
  * {@link Compare.has}.
  *
  * This interface defines the return type when querying {@link Compare}
- * objects for the number or existence of `omittedProperties`,
- * `extraProperties`, `sharedProperties`, or `alteredProperties`. When querying
- * for the *count*, this interface's properties are based on `number`s, when
- * querying for the *existence* this interface's properties are based on
- * `boolean` values.
+ * objects for the number or existence of
+ * {@link Compare.omittedProperties `omittedProperties`},
+ * {@link Compare.extraProperties `extraProperties`},
+ * {@link Compare.sharedProperties `sharedProperties`}, and
+ * {@link Compare.alteredProperties `alteredProperties`}. When querying
+ * for the {@link Compare.count `count`}, this interface's properties are based
+ * on `number`s, when querying for the {@link Compare.has `has`} (the existence)
+ * this interface's properties are based on `boolean` values.
+ *
+ * @template {number | boolean} QueryReturnType - The type each query returns
+ *           dependent on whether it's a query for the
+ *           {@link Compare.count count} or {@link Compare.has has} (existence)
  *
  * @interface
+ * @author Snap
  */
 export interface Query<QueryReturnType extends number | boolean>
 {
