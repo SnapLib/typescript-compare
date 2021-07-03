@@ -12,16 +12,16 @@ import {isEqual} from "@snaplib/is-equal";
  * Both objects must have enumerable key-value properties. If a `string` is
  * passed as an argument, it's converted into an array.
  *
- * @param {NonNullable<object>} source The object being compared to the passed
- *        target object
+ * @param {NonNullable<object>} source The non-null object being compared to the
+ *        passed target object
  *
- * @param {NonNullable<object>} target The object the source object is being
- *        compared to
+ * @param {NonNullable<object>} target The non-null object the source object is
+ *        being compared to
  *
- * @returns {PropertyValueDifferences} An object containing the keys present in
- *          both the source and target object but mapped to differing values as
- *          well as what their values are in each corresponding source and
- *          target object.
+ * @returns {PropertyValueDifferences} An object containing the equivalent keys
+ *          that are present in both the source and target object but mapped to
+ *          differing values as well as what the values they're mapped to in
+ *          both the source and target object.
  */
 export const getPropertyValueDifferences = (source: NonNullable<unknown>, target: NonNullable<unknown>): PropertyValueDifferences =>
 {
