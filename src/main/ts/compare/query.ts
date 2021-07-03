@@ -14,9 +14,9 @@
  * This interface defines the return type when querying {@link Compare}
  * objects for the number or existence of `omittedProperties`,
  * `extraProperties`, `sharedProperties`, or `alteredProperties`. When querying
- * for the *count*, this interface's properties are based on numbers, when
- * querying for the existence this interface's properties are based on boolean
- * values.
+ * for the *count*, this interface's properties are based on `number`s, when
+ * querying for the *existence* this interface's properties are based on
+ * `boolean` values.
  *
  * @interface
  */
