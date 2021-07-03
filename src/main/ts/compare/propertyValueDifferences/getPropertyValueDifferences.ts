@@ -21,7 +21,7 @@ import {isEqual} from "@snaplib/is-equal";
  * @returns {PropertyValueDifferences} An object containing the equivalent keys
  *          that are present in both the source and target object but mapped to
  *          differing values as well as what the values they're mapped to in
- *          both the source and target object.
+ *          each object.
  */
 export const getPropertyValueDifferences = (source: NonNullable<unknown>, target: NonNullable<unknown>): PropertyValueDifferences =>
 {
