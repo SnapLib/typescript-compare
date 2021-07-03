@@ -6,7 +6,7 @@ import {isEqual} from "@snaplib/is-equal";
  * Consumes 2 non-null objects and returns the properties that are present in
  * both and have the same keys, but are mapped to differing values.
  *
- * Both the key and values from the source and target object are returned.
+ * Both the key and value it's mapped to in each object is returned.
  *
  * @remarks
  * Both objects must have enumerable key-value properties. If a `string` is
