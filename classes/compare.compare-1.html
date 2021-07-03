@@ -1,0 +1,979 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Compare | @snaplib/compare</title>
+	<meta name="description" content="Documentation for @snaplib/compare">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@snaplib/compare</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">@snaplib/compare</a>
+				</li>
+				<li>
+					<a href="../modules/compare.html">compare</a>
+				</li>
+				<li>
+					<a href="compare.compare-1.html">Compare</a>
+				</li>
+			</ul>
+			<h1>Class Compare&lt;SourceType, TargetType&gt;</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The <code>Compare</code> class compares 2 objects to each other. It simplifies the
+							process of querying the differences and similarities between the 2 objects
+							being compared. The types of relationships between the objects is relative to
+							how the <em><strong>source</strong></em> <em>object compares to the</em> <em><strong>target</strong></em> <em>object</em>. There
+							are 4 types of relations that can be queried via properties of a <code>Compare</code>
+						object:</p>
+					</div>
+					<ol>
+						<li><p><a href="compare.compare-1.html#omittedproperties">omittedProperties</a></p>
+							<p> Properties that are present in the <em>source</em> object but not in the
+								<em>target</em> object are considered &quot;omitted&quot; properties. As in they&#39;re
+								properties that are present in the source object but <em>omitted</em> in the
+							target object.</p>
+							<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">obj1</span><span style="color: #000000"> = { </span><span style="color: #001080">prop1:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop2:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000"> };</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">obj2</span><span style="color: #000000"> = { </span><span style="color: #001080">prop1:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000"> };</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Compare</span><span style="color: #000000">(</span><span style="color: #001080">obj1</span><span style="color: #000000">, </span><span style="color: #001080">obj2</span><span style="color: #000000">).</span><span style="color: #001080">omittedProperties</span><span style="color: #000000">);</span>
+<span style="color: #008000">// prints: { prop2: &quot;foo&quot; }</span>
+</code></pre>
+						</li>
+						<li><p><a href="compare.compare-1.html#extraproperties">extraProperties</a></p>
+							<p> Properties that are not present in the <em>source</em> object but are present in
+								the <em>target</em> object are considered &quot;extra&quot; properties. As in they&#39;re
+								<em>extra</em> properties that are present in the target object but not in the
+							source object.</p>
+							<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">obj1</span><span style="color: #000000"> = { </span><span style="color: #001080">prop1:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop2:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000"> };</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">obj2</span><span style="color: #000000"> = { </span><span style="color: #001080">prop1:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop2:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop3:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> };</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Compare</span><span style="color: #000000">(</span><span style="color: #001080">obj1</span><span style="color: #000000">, </span><span style="color: #001080">obj2</span><span style="color: #000000">).</span><span style="color: #001080">extraProperties</span><span style="color: #000000">);</span>
+<span style="color: #008000">// prints: { prop3: true }</span>
+</code></pre>
+						</li>
+						<li><p><a href="compare.compare-1.html#sharedproperties">sharedProperties</a></p>
+							<p> Properties that are present in both the <em>source</em> and <em>target</em> object that
+								are equivalent are considered &quot;shared&quot; properties. If there are keys that
+								are present in both the source and target objects <em>that are also mapped</em>
+								<em>to equivalent values</em> then the key-value pairs are considered shared
+							properties.</p>
+							<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">obj1</span><span style="color: #000000"> = { </span><span style="color: #001080">prop1:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop2:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop3:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000"> };</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">obj2</span><span style="color: #000000"> = { </span><span style="color: #001080">prop1:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop2:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop3:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> };</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Compare</span><span style="color: #000000">(</span><span style="color: #001080">obj1</span><span style="color: #000000">, </span><span style="color: #001080">obj2</span><span style="color: #000000">).</span><span style="color: #001080">sharedProperties</span><span style="color: #000000">);</span>
+<span style="color: #008000">// prints: { prop1: 1,</span>
+<span style="color: #008000">//           prop2: &quot;foo&quot; }</span>
+</code></pre>
+						</li>
+						<li><p><a href="compare.compare-1.html#alteredproperties">alteredProperties</a></p>
+							<p> Properties that are present in both the <em>source</em> and <em>target</em> object that
+								contain differing values are considered &quot;altered&quot; properties. If there
+								are keys that are present in both the source and target objects <em>that</em>
+								<em>are mapped to differing values</em> then the key-value pairs are considered
+							altered properties.</p>
+							<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">obj1</span><span style="color: #000000"> = { </span><span style="color: #001080">prop1:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop2:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop3:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000"> };</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">obj2</span><span style="color: #000000"> = { </span><span style="color: #001080">prop1:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop2:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;foo&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">               </span><span style="color: #001080">prop3:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> };</span>
+
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Compare</span><span style="color: #000000">(</span><span style="color: #001080">obj1</span><span style="color: #000000">, </span><span style="color: #001080">obj2</span><span style="color: #000000">).</span><span style="color: #001080">alteredProperties</span><span style="color: #000000">);</span>
+<span style="color: #008000">// prints: { prop3: { sourceValue: false,</span>
+<span style="color: #008000">//                    targetValue: true } }</span>
+</code></pre>
+						</li>
+					</ol>
+					<dl class="tsd-comment-tags">
+						<dt>classdesc</dt>
+						<dd></dd>
+						<dt>author</dt>
+						<dd><p>Snap</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>SourceType</h4>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>The type of object being compared to the target object.</p>
+							</div>
+						</div>
+					</li>
+					<li>
+						<h4>TargetType</h4>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>The type of object the source object is being compared
+								to.</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">Compare</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter"><a href="compare.compare-1.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_alteredproperties" class="tsd-kind-icon">#altered<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_alteredpropertiescount" class="tsd-kind-icon">#altered<wbr>Properties<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_extraproperties" class="tsd-kind-icon">#extra<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_extrapropscount" class="tsd-kind-icon">#extra<wbr>Props<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_hasalteredproperties" class="tsd-kind-icon">#has<wbr>Altered<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_hasextraproperties" class="tsd-kind-icon">#has<wbr>Extra<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_hasomittedproperties" class="tsd-kind-icon">#has<wbr>Omitted<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_hassharedproperties" class="tsd-kind-icon">#has<wbr>Shared<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_omittedproperties" class="tsd-kind-icon">#omitted<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_omittedpropscount" class="tsd-kind-icon">#omitted<wbr>Props<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_sharedproperties" class="tsd-kind-icon">#shared<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_sharedpropertiescount" class="tsd-kind-icon">#shared<wbr>Properties<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_srcobj" class="tsd-kind-icon">#src<wbr>Obj</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="compare.compare-1.html#_targetobj" class="tsd-kind-icon">#target<wbr>Obj</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="compare.compare-1.html#count" class="tsd-kind-icon">count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="compare.compare-1.html#has" class="tsd-kind-icon">has</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="compare.compare-1.html#alteredproperties" class="tsd-kind-icon">altered<wbr>Properties</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="compare.compare-1.html#extraproperties" class="tsd-kind-icon">extra<wbr>Properties</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="compare.compare-1.html#omittedproperties" class="tsd-kind-icon">omitted<wbr>Properties</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="compare.compare-1.html#sharedproperties" class="tsd-kind-icon">shared<wbr>Properties</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="compare.compare-1.html#source" class="tsd-kind-icon">source</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="compare.compare-1.html#target" class="tsd-kind-icon">target</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Compare&lt;SourceType, TargetType&gt;<span class="tsd-signature-symbol">(</span>sourceObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SourceType</span><span class="tsd-signature-symbol">&gt;</span>, targetObject<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TargetType</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="compare.compare-1.html" class="tsd-signature-type" data-tsd-kind="Class">Compare</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SourceType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TargetType</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in compare.ts:241</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Constructs an instance of a <code>Compare</code> object. The only required arguments
+										are 2 &quot;comparable&quot; non-null objects to compare to each other. As long as
+										the passed arguments can be interpreted as sets of enumerable properties
+									(key-value pairs) then they&#39;re considered comparable.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>remarks</dt>
+									<dd><p>Strings are converted to string arrays where each character of the string
+											is mapped to an index that corresponds to its position in the string. So
+										it&#39;s possible to compare strings to each other (or other objects).</p>
+									</dd>
+									<dt>throws</dt>
+									<dd><p>{TypeError} If source or target object is an invalid type that
+											can&#39;t be interpreted as an enumerable set of properties (key
+										value pairs).</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>SourceType</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>The type of object being compared to the target
+										object.</p>
+									</div>
+								</li>
+								<li>
+									<h4>TargetType</h4>
+									<div class="tsd-comment tsd-typography">
+										<p>The type of object the source object is being
+										compared to.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>sourceObject: <span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SourceType</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The object being compared to the target object.</p>
+									</div>
+								</li>
+								<li>
+									<h5>targetObject: <span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TargetType</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The object the source object is being compared to.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="compare.compare-1.html" class="tsd-signature-type" data-tsd-kind="Class">Compare</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SourceType</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TargetType</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returns instantiated
+							<code>Compare</code> object.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_alteredproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #altered<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">#altered<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/compare_propertyvaluedifferences.propertyvaluedifferences.html" class="tsd-signature-type" data-tsd-kind="Interface">PropertyValueDifferences</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:223</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An object containing properties whose keys are present in both the source
+							and target objects, but are mapped to differing values.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_alteredpropertiescount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #altered<wbr>Properties<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">#altered<wbr>Properties<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:241</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Number of properties that are present in both the source and target
+							objects, but are mapped to differing values.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_extraproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #extra<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">#extra<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:167</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An object containing the keys and their mapped values that are present in
+							the target object but not the source object.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_extrapropscount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #extra<wbr>Props<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">#extra<wbr>Props<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:185</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Number of properties the target object contains that aren&#39;t present in
+							the source object being compared to it.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_hasalteredproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #has<wbr>Altered<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">#has<wbr>Altered<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:232</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Boolean indicating if there are properties in the source and target
+							object mapped to differing values.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_hasextraproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #has<wbr>Extra<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">#has<wbr>Extra<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:176</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Boolean indicating if there are properties in the target object
+							that are not present in the source object.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_hasomittedproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #has<wbr>Omitted<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">#has<wbr>Omitted<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:149</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Boolean indicating if there are properties in the source object
+							that are not present in the target object.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_hassharedproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #has<wbr>Shared<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">#has<wbr>Shared<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:205</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Boolean indicating if there are equivalent properties in the source
+							and target object.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_omittedproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #omitted<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">#omitted<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:140</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An object containing the keys and their mapped values that are present in
+							the source object but not the target object.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_omittedpropscount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #omitted<wbr>Props<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">#omitted<wbr>Props<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:158</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Number of properties the source object contains that aren&#39;t present in
+							the target object it&#39;s being compared to.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_sharedproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #shared<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">#shared<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:196</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An object containing properties that are present in both the source and
+								target objects being compared that are equivalent. That is, Keys that are
+								present in both the source and target objects that are mapped to
+							equivalent values.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_sharedpropertiescount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #shared<wbr>Properties<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">#shared<wbr>Properties<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:214</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Number of properties that both the source and target object contain that
+							are equivalent.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_srcobj" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #src<wbr>Obj</h3>
+					<div class="tsd-signature tsd-kind-icon">#src<wbr>Obj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SourceType</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:122</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Contains the source object passed to the constructor during
+							instantiation.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_targetobj" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> #target<wbr>Obj</h3>
+					<div class="tsd-signature tsd-kind-icon">#target<wbr>Obj<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TargetType</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:131</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Contains the target object passed to the constructor during
+							instantiation.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="count" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> count</h3>
+					<div class="tsd-signature tsd-kind-icon">count<span class="tsd-signature-symbol">:</span> <a href="../interfaces/compare_query.query.html" class="tsd-signature-type" data-tsd-kind="Interface">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:503</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns a number representing the amount of omitted, extra, shared,
+								and/or altered properties that are present in the source and target
+							objects being compared.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>{number} count.omittedProperties() - number of properties that
+									are present in the source object, but aren&#39;t present in the
+								target object it&#39;s being compared to.</p>
+							</dd>
+							<dt>property</dt>
+							<dd><p>{number} count.extraProperties() - number of properties that
+									are not present in the source object, but are present in the
+								target object it&#39;s being compared to.</p>
+							</dd>
+							<dt>property</dt>
+							<dd><p>{number} count.sharedProperties() - number of properties that are
+									present in both the source and target object that are
+								equivalent.</p>
+							</dd>
+							<dt>property</dt>
+							<dd><p>{number} count.alteredProperties() - number of keys present in
+									both the the source and target object that are mapped to
+								differing values.</p>
+							</dd>
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="has" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> has</h3>
+					<div class="tsd-signature tsd-kind-icon">has<span class="tsd-signature-symbol">:</span> <a href="../interfaces/compare_query.query.html" class="tsd-signature-type" data-tsd-kind="Interface">Query</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare.ts:469</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Returns a boolean representing whether omitted, extra, shared, and/or
+								altered properties are present in the source and target objects being
+							compared.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>property</dt>
+							<dd><p>{boolean} has.omittedProperties() - <code>boolean</code> indicating
+									whether the source object contains properties that aren&#39;t
+								present in the target object it&#39;s being compared to.</p>
+							</dd>
+							<dt>property</dt>
+							<dd><p>{boolean} has.extraProperties() - <code>boolean</code> indicating
+									whether the source object does not contain properties that are
+								present in the target object it&#39;s being compared to.</p>
+							</dd>
+							<dt>property</dt>
+							<dd><p>{boolean} has.sharedProperties() - <code>boolean</code> indicating
+									whether the source and target object contain equivalent
+								properties.</p>
+							</dd>
+							<dt>property</dt>
+							<dd><p>{boolean} has.alteredProperties() - <code>boolean</code> indicating
+									whether the source and target object contain equivalent
+								keys that are mapped to differing values.</p>
+							</dd>
+							<dt>readonly</dt>
+							<dd></dd>
+						</dl>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="alteredproperties" class="tsd-anchor"></a>
+					<h3>altered<wbr>Properties</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> alteredProperties<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/compare_propertyvaluedifferences.propertyvaluedifferences.html" class="tsd-signature-type" data-tsd-kind="Interface">PropertyValueDifferences</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in compare.ts:443</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the properties that are present in both the source and target
+										object that have differing values. That is, keys that are present in both
+									the source and target object that are mapped to differing values.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>remarks</dt>
+									<dd><p>The key of the property and property value from the source and
+										target object is returned.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/compare_propertyvaluedifferences.propertyvaluedifferences.html" class="tsd-signature-type" data-tsd-kind="Interface">PropertyValueDifferences</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>An object containing the keys that are
+								present in the source and target object and the differing values
+							they are mapped to in the source and target object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="extraproperties" class="tsd-anchor"></a>
+					<h3>extra<wbr>Properties</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> extraProperties<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in compare.ts:415</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the properties that are present in the target object but not the
+									source object that&#39;s being compared to it.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>An object containing the properties that are
+								not present in the source object but are present in the target
+							object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="omittedproperties" class="tsd-anchor"></a>
+					<h3>omitted<wbr>Properties</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> omittedProperties<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in compare.ts:403</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the properties that are present in the source object but not the
+									target object it&#39;s being compared to.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>An object containing the properties that are
+							present in the source object but not the target object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="sharedproperties" class="tsd-anchor"></a>
+					<h3>shared<wbr>Properties</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> sharedProperties<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in compare.ts:427</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the properties that are present in both the source and target
+										object that are equivalent. That is, keys that are present in both the
+									source and target object that are also mapped to equivalent values.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>An object containing the properties that are
+							present and equivalent in the source and target object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="source" class="tsd-anchor"></a>
+					<h3>source</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> source<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SourceType</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in compare.ts:381</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the source object being compared to the target object. The
+									returned object is frozen to prevent inadvertently mutating it.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SourceType</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The source object being compared to the
+							target object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="target" class="tsd-anchor"></a>
+					<h3>target</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> target<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TargetType</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in compare.ts:392</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the target object that the source object is being compared to.
+									The returned object is frozen to prevent inadvertently mutating it.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TargetType</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>The target object the source object is being
+							compared to.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/compare.html">compare</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/compare_propertyvaluedifferences.html">compare/property<wbr>Value<wbr>Differences</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/compare_propertyvaluedifferences_getpropertyvaluedifferences.html">compare/property<wbr>Value<wbr>Differences/get<wbr>Property<wbr>Value<wbr>Differences</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/compare_propertyvaluedifferences_propertyvaluedifference.html">compare/property<wbr>Value<wbr>Differences/property<wbr>Value<wbr>Difference</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/compare_query.html">compare/query</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/compare.html#default" class="tsd-kind-icon">default</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="compare.compare-1.html" class="tsd-kind-icon">Compare</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="compare.compare-1.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_alteredproperties" class="tsd-kind-icon">#altered<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_alteredpropertiescount" class="tsd-kind-icon">#altered<wbr>Properties<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_extraproperties" class="tsd-kind-icon">#extra<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_extrapropscount" class="tsd-kind-icon">#extra<wbr>Props<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_hasalteredproperties" class="tsd-kind-icon">#has<wbr>Altered<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_hasextraproperties" class="tsd-kind-icon">#has<wbr>Extra<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_hasomittedproperties" class="tsd-kind-icon">#has<wbr>Omitted<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_hassharedproperties" class="tsd-kind-icon">#has<wbr>Shared<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_omittedproperties" class="tsd-kind-icon">#omitted<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_omittedpropscount" class="tsd-kind-icon">#omitted<wbr>Props<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_sharedproperties" class="tsd-kind-icon">#shared<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_sharedpropertiescount" class="tsd-kind-icon">#shared<wbr>Properties<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_srcobj" class="tsd-kind-icon">#src<wbr>Obj</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="compare.compare-1.html#_targetobj" class="tsd-kind-icon">#target<wbr>Obj</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="compare.compare-1.html#count" class="tsd-kind-icon">count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="compare.compare-1.html#has" class="tsd-kind-icon">has</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="compare.compare-1.html#alteredproperties" class="tsd-kind-icon">altered<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="compare.compare-1.html#extraproperties" class="tsd-kind-icon">extra<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="compare.compare-1.html#omittedproperties" class="tsd-kind-icon">omitted<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="compare.compare-1.html#sharedproperties" class="tsd-kind-icon">shared<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="compare.compare-1.html#source" class="tsd-kind-icon">source</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="compare.compare-1.html#target" class="tsd-kind-icon">target</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

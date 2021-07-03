@@ -1,0 +1,367 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Query | @snaplib/compare</title>
+	<meta name="description" content="Documentation for @snaplib/compare">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@snaplib/compare</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">@snaplib/compare</a>
+				</li>
+				<li>
+					<a href="../modules/compare_query.html">compare/query</a>
+				</li>
+				<li>
+					<a href="compare_query.query.html">Query</a>
+				</li>
+			</ul>
+			<h1>Interface Query&lt;QueryReturnType&gt;</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The return type returned by <a href="../classes/compare.compare-1.html#count">Compare.count</a> and
+						<a href="../classes/compare.compare-1.html#has">Compare.has</a>.</p>
+					</div>
+					<p>This interface defines the return type when querying <a href="../classes/compare.compare-1.html">Compare</a>
+						objects for the number or existence of
+						<a href="../classes/compare.compare-1.html#omittedproperties"><code>omittedProperties</code></a>,
+						<a href="../classes/compare.compare-1.html#extraproperties"><code>extraProperties</code></a>,
+						<a href="../classes/compare.compare-1.html#sharedproperties"><code>sharedProperties</code></a>, and
+						<a href="../classes/compare.compare-1.html#alteredproperties"><code>alteredProperties</code></a>. When querying
+						for the <a href="../classes/compare.compare-1.html#count"><code>count</code></a>, this interface&#39;s properties are based
+						on <code>number</code>s, when querying for the <a href="../classes/compare.compare-1.html#has"><code>has</code></a> (the existence)
+					this interface&#39;s properties are based on <code>boolean</code> values.</p>
+					<dl class="tsd-comment-tags">
+						<dt>interface</dt>
+						<dd></dd>
+						<dt>author</dt>
+						<dd><p>Snap</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>QueryReturnType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></h4>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>The type each query returns
+									dependent on whether it&#39;s a query for the
+								<a href="../classes/compare.compare-1.html#count">count</a> or <a href="../classes/compare.compare-1.html#has">has</a> (existence)</p>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">Query</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="compare_query.query.html#alteredproperties" class="tsd-kind-icon">altered<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="compare_query.query.html#extraproperties" class="tsd-kind-icon">extra<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="compare_query.query.html#omittedproperties" class="tsd-kind-icon">omitted<wbr>Properties</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="compare_query.query.html#sharedproperties" class="tsd-kind-icon">shared<wbr>Properties</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="alteredproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> altered<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">altered<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">QueryReturnType</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare/query.ts:101</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">QueryReturnType</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Returns either a <code>boolean</code> indicating if there are any equivalent
+													property keys in both the source object and target object it&#39;s being
+													compared to that are mapped to differing values or the <code>number</code> of
+													equivalent property keys in both the source object and target object that
+												are mapped to differing values.</p>
+											</div>
+										</div>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">QueryReturnType</span></h4>
+										<p>Either a <code>boolean</code> indicating if there are
+											any equivalent property keys in both the source and target
+											object that are mapped to differing values or the <code>number</code> of
+											equivalent property keys in both the source and target object
+										that are mapped to differing values.</p>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="extraproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> extra<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">extra<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">QueryReturnType</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare/query.ts:65</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">QueryReturnType</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Returns either a <code>boolean</code> indicating if there are properties in the
+													target object that aren&#39;t in the source object being compared to it or
+													the <code>number</code> of properties the target object contains that the source
+												object does not.</p>
+											</div>
+										</div>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">QueryReturnType</span></h4>
+										<p>Either a <code>boolean</code> indicating if there are
+											properties in the target object that aren&#39;t in the source object
+											or the <code>number</code> of properties the target object contains that
+										the source object does not.</p>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="omittedproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> omitted<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">omitted<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">QueryReturnType</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare/query.ts:48</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">QueryReturnType</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Returns either a <code>boolean</code> indicating if there are properties in the
+													source object that aren&#39;t in the target object it&#39;s being compared to or
+													the <code>number</code> of properties the source object contains that the target
+												object does not.</p>
+											</div>
+										</div>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">QueryReturnType</span></h4>
+										<p>Either a <code>boolean</code> indicating if there are
+											properties in the source object that aren&#39;t in the target object
+											or the <code>number</code> of properties the source object contains that
+										the target object does not.</p>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sharedproperties" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> shared<wbr>Properties</h3>
+					<div class="tsd-signature tsd-kind-icon">shared<wbr>Properties<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">QueryReturnType</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in compare/query.ts:82</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-interface">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">QueryReturnType</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<div class="tsd-comment tsd-typography">
+											<div class="lead">
+												<p>Returns either a <code>boolean</code> indicating if there are equivalent properties
+													in both the source object and target object it&#39;s being compared to or the
+													<code>number</code> of equivalent properties both the source and target object
+												contain.</p>
+											</div>
+										</div>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">QueryReturnType</span></h4>
+										<p>Either a <code>boolean</code> indicating if there are
+											equivalent properties in both the source object and target or
+											the <code>number</code> of equivalent properties in both the source and
+										target objects.</p>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/compare.html">compare</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/compare_propertyvaluedifferences.html">compare/property<wbr>Value<wbr>Differences</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/compare_propertyvaluedifferences_getpropertyvaluedifferences.html">compare/property<wbr>Value<wbr>Differences/get<wbr>Property<wbr>Value<wbr>Differences</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/compare_propertyvaluedifferences_propertyvaluedifference.html">compare/property<wbr>Value<wbr>Differences/property<wbr>Value<wbr>Difference</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="../modules/compare_query.html">compare/query</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="../modules/compare_query.html#default" class="tsd-kind-icon">default</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="compare_query.query.html" class="tsd-kind-icon">Query</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="compare_query.query.html#alteredproperties" class="tsd-kind-icon">altered<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="compare_query.query.html#extraproperties" class="tsd-kind-icon">extra<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="compare_query.query.html#omittedproperties" class="tsd-kind-icon">omitted<wbr>Properties</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="compare_query.query.html#sharedproperties" class="tsd-kind-icon">shared<wbr>Properties</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
