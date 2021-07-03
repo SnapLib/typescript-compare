@@ -3,21 +3,25 @@ import {PropertyValueDifference} from "./propertyValueDifference";
 import {isEqual} from "@snaplib/is-equal";
 
 /**
- * Consumes 2 non-nullable objects, referred to as the *source* and *target*
- * object, and returns the properties that are present in both, but "altered" in
- * the target object. By altered, that means the property key is the same in
- * both the source and target objects, but it's mapped to a different value in
- * the target object than the source object.
+ * Consumes 2 non-null objects and returns the properties that are present in
+ * both and have the same keys, but are mapped to differing values.
+ *
+ * Both the key and value from the source and target object are returned.
+ *
+ * @remarks
+ * Both objects must have enumerable key-value properties. If a `string` is
+ * passed as an argument, it's converted into an array.
  *
  * @param {NonNullable<object>} source The object being compared to the passed
  *        target object
  *
- * @param {NonNullable<object>} target The object being compared to the passed
- *        source object
+ * @param {NonNullable<object>} target The object the source object is being
+ *        compared to
  *
  * @returns {PropertyValueDifferences} An object containing the keys present in
- *          both the source and target object mapped to what their values are in
- *          each corresponding object.
+ *          both the source and target object but mapped to differing values as
+ *          well as what their values are in each corresponding source and
+ *          target object.
  */
 export const getPropertyValueDifferences = (source: NonNullable<unknown>, target: NonNullable<unknown>): PropertyValueDifferences =>
 {
