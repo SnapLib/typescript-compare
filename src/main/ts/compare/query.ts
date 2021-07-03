@@ -23,60 +23,72 @@
 export interface Query<QueryReturnType extends number | boolean>
 {
     /**
-     * Query to check either the number or existence of omitted property keys
-     * between the source and target object being compared.
+     * Returns either a `boolean` indicating if there are properties in the
+     * source object that aren't in the target object it's being compared to or
+     * the `number` of properties the source object contains that the target
+     * object does not.
      *
      * @public
      * @readonly
      * @abstract
      *
-     * @returns {number | boolean} Either a number indicating how many
-     *          omitted keys the target object does not contain or a boolean
-     *          indicating whether or not any omitted keys are present.
+     * @returns {number | boolean} Either a `boolean` indicating if there are
+     *          properties in the source object that aren't in the target object
+     *          or the `number` of properties the source object contains that
+     *          the target object does not.
      */
     readonly omittedProperties: () => QueryReturnType;
 
     /**
-     * Query to check either the number or existence of added property keys
-     * between the source and target object being compared.
+     * Returns either a `boolean` indicating if there are properties in the
+     * target object that aren't in the source object being compared to it or
+     * the `number` of properties the target object contains that the source
+     * object does not.
      *
      * @public
      * @readonly
      * @abstract
      *
-     * @returns {number | boolean} Either a number indicating how many
-     *          added keys the target object contains that aren't present in the
-     *          source object or a boolean indicating whether or not any added
-     *          keys are present in the target object.
+     * @returns {number | boolean} Either a `boolean` indicating if there are
+     *          properties in the target object that aren't in the source object
+     *          or the `number` of properties the target object contains that
+     *          the source object does not.
      */
     readonly extraProperties: () => QueryReturnType;
 
     /**
-     * Query to check either the number or existence of shared properties
-     * between the source and target object being compared.
+     * Returns either a `boolean` indicating if there are equivalent properties
+     * in both the source object and target object it's being compared to or the
+     * `number` of equivalent properties both the source and target object
+     * contain.
      *
      * @public
      * @readonly
      * @abstract
      *
-     * @returns {number | boolean} Either a number indicating how many identical
-     *          properties the source and target object contain or a boolean
-     *          indicating whether or not any shared properties are present.
+     * @returns {number | boolean} Either a `boolean` indicating if there are
+     *          equivalent properties in both the source object and target or
+     *          the `number` of equivalent properties in both the source and
+     *          target objects.
      */
     readonly sharedProperties: () => QueryReturnType;
 
     /**
-     * Query to check either the number or existence of altered properties
-     * between the source and target object being compared.
+     * Returns either a `boolean` indicating if there are any equivalent
+     * property keys in both the source object and target object it's being
+     * compared to that are mapped to differing values or the `number` of
+     * equivalent property keys in both the source object and target object that
+     * are mapped to differing values.
      *
      * @public
      * @readonly
      * @abstract
      *
-     * @returns {number | boolean} Either a number indicating how many
-     *          properties the source and target object contain with differing
-     *          values but same keys or a boolean indicating whether or not any
-     *          altered properties are present.
+     * @returns {number | boolean} Either a `boolean` indicating if there are
+     *          any equivalent property keys in both the source and target
+     *          object that are mapped to differing values or the `number` of
+     *          equivalent property keys in both the source and target object
+     *          that are mapped to differing values.
      */
     readonly alteredProperties: () => QueryReturnType;
 }
