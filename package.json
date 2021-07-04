@@ -17,6 +17,10 @@
     "type": "git",
     "url": "https://www.github.com/SnapLib/typescript-compare/tree/release"
   },
+  "bugs": {
+    "url": "https://github.com/SnapLib/typescript-compare/issues",
+    "email": "snap@snaplib.org"
+  },
   "engines": {
     "node": ">=14.0.0"
   },
