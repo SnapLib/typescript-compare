@@ -1,4 +1,4 @@
-# TypeScript-Compare Repo Package
+# TypeScript-Compare Repo Node Package
 
 This repo is itself a Node package and as such has the features and structure
 of a Node package. It utilizes other Node packages as dependencies and contains
@@ -59,7 +59,7 @@ miscellaneous utility script.
       The "tsnode" script executes TypeScript files without having to compile
       them. If passed a path to a TypeScript file, it will execute the file.
 
-## Package/Repo Structure
+## Repo Node Package Structure
 
 The root of this repo contains the majority of the config files as well as the
 `src` and `docs` directory.
