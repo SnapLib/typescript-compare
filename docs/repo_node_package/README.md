@@ -63,3 +63,14 @@ miscellaneous utility script.
 
 The root of this repo contains the majority of the config files as well as the
 `src` and `docs` directory.
+
+## NOTE
+
+While this repo is a Node package, it is **not** the package that gets
+published/distributed to the NPM to be imported and used by other Node packages.
+It is used for development purposes only and *builds* the distributable package
+that is intended to be published to NPM and ultimately imported and used by
+other Node packages. The root `package.json` file located in the root directory
+of this repo has `private` set to `true` to prevent it from being published to
+the NPM. Instead, the built distributable package contains its own
+`package.json` file with its properties appropriately set.
