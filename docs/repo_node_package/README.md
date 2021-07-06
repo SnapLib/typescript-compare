@@ -108,7 +108,7 @@ of this repo has `private` set to `true` to prevent it from being published to
 the NPM. Instead, the built distributable package contains its own
 `package.json` file with its properties appropriately set.
 
-[1]: "../../tsconfig.json" "root tsconfig"
-[2]: "../../src/test/tsconfig.json" "tsconfig for testing"
-[3]: "../../src/test/.mocharc.cjs" "mocharc for shell based reporting"
-[4]: https://www.npmjs.com/package/mochawesome" "mochawesome"
+[1]: ../../tsconfig.json "root tsconfig"
+[2]: ../../src/test/tsconfig.json "tsconfig for testing"
+[3]: ../../src/test/.mocharc.cjs "mocharc for shell based reporting"
+[4]: https://www.npmjs.com/package/mochawesome "mochawesome"
