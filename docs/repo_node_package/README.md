@@ -52,7 +52,7 @@ miscellaneous utility script.
 
       The "test" script executes all unit tests.
 
-1. miscellanous
+1. miscellaneous
 
    - `tsnode`
 
@@ -64,6 +64,39 @@ miscellaneous utility script.
 The root of this repo contains the majority of the config files as well as the
 `src` and `docs` directory.
 
+### src directory
+
+The `src` directory contains all the TypeScript source code of this repository.
+This includes both the TypeScript source code that gets compiled to the
+JavaScript distributable as well as the source code that makes up the unit
+tests.
+
+The `src` directory has 2 directory in its root. The `main` directory and the
+`test` directory.
+
+#### src/main
+
+The `main` directory contains all the source code that gets compiled to the
+JavaScript distributable that gets published to NPM and imported by other Node
+packages. The [tsconfig.json][1] file located in the root of this repo is used
+to configure the compiler output.
+
+#### src/test
+
+The `test` directory contains all the source code that gets *executed* (not
+compiled) when running the unit tests. It contains its own config files that
+are more appropriate for running unit tests.
+
+1. It contains its own [tsconfig.json][2] to configure the test source code to
+   be compiled to include source maps, ignore errors, and not emit any output
+   files.
+
+1. It contains a [.mocharc.cjs][3] to configure Mocha to be executed with
+   the test results reported to the shell (via stdout).
+
+1. It contains a [report.mocharc.cjs][3] to configure Mocha to use
+   [`Mochawesome`][4] as the reporter and generate an html/css based report.
+
 ## NOTE
 
 While this repo is a Node package, it is **not** the package that gets
@@ -74,3 +107,8 @@ other Node packages. The root `package.json` file located in the root directory
 of this repo has `private` set to `true` to prevent it from being published to
 the NPM. Instead, the built distributable package contains its own
 `package.json` file with its properties appropriately set.
+
+[1]: "../../tsconfig.json" "root tsconfig"
+[2]: "../../src/test/tsconfig.json" "tsconfig for testing"
+[3]: "../../src/test/.mocharc.cjs" "mocharc for shell based reporting"
+[4]: https://www.npmjs.com/package/mochawesome" "mochawesome"
