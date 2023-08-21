@@ -5,7 +5,7 @@
  * objects. Refer to the {@link Compare} documentation for more in depth details
  * regarding its implementation.
  *
- * @module
+ * @module compare
  * @author Snap
  */
 

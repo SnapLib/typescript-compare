@@ -1,3 +1,7 @@
+/**
+ * @module propertyValueDifferences
+ */
+
 export interface PropertyValueDifferences
 {
     readonly [propertyKey: string]: { readonly sourceValue: Readonly<unknown>,

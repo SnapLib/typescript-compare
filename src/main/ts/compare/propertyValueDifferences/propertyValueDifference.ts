@@ -1,3 +1,7 @@
+/**
+ * @module propertyValueDifference
+ */
+
 type DiffEntry = Readonly<[string, {readonly sourceValue: Readonly<unknown>, readonly targetValue: Readonly<unknown>}]>;
 
 /**

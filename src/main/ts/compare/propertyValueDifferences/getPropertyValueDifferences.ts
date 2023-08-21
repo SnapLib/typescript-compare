@@ -1,3 +1,7 @@
+/**
+ * @module getPropertyValueDifferences
+ */
+
 import type {PropertyValueDifferences} from "../propertyValueDifferences";
 import {PropertyValueDifference} from "./propertyValueDifference";
 import {isEqual} from "@snaplib/is-equal";

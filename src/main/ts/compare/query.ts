@@ -3,7 +3,7 @@
  * {@link Compare.count `count`} and {@link Compare.has `has`} queries of the
  * {@link Compare} class.
  *
- * @module
+ * @module query
  * @author Snap
  */
 
